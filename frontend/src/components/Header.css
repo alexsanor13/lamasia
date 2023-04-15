@@ -1,0 +1,35 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1c1c1c;
+    padding: 20px;
+    color: #ffffff;
+}
+  
+.header-content {
+    display: flex;
+    align-items: center;
+}
+
+.header-logo {
+    margin-left: 20px;
+}
+
+.header-nav {
+    display: flex;
+    align-items: center;
+}
+
+.header-nav-link {
+    margin-left: 20px;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.header-nav-link:hover {
+    color: #ff9900;
+}
+  
