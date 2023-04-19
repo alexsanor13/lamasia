@@ -1,6 +1,8 @@
 import React from 'react'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+import EventsCollection from '../components/EventsCollection'
+import './Home.css'
 
 const Home = () => {
 	return (
@@ -8,8 +10,8 @@ const Home = () => {
 			<Header />
 			<main>
 				<section>
-					<h2>Bienvenido a La Masia</h2>
-					<p>Un pirata hace lo que puede</p>
+					<h2>Un pirata hace lo que puede</h2>
+					<EventsCollection />
 				</section>
 			</main>
 			<Footer />
