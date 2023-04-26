@@ -14,26 +14,32 @@ import pecadosPlaceholder from '../assets/placeholders/pecados-placeholder.svg'
 const EventsCollection = () => {
 	const events = [
 		{
-			title: 'FUCK COVID',
-			date: '02/04/2022',
+			title: 'NewEvent',
+			date: '01-07-2023',
+			image: pecados,
+			placeholder: pecadosPlaceholder,
+		},
+		{
+			title: 'F☠️CK COVID',
+			date: '02-04-2022',
 			image: fuckCovid,
 			placeholder: fuckCovidPlaceholder,
 		},
 		{
-			title: 'A FUEGO',
-			date: '02/07/2022',
+			title: 'A FUEG🔥',
+			date: '02-07-2022',
 			image: aFuego,
 			placeholder: aFuegoPlaceholder,
 		},
 		{
 			title: 'R3VOLUTION',
-			date: '02/09/2022',
+			date: '02-09-2022',
 			image: revolution,
 			placeholder: revolutionPlaceholder,
 		},
 		{
-			title: 'TORTUGA',
-			date: '02/12/2022',
+			title: 'TOR7UGA',
+			date: '02-12-2022',
 			image: pecados,
 			placeholder: pecadosPlaceholder,
 		},

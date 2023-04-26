@@ -1,6 +1,8 @@
 .events-collection {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 20px;
+	gap: 15px;
 	justify-content: center;
+	max-width: 80%;
+	margin: 0 auto;
 }

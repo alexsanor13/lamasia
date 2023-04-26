@@ -22,6 +22,9 @@ const Header = () => {
 					Eventos
 				</a>
 				<a href="/sobre-nosotros" className="header-nav-link">
+					Blog
+				</a>
+				<a href="/sobre-nosotros" className="header-nav-link">
 					Sobre nosotros
 				</a>
 			</nav>
