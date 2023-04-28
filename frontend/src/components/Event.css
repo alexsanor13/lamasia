@@ -9,8 +9,14 @@
 	margin: 10px;
 	border-radius: 10px;
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-	background-color: #fff;
+	background-color: #ffffff51;
 	box-sizing: border-box;
+}
+
+.event-box-upcoming {
+	background-color: rgb(253 208 36 / 39%);
+	height: 700px;
+	min-width: 50%;
 }
 
 .event-image-container {
@@ -47,15 +53,18 @@
 
 .event-date {
 	font-family: Akira, sans-serif;
-	font-size: 32px;
+	font-size: 48px;
 	font-weight: 900;
-	letter-spacing: 0.4px;
-	margin: 5px 0 0 0;
+	letter-spacing: 2px;
+	margin: 8px 0 0 0;
+	color: #f7c02a;
 }
 
 .event-title {
-	font-size: 16px;
+	font-size: 24px;
 	font-weight: bold;
+	margin: 5px 0;
+	letter-spacing: 2px;
 }
 
 .buy-ticket-button,
@@ -79,4 +88,22 @@
 .finished-button {
 	background-color: #f7c02a56;
 	cursor: auto;
+}
+
+@media (max-width: 500px) {
+	.event-box {
+		width: fit-content;
+		height: 400px;
+		max-height: 400px;
+		max-width: 90%;
+	}
+}
+
+@media (max-width: 900px) {
+	.event-box,
+	.event-box-upcoming {
+		width: fit-content;
+		height: 500px;
+		width: fit-content;
+	}
 }

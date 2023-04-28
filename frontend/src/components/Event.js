@@ -36,12 +36,12 @@ const Event = ({ event }) => {
 		<button className="finished-button">Evento finalizado</button>
 	)
 
-	const eventStyle = isUpcomingEvent()
-		? { minHeight: '600px', minWidth: '50%', backgroundColor: '#FDDA24' }
-		: {}
+	const eventClassName = isUpcomingEvent()
+		? 'event-box event-box-upcoming'
+		: 'event-box'
 
 	return (
-		<div className="event-box" style={eventStyle}>
+		<div className={eventClassName}>
 			<div className="event-image-container">
 				<LazyLoadImage
 					src={image}
@@ -51,7 +51,7 @@ const Event = ({ event }) => {
 					className="event-image"
 				/>
 			</div>
-			<div className="event-info-container">
+			<div className="event-info-container outlined-text">
 				<p className="event-date">{getFormattedDate()}</p>
 				<h2 className="event-title">{title}</h2>
 				{showBuyTickets}

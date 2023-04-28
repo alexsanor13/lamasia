@@ -14,7 +14,7 @@ import pecadosPlaceholder from '../assets/placeholders/pecados-placeholder.svg'
 const EventsCollection = () => {
 	const events = [
 		{
-			title: 'NewEvent',
+			title: '🏜️🌬️🔥🌊',
 			date: '01-07-2023',
 			image: pecados,
 			placeholder: pecadosPlaceholder,
