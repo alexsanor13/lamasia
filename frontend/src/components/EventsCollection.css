@@ -1,3 +1,12 @@
+h1 {
+	text-align: center;
+	margin-top: 50px;
+	font-size: 90px;
+	font-family: Akira, sans-serif;
+	letter-spacing: 0.3em;
+	color: var(--pirate-gold);
+}
+
 .events-collection {
 	display: flex;
 	flex-wrap: wrap;
@@ -5,4 +14,10 @@
 	justify-content: center;
 	max-width: 80%;
 	margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+	h1 {
+		font-size: 48px;
+	}
 }

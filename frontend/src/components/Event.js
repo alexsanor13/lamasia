@@ -7,7 +7,7 @@ const Event = ({ event }) => {
 	const { title, date, image, placeholder } = event
 
 	const getValidDate = () => {
-		const [day, month, year] = date.split('-')
+		const [day, month, year] = date.split('/')
 		return new Date(year, month - 1, day)
 	}
 
@@ -19,26 +19,19 @@ const Event = ({ event }) => {
 		return true
 	}
 
-	const getFormattedDate = () => {
-		const eventDate = getValidDate()
-
-		const formattedDate = eventDate.toLocaleDateString('es-ES', {
-			day: 'numeric',
-			month: 'numeric',
-			year: 'numeric',
-		})
-		return formattedDate
-	}
-
 	const showBuyTickets = isUpcomingEvent() ? (
-		<button className="buy-ticket-button">Comprar entrada</button>
+		<button className="buy-ticket-button">COMPRAR ENTRADA</button>
 	) : (
-		<button className="finished-button">Evento finalizado</button>
+		<button className="finished-button">EVENTO FINALIZADO</button>
 	)
 
 	const eventClassName = isUpcomingEvent()
 		? 'event-box event-box-upcoming'
 		: 'event-box'
+
+	const dateClassName = isUpcomingEvent()
+		? 'event-date event-date-upcoming'
+		: 'event-date'
 
 	return (
 		<div className={eventClassName}>
@@ -52,7 +45,7 @@ const Event = ({ event }) => {
 				/>
 			</div>
 			<div className="event-info-container outlined-text">
-				<p className="event-date">{getFormattedDate()}</p>
+				<p className={dateClassName}>{date}</p>
 				<h2 className="event-title">{title}</h2>
 				{showBuyTickets}
 			</div>

@@ -10,7 +10,6 @@ const Home = () => {
 			<Header />
 			<main>
 				<section>
-					<h2>Un pirata hace lo que puede</h2>
 					<EventsCollection />
 				</section>
 			</main>

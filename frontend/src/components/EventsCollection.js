@@ -15,42 +15,45 @@ const EventsCollection = () => {
 	const events = [
 		{
 			title: '🏜️🌬️🔥🌊',
-			date: '01-07-2023',
+			date: '01/07/2023',
 			image: pecados,
 			placeholder: pecadosPlaceholder,
 		},
 		{
 			title: 'F☠️CK COVID',
-			date: '02-04-2022',
+			date: '02/04/2022',
 			image: fuckCovid,
 			placeholder: fuckCovidPlaceholder,
 		},
 		{
 			title: 'A FUEG🔥',
-			date: '02-07-2022',
+			date: '02/07/2022',
 			image: aFuego,
 			placeholder: aFuegoPlaceholder,
 		},
 		{
 			title: 'R3VOLUTION',
-			date: '02-09-2022',
+			date: '02/09/2022',
 			image: revolution,
 			placeholder: revolutionPlaceholder,
 		},
 		{
 			title: 'TOR7UGA',
-			date: '02-12-2022',
+			date: '02/12/2022',
 			image: pecados,
 			placeholder: pecadosPlaceholder,
 		},
 	]
 
 	return (
-		<div className="events-collection">
-			{events.map((item, index) => (
-				<Event key={index} event={item} />
-			))}
-		</div>
+		<>
+			<h1 className="outlined-text">EVENTOS</h1>
+			<div className="events-collection">
+				{events.map((item, index) => (
+					<Event key={index} event={item} />
+				))}
+			</div>
+		</>
 	)
 }
 
