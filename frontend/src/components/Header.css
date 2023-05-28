@@ -67,6 +67,6 @@
 	width: fit-content;
 }
 
-.header-nav-link:hover {
-	color: #ff9900;
+a:hover {
+	color: #909090 !important;
 }

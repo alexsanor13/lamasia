@@ -1,5 +1,5 @@
 import React from 'react'
-// import Events from './Events'
+import './Home.css'
 
 const Home = ({ handlePage }) => {
 	console.log('Home rendered')

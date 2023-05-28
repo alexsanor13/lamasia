@@ -1,6 +1,7 @@
 import React from 'react'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import 'react-lazy-load-image-component/src/effects/blur.css'
+import { Link } from 'react-router-dom'
 import './EventBox.css'
 
 const EventBox = ({ event }) => {
@@ -20,7 +21,12 @@ const EventBox = ({ event }) => {
 	}
 
 	const showBuyTickets = isUpcomingEvent() ? (
-		<button className="buy-ticket-button">COMPRAR ENTRADA</button>
+		<Link
+			to={`/events/${event.id}`}
+			id="events-page"
+			className="header-nav-link">
+			<button className="buy-ticket-button">COMPRAR ENTRADA</button>
+		</Link>
 	) : (
 		<button className="finished-button">EVENTO FINALIZADO</button>
 	)

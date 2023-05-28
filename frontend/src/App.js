@@ -5,6 +5,8 @@ import Home from './pages/Home'
 import Header from './components/Header'
 // import Footer from './components/Footer'
 import Events from './pages/Events'
+import EventDetail from './pages/EventDetail'
+
 // import About from './pages/About'
 // import Blog from './pages/Blog'
 
@@ -53,6 +55,7 @@ const App = () => {
 							path="/events"
 							element={<Events handlePage={handlePage} />}
 						/>
+						<Route path="/events/:id" element={<EventDetail />} />
 						{/* <Route
 							path="/about"
 							render={() => <About handlePage={handlePage} />}

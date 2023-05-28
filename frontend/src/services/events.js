@@ -5,10 +5,23 @@ const baseUrl = 'http://localhost:3001/api/events'
 
 const getAllEvents = async () => {
 	const response = await axios.get(baseUrl)
-	console.log(typeof response.data)
 	return response.data
 }
 
-const exports = { getAllEvents }
+const getEventInfo = async (eventId) => {
+	console.log(eventId)
+	try {
+		const response = await axios.post(baseUrl, {
+			id: eventId, // envía el ID del evento en el cuerpo de la solicitud
+		})
+
+		return response.data
+	} catch (error) {
+		console.error(error)
+		return null
+	}
+}
+
+const exports = { getAllEvents, getEventInfo }
 
 export default exports

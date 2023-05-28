@@ -39,7 +39,7 @@ app.use(cors())
 
 // Se incluye el front como static
 // app.use(express.static('build'))
-// app.use(express.json())
+app.use(express.json())
 
 // end-points
 // app.use('/api/notes', userExtractor, notesRouter)
