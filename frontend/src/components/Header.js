@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
+import { Link } from 'react-router-dom'
 import 'react-lazy-load-image-component/src/effects/blur.css'
 import logo from '../assets/images/logo.webp'
 import logoPlaceholder from '../assets/placeholders/logo-placeholder.svg'
 import './Header.css'
 
-const Header = () => {
+const Header = ({ handlePage }) => {
 	const [visible, setVisible] = useState(true)
 	const [previousScrollPosition, setPreviousScrollPosition] = useState(0)
 
@@ -26,28 +27,44 @@ const Header = () => {
 		return () => window.removeEventListener('scroll', handleScroll)
 	}, [previousScrollPosition])
 
+	console.log('Header rendered')
+
 	return (
 		<header className={`header ${visible ? '' : 'header-hidden'} `}>
 			<div className="header-content">
-				<LazyLoadImage
-					src={logo}
-					placeholderSrc={logoPlaceholder}
-					alt="La Masia Logo"
-					effect="blur"
-					className="header-logo"
-				/>
+				<Link to="/" id="home-page" onClick={() => handlePage('')}>
+					<LazyLoadImage
+						src={logo}
+						placeholderSrc={logoPlaceholder}
+						alt="La Masia Logo"
+						effect="blur"
+						className="header-logo"
+					/>
+				</Link>
 			</div>
 
 			<nav className="header-nav">
-				<a href="/eventos" className="header-nav-link">
+				<Link
+					to="/events"
+					id="events-page"
+					className="header-nav-link"
+					onClick={() => handlePage('events')}>
 					Eventos
-				</a>
-				<a href="/sobre-nosotros" className="header-nav-link">
+				</Link>
+				<Link
+					to="/blog"
+					id="blog-page"
+					className="header-nav-link"
+					onClick={() => handlePage('blog')}>
 					Blog
-				</a>
-				<a href="/sobre-nosotros" className="header-nav-link">
-					Sobre nosotros
-				</a>
+				</Link>
+				<Link
+					to="/about"
+					id="about-page"
+					className="header-nav-link"
+					onClick={() => handlePage('about')}>
+					Nosotros
+				</Link>
 			</nav>
 		</header>
 	)

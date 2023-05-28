@@ -1,9 +1,9 @@
 import React from 'react'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import 'react-lazy-load-image-component/src/effects/blur.css'
-import './Event.css'
+import './EventBox.css'
 
-const Event = ({ event }) => {
+const EventBox = ({ event }) => {
 	const { title, date, image, placeholder } = event
 
 	const getValidDate = () => {
@@ -25,16 +25,15 @@ const Event = ({ event }) => {
 		<button className="finished-button">EVENTO FINALIZADO</button>
 	)
 
-	const eventClassName = isUpcomingEvent()
-		? 'event-box event-box-upcoming'
-		: 'event-box'
-
-	const dateClassName = isUpcomingEvent()
-		? 'event-date event-date-upcoming'
-		: 'event-date'
+	const eventClass = isUpcomingEvent()
+		? {
+				containerClass: 'event-box event-box-upcoming',
+				dateClass: 'event-date event-date-upcoming',
+		  }
+		: { containerClass: 'event-box', dateClass: 'event-date' }
 
 	return (
-		<div className={eventClassName}>
+		<div className={eventClass.containerClass}>
 			<div className="event-image-container">
 				<LazyLoadImage
 					src={image}
@@ -45,7 +44,7 @@ const Event = ({ event }) => {
 				/>
 			</div>
 			<div className="event-info-container outlined-text">
-				<p className={dateClassName}>{date}</p>
+				<p className={eventClass.dateClass}>{date}</p>
 				<h2 className="event-title">{title}</h2>
 				{showBuyTickets}
 			</div>
@@ -53,4 +52,4 @@ const Event = ({ event }) => {
 	)
 }
 
-export default Event
+export default EventBox

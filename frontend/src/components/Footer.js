@@ -1,6 +1,7 @@
 import React from 'react'
 
 const Footer = () => {
+	console.log('Footer rendered')
 	return (
 		<footer>
 			<p>

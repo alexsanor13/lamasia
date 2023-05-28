@@ -54,7 +54,8 @@
 }
 
 .header-nav {
-	width: fit-content;
+	width: 70%;
+	max-width: 70%;
 }
 
 .header-nav-link {
