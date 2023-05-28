@@ -1,0 +1,8 @@
+PUT http://localhost:3001/api/notes/60703f76e99afe16f09c62e7
+Content-type: application/json
+
+{
+    "content": "la edad",
+    "important": false
+}
+
