@@ -7,8 +7,8 @@ import Header from './components/Header'
 import Events from './pages/Events'
 import EventDetail from './pages/EventDetail'
 
-// import About from './pages/About'
-// import Blog from './pages/Blog'
+import About from './pages/About'
+import Blog from './pages/Blog'
 
 const App = () => {
 	const [currentPage, setPage] = useState(window.location.href)
@@ -56,14 +56,8 @@ const App = () => {
 							element={<Events handlePage={handlePage} />}
 						/>
 						<Route path="/events/:id" element={<EventDetail />} />
-						{/* <Route
-							path="/about"
-							render={() => <About handlePage={handlePage} />}
-						/>
-						<Route
-							path="/blog"
-							render={() => <Blog handlePage={handlePage} />}
-						/> */}
+						<Route path="/about" element={<About handlePage={handlePage} />} />
+						<Route path="/blog" element={<Blog handlePage={handlePage} />} />
 					</Routes>
 				</main>
 				{/* <Footer /> */}

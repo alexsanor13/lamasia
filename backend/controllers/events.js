@@ -2,17 +2,16 @@ const eventsRouter = require('express').Router()
 
 // Models
 const Event = require('../models/Event')
-const EventDetail = require('../models/EventDetail')
 
 eventsRouter.get('/', async (request, response) => {
-	const events = await Event.find({})
+	const events = await Event.find({}).select('id title date image')
 	return response.status(200).json(events)
 })
 
 eventsRouter.post('/', async (request, response, next) => {
 	try {
-		const { id } = request.body // Aquí cambiamos request.params por request.body
-		const event = await EventDetail.findOne({ id: id }).lean()
+		const { id } = request.body
+		const event = await Event.findOne({ id: id }).lean()
 
 		if (event) {
 			return response.status(200).json(event)

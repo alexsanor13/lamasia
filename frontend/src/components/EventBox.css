@@ -8,38 +8,15 @@
 	padding: 10px;
 	margin: 10px;
 	border-radius: 10px;
-	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-	background-color: #56565677;
+	box-shadow: 0 10px 10px #0c0a0a4f;
+	background-color: #00000085;
 	box-sizing: border-box;
 }
 
 .event-box-upcoming {
-	background-color: rgba(253, 210, 36, 0.524);
+	background-color: #9f806873;
 	height: 700px;
 	min-width: 50%;
-	border: 1px dotted rgba(255, 255, 255, 0.541);
-}
-
-@media (max-width: 500px) {
-	.event-box {
-		width: fit-content;
-		height: 400px;
-		max-height: 400px;
-		max-width: 90%;
-	}
-}
-
-@media (max-width: 900px) {
-	.event-box,
-	.event-box-upcoming {
-		width: fit-content;
-		height: 500px;
-		width: fit-content;
-	}
-
-	.event-date-upcoming {
-		font-size: 36px;
-	}
 }
 
 .event-image-container {
@@ -75,7 +52,7 @@
 }
 
 .event-date {
-	font-family: Akira, sans-serif;
+	font-family: 'Nunito Sans', sans-serif;
 	color: white;
 	font-size: 1em;
 	font-weight: 900;
@@ -85,13 +62,7 @@
 
 .event-date-upcoming {
 	font-size: 3em;
-	color: #f7c02a;
-}
-
-@media (max-width: 900px) {
-	.event-date-upcoming {
-		font-size: 36px;
-	}
+	color: #d3b16f;
 }
 
 .event-title {
@@ -108,7 +79,7 @@
 	margin-top: 5px;
 	border: none;
 	border-radius: 5px;
-	background-color: #f7c02a;
+	background-color: #e8381de6;
 	color: #fff;
 	font-size: 16px;
 	font-weight: bold;
@@ -117,7 +88,7 @@
 }
 
 .buy-ticket-button:hover {
-	background-color: #f9db61;
+	background-color: #431009;
 }
 
 .finished-button {
@@ -125,4 +96,32 @@
 	cursor: auto;
 	padding: 7px;
 	font-size: 12px;
+}
+
+@media (max-width: 900px) {
+	.event-date-upcoming {
+		font-size: 36px;
+	}
+}
+
+@media (max-width: 500px) {
+	.event-box {
+		width: fit-content;
+		height: 400px;
+		max-height: 400px;
+		max-width: 90%;
+	}
+}
+
+@media (max-width: 900px) {
+	.event-box,
+	.event-box-upcoming {
+		width: fit-content;
+		height: 500px;
+		width: fit-content;
+	}
+
+	.event-date-upcoming {
+		font-size: 36px;
+	}
 }

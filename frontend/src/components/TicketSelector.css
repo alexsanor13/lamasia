@@ -1,0 +1,87 @@
+.ticket-selector {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	font-size: 1em;
+	margin: 20px auto;
+	flex-wrap: wrap;
+	background-color: transparent;
+	padding: 10px;
+	border-radius: 10px;
+}
+
+.ticket-selector span {
+	text-align: center;
+}
+
+.ticket-label {
+	width: 40%;
+}
+
+.ticket-selector-price {
+	width: 10%;
+}
+
+.counter {
+	display: flex;
+	background-color: rgba(255, 255, 255, 0.14);
+	border-radius: 10px;
+	height: 40px;
+	line-height: 40px;
+	flex: 1;
+}
+
+.button-minus,
+.button-plus {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 30px;
+	height: 100%;
+	border: none;
+	border-radius: 50%;
+	background: transparent;
+	cursor: pointer;
+}
+
+.plus-svg,
+.minus-svg {
+	width: 10px;
+	height: auto;
+	display: block;
+	line-height: 30px;
+	fill: white;
+}
+
+.plus-svg:hover,
+.minus-svg:hover {
+	fill: #f7c02a;
+}
+
+.value {
+	font-size: 1.2em;
+}
+
+.button-minus,
+.button-plus,
+.value {
+	flex: 1;
+	padding: 2px;
+	text-align: center;
+	height: auto;
+}
+
+@media (width < 768px) {
+	.ticket-selector {
+		background-color: #00000042;
+	}
+
+	.ticket-label {
+		width: 100% !important;
+	}
+
+	.ticket-selector-price,
+	.counter {
+		min-width: 40%;
+	}
+}

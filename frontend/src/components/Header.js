@@ -27,8 +27,6 @@ const Header = ({ handlePage }) => {
 		return () => window.removeEventListener('scroll', handleScroll)
 	}, [previousScrollPosition])
 
-	console.log('Header rendered')
-
 	return (
 		<header className={`header ${visible ? '' : 'header-hidden'} `}>
 			<div className="header-content">
@@ -49,21 +47,21 @@ const Header = ({ handlePage }) => {
 					id="events-page"
 					className="header-nav-link"
 					onClick={() => handlePage('events')}>
-					Eventos
+					EVENTOS
 				</Link>
 				<Link
 					to="/blog"
 					id="blog-page"
 					className="header-nav-link"
 					onClick={() => handlePage('blog')}>
-					Blog
+					BLOG
 				</Link>
 				<Link
 					to="/about"
 					id="about-page"
 					className="header-nav-link"
 					onClick={() => handlePage('about')}>
-					Nosotros
+					NOSOTROS
 				</Link>
 			</nav>
 		</header>

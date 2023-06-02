@@ -2,9 +2,15 @@ h1 {
 	text-align: center;
 	margin-top: 50px;
 	font-size: 90px;
-	font-family: Akira, sans-serif;
+	font-family: 'Nunito Sans', sans-serif;
 	letter-spacing: 0.3em;
-	color: var(--pirate-gold);
+	font-size: 100px;
+	font-weight: 900;
+	width: 100%;
+	display: block;
+	height: fit-content;
+	color: #f7c02a;
+	text-shadow: 4px -2px #b18a1f;
 }
 
 @media (max-width: 768px) {

@@ -10,7 +10,7 @@ const Events = ({ handlePage }) => {
 	}, [events])
 
 	const sectionTitle = events.length ? (
-		<h1 className="outlined-text">EVENTOS</h1>
+		<h1 className="section-title">EVENTOS</h1>
 	) : (
 		''
 	)

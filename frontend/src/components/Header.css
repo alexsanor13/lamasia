@@ -47,15 +47,9 @@
 	}
 }
 
-@media (max-width: 480px) {
-	.header-logo {
-		height: 40px;
-	}
-}
-
 .header-nav {
-	width: 70%;
-	max-width: 70%;
+	width: 85%;
+	max-width: 85%;
 }
 
 .header-nav-link {
@@ -69,4 +63,14 @@
 
 a:hover {
 	color: #909090 !important;
+}
+
+@media (width < 480px) {
+	.header-logo {
+		height: 40px;
+	}
+
+	.header-nav-link {
+		font-size: 14px;
+	}
 }

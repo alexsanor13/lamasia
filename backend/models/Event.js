@@ -3,9 +3,17 @@ const { Schema, model } = require('mongoose')
 const eventSchema = new Schema({
 	id: Number,
 	title: String,
-	date: String,
+	date: {
+		type: Date,
+		default: Date.now,
+	},
 	image: String,
-	placeholder: String,
+	description: String,
+	location: String,
+	locationMap: String,
+	locationDescription: String,
+	price: Number,
+	extras: String,
 })
 
 eventSchema.set('toJSON', {

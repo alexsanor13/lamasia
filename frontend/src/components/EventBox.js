@@ -1,19 +1,21 @@
 import React from 'react'
-import { LazyLoadImage } from 'react-lazy-load-image-component'
-import 'react-lazy-load-image-component/src/effects/blur.css'
 import { Link } from 'react-router-dom'
 import './EventBox.css'
 
 const EventBox = ({ event }) => {
-	const { title, date, image, placeholder } = event
+	const { title, date, image } = event
 
-	const getValidDate = () => {
-		const [day, month, year] = date.split('/')
-		return new Date(year, month - 1, day)
+	const getFormattedDate = () => {
+		const receivedDate = new Date(date)
+		let day = String(receivedDate.getDate()).padStart(2, '0')
+		let month = String(receivedDate.getMonth() + 1).padStart(2, '0')
+		let year = receivedDate.getFullYear()
+
+		return `${day}/${month}/${year}`
 	}
 
 	const isUpcomingEvent = () => {
-		const eventFinished = getValidDate() < new Date()
+		const eventFinished = new Date(date) < new Date()
 		if (eventFinished) {
 			return false
 		}
@@ -21,10 +23,7 @@ const EventBox = ({ event }) => {
 	}
 
 	const showBuyTickets = isUpcomingEvent() ? (
-		<Link
-			to={`/events/${event.id}`}
-			id="events-page"
-			className="header-nav-link">
+		<Link to={`/events/${event.id}`} id="events-page">
 			<button className="buy-ticket-button">COMPRAR ENTRADA</button>
 		</Link>
 	) : (
@@ -41,16 +40,10 @@ const EventBox = ({ event }) => {
 	return (
 		<div className={eventClass.containerClass}>
 			<div className="event-image-container">
-				<LazyLoadImage
-					src={image}
-					placeholderSrc={placeholder}
-					alt={title}
-					effect="blur"
-					className="event-image"
-				/>
+				<img src={image} alt={title} className="event-image" />
 			</div>
 			<div className="event-info-container outlined-text">
-				<p className={eventClass.dateClass}>{date}</p>
+				<p className={eventClass.dateClass}>{getFormattedDate()}</p>
 				<h2 className="event-title">{title}</h2>
 				{showBuyTickets}
 			</div>

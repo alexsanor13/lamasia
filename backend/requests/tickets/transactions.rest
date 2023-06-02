@@ -1,0 +1,10 @@
+POST http://localhost:3001/api/tickets
+Content-type: application/json
+
+{
+    "eventId": "2",
+    "email": "alex@test.com",
+    "amount": "45",
+    "tickets": 4,
+    "purchaseInfo": "pack2,pack1"
+}

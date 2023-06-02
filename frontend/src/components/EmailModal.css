@@ -1,0 +1,8 @@
+.ReactModal__Content {
+	width: 80% !important;
+	height: 20% !important;
+	margin: 0 auto !important;
+	padding: 0 !important;
+	text-align: center !important;
+	border-radius: 10px !important;
+}

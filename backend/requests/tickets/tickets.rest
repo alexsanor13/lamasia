@@ -1,0 +1,7 @@
+PUT http://localhost:3001/api/tickets/:ticketId/redeem
+Content-type: application/json
+
+{
+    "ticketId": "la edad"
+}
+

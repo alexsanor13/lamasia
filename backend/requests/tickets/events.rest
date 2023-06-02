@@ -1,0 +1,12 @@
+GET http://localhost:3001/api/events
+Content-type: application/json
+
+###
+
+POST http://localhost:3001/api/events
+Content-type: application/json
+
+{
+    "id": 2
+}
+
