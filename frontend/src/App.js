@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import Header from './components/Header'
-// import Footer from './components/Footer'
+import Footer from './components/Footer'
 import Events from './pages/Events'
 import EventDetail from './pages/EventDetail'
 
@@ -60,7 +60,7 @@ const App = () => {
 						<Route path="/blog" element={<Blog handlePage={handlePage} />} />
 					</Routes>
 				</main>
-				{/* <Footer /> */}
+				<Footer />
 			</div>
 		</Router>
 	)

@@ -5,7 +5,7 @@ const Soon = () => {
 	return (
 		<section>
 			<div className="soon-container">
-				proximamente...
+				<span>proximamente...</span>
 				<img src={soon} alt="Soon." />
 			</div>
 		</section>

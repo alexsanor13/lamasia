@@ -128,6 +128,16 @@
 	}
 }
 
+@media (width < 1000px) {
+	.event-detail-title {
+		font-size: 60px;
+	}
+
+	.box-title {
+		font-size: 30px;
+	}
+}
+
 @media (width < 768px) {
 	.event-detail-title {
 		font-size: 37px;

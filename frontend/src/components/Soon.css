@@ -7,7 +7,14 @@
 	height: 100%;
 }
 
+.soon-container span {
+	width: 100%;
+	display: block;
+	text-align: center;
+}
+
 .soon-container img {
-	width: 80%;
+	width: 40%;
+	min-width: 300px;
 	margin-top: 1rem;
 }

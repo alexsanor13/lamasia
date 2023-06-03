@@ -8,31 +8,41 @@ const EmailModal = ({ isOpen, closeModal }) => {
 	const [email, setEmail] = useState('')
 	const [emailError, setEmailError] = useState('')
 
-	const validateEmail = () => {
+	const validateEmail = (e) => {
+		e.preventDefault()
 		let regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
-		if (!regex.test(email)) {
-			setEmailError('Please enter a valid email')
+		if (!regex.test(email) || email === '') {
+			setEmailError(
+				'Porfavor, introduce una dirección de correo electrónico que sea correcta'
+			)
+			setTimeout(() => setEmailError(''), 5000)
+			return false
 		} else {
 			setEmailError('')
-			// Perform your purchasing operation here
+
 			closeModal()
 		}
 	}
 
 	return (
 		<Modal isOpen={isOpen} onRequestClose={closeModal}>
-			<h2>Buy Tickets</h2>
+			<h2>Comprar entradas</h2>
+			<p className="email-modal-info">
+				Introduce una dirección de <b>correo electronico</b> válida donde se
+				recibirán las entradas, después del pago.
+			</p>
 			<form>
 				<input
-					type="text"
-					placeholder="Enter your email"
+					type="email"
+					placeholder="pirata@perlanegra.com"
 					value={email}
 					onChange={(e) => setEmail(e.target.value)}
 				/>
-				<p>{emailError}</p>
-				<button onClick={validateEmail}>Submit</button>
+				<p className="email-error">{emailError}</p>
+				<button className="purchase-button" onClick={(e) => validateEmail(e)}>
+					PAGAR
+				</button>
 			</form>
-			<button onClick={closeModal}>close</button>
 		</Modal>
 	)
 }

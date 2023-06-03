@@ -1,8 +1,38 @@
 .ReactModal__Content {
 	width: 80% !important;
-	height: 20% !important;
+	height: 50% !important;
 	margin: 0 auto !important;
 	padding: 0 !important;
 	text-align: center !important;
 	border-radius: 10px !important;
+	top: 50%;
+}
+
+.ReactModal__Content form button {
+	margin: 0 auto 5px;
+}
+
+.ReactModal__Content input {
+	padding: 5px !important;
+}
+
+.ReactModal__Overlay {
+	background-color: rgb(255 255 255 / 54%) !important;
+}
+
+.email-modal-info {
+	width: 80%;
+	margin: 2rem auto;
+}
+
+.email-error {
+	color: red;
+	width: 80%;
+	margin: 2rem auto;
+}
+
+.purchase-button {
+	padding: 8px;
+	font-size: 14px;
+	font-weight: 900;
 }

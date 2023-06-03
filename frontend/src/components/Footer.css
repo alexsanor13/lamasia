@@ -1,0 +1,41 @@
+footer {
+	bottom: 0;
+	height: 300px;
+	box-sizing: border-box;
+	text-align: center;
+	background-color: rgba(255, 255, 255, 0.2);
+	width: 100%;
+	padding: 3em;
+	margin-top: 3em;
+	display: block;
+	font-size: 15px;
+	color: white;
+}
+
+footer div {
+	color: white;
+	text-align: center;
+	width: 100%;
+	height: fit-content;
+	box-sizing: border-box;
+}
+
+.mail .icon-container svg {
+	height: 48px;
+}
+
+.instagram,
+.mail {
+	display: flex;
+	line-height: 48px;
+	gap: 20px;
+	justify-content: center;
+	width: fit-content;
+	margin: 0 auto;
+}
+
+footer a,
+.mail div {
+	text-align: center;
+	height: 48px;
+}
