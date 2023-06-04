@@ -46,7 +46,7 @@ const App = () => {
 
 	return (
 		<Router>
-			<div className="App">
+			<div className="app">
 				<Header handlePage={handlePage} />
 				<main>
 					<Routes>

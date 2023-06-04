@@ -1,28 +1,47 @@
 .ReactModal__Content {
-	width: 80% !important;
-	height: 50% !important;
+	height: fit-content !important;
 	margin: 0 auto !important;
-	padding: 0 !important;
+	padding: 20px !important;
 	text-align: center !important;
 	border-radius: 10px !important;
 	top: 50%;
+	display: flex;
+	flex-direction: column;
+	vertical-align: middle;
+	max-width: 500px;
 }
 
 .ReactModal__Content form button {
 	margin: 0 auto 5px;
+	cursor: pointer;
 }
 
 .ReactModal__Content input {
 	padding: 5px !important;
+	margin: 10px auto;
+	width: 200px;
+	display: block;
 }
 
 .ReactModal__Overlay {
-	background-color: rgb(255 255 255 / 54%) !important;
+	background-color: rgba(255, 255, 255, 0.499) !important;
+}
+
+.email-modal-cart-info {
+	margin: 0 auto;
+	padding: 1em 0;
+	width: 80%;
+	max-width: 300px;
+}
+
+tr {
+	text-align: left;
 }
 
 .email-modal-info {
 	width: 80%;
 	margin: 2rem auto;
+	font-size: 16px;
 }
 
 .email-error {

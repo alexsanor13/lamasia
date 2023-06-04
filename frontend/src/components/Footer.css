@@ -28,7 +28,7 @@ footer div {
 .mail {
 	display: flex;
 	line-height: 48px;
-	gap: 20px;
+	gap: 5px;
 	justify-content: center;
 	width: fit-content;
 	margin: 0 auto;

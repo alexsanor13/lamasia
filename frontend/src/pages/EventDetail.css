@@ -112,7 +112,7 @@
 
 .button-container {
 	width: 100%;
-	text-align: right;
+	text-align: center;
 }
 
 .event-detail-purchase-button {
@@ -185,9 +185,5 @@
 
 	.box-title {
 		font-size: 30px;
-	}
-
-	.button-container {
-		text-align: center;
 	}
 }

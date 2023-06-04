@@ -13,6 +13,7 @@ const EventDetail = () => {
 	const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
 	const [selectedTickets, setSelectedTickets] = useState(0)
 	const [packTickets, setPackTickets] = useState(0)
+	const [cart, setCart] = useState({})
 
 	const [modalIsOpen, setIsOpen] = useState(false)
 
@@ -64,6 +65,14 @@ const EventDetail = () => {
 			packTickets * eventInfo.extraPrice + selectedTickets * eventInfo.price
 
 		if (amount) {
+			setCart({
+				tickets: selectedTickets,
+				price: eventInfo.price,
+				packTickets: packTickets,
+				packPrice: eventInfo.extraPrice,
+				amount,
+			})
+
 			openModal()
 		}
 	}
@@ -104,7 +113,11 @@ const EventDetail = () => {
 								className="event-detail-purchase-button">
 								Confirmar compra
 							</button>
-							<EmailModal isOpen={modalIsOpen} closeModal={closeModal} />
+							<EmailModal
+								isOpen={modalIsOpen}
+								closeModal={closeModal}
+								shoppingCart={cart}
+							/>
 						</div>
 					</div>
 					<div className="event-description box">
