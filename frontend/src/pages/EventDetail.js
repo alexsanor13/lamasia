@@ -66,6 +66,7 @@ const EventDetail = () => {
 
 		if (amount) {
 			setCart({
+				eventId: id,
 				tickets: selectedTickets,
 				price: eventInfo.price,
 				packTickets: packTickets,
@@ -74,14 +75,14 @@ const EventDetail = () => {
 			})
 
 			openModal()
+		} else {
+			alert('Selecciona una entrada para continuar.')
 		}
 	}
 
 	return (
-		<div className="event-detail-container">
-			<span className="event-detail-title outlined-text">
-				{eventInfo.title}
-			</span>
+		<section className="event-detail-container">
+			<h1 className="event-detail-title outlined-text">{eventInfo.title}</h1>
 			<div className="event-detail-content">
 				<div className="event-detail-image-container">
 					<img
@@ -92,7 +93,9 @@ const EventDetail = () => {
 				</div>
 				<div className="event-detail-info">
 					<div className="event-detail-purchase box">
-						<h2 className="box-title">ENTRADAS</h2>
+						<div className="box-title-container">
+							<h2 className="box-title">ENTRADAS</h2>
+						</div>
 						<TicketSelector
 							className="event-ticket-option"
 							label={'Entrada pirata'}
@@ -110,8 +113,8 @@ const EventDetail = () => {
 						<div className="button-container">
 							<button
 								onClick={handlePurchase}
-								className="event-detail-purchase-button">
-								Confirmar compra
+								className="event-detail-purchase-button buy-button">
+								Continuar
 							</button>
 							<EmailModal
 								isOpen={modalIsOpen}
@@ -121,23 +124,29 @@ const EventDetail = () => {
 						</div>
 					</div>
 					<div className="event-description box">
-						<h2 className="box-title">QUÉ</h2>
+						<div className="box-title-container">
+							<h2 className="box-title">QUÉ</h2>
+						</div>
 						<p>{eventInfo.description}</p>
 					</div>
 					<div className="event-time box">
-						<h2 className="box-title">CUÁNDO</h2>
+						<div className="box-title-container">
+							<h2 className="box-title">CUÁNDO</h2>
+						</div>
 						<p>{eventInfo.date}</p>
 					</div>
 					<div className="event-location box">
 						<div className="location-info">
-							<h2 className="box-title">DÓNDE</h2>
+							<div className="box-title-container">
+								<h2 className="box-title">DÓNDE</h2>
+							</div>
 							<p>{eventInfo.location}</p>
 							<p>{eventInfo.locationInfo}</p>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</section>
 	)
 }
 

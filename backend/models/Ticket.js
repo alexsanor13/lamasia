@@ -12,7 +12,10 @@ const TicketSchema = new Schema({
 		type: Boolean,
 		default: false,
 	},
-	extra: String,
+	packTicket: {
+		type: Boolean,
+		default: false,
+	},
 })
 
 TicketSchema.set('toJSON', {

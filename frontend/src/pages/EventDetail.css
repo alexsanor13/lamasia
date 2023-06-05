@@ -5,9 +5,10 @@
 	background-color: rgba(0, 0, 0, 0.398);
 	padding: 2em;
 	border-radius: 10px;
-	max-width: 90%;
+	max-width: 70%;
 	margin: auto;
 	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+	text-align: center;
 }
 
 .event-detail-content {
@@ -31,16 +32,18 @@
 }
 
 .event-detail-title {
-	font-size: 100px;
-	margin-bottom: 2rem;
+	font-size: 90px;
+	margin: 0 auto 2rem;
 	font-weight: 900;
 	letter-spacing: 60px;
-	width: 100%;
+	width: fit-content;
 	display: block;
 	height: fit-content;
-	text-align: center;
+	text-align: center !important;
 	color: #f7c02a;
 	text-shadow: 4px -2px #b18a1f;
+	box-sizing: border-box;
+	overflow-x: hidden;
 }
 
 .event-detail-info {
@@ -97,13 +100,18 @@
 	color: rgba(255, 255, 255, 0.681);
 }
 
+.box-title-container {
+	width: 100%;
+	border-bottom: 1px solid #f7c02a5d;
+}
+
 .box-title {
-	margin: 0 auto 1rem;
+	margin: 0 0 8px;
 	color: #f7c02a;
-	text-align: center !important;
-	font-size: 40px;
+	text-align: right !important;
+	font-size: 20px;
 	letter-spacing: 10px;
-	text-shadow: 2px -1px #b18a1f;
+	text-shadow: 2px -1px #b18a1f55;
 }
 
 .event-ticket-option {
@@ -112,14 +120,11 @@
 
 .button-container {
 	width: 100%;
-	text-align: center;
+	text-align: right;
 }
 
 .event-detail-purchase-button {
-	padding: 4px;
-	margin: 0 auto;
-	font-size: 15px;
-	outline: none;
+	margin-right: 10px;
 }
 
 @media (min-width: 768px) {
@@ -140,10 +145,9 @@
 
 @media (width < 768px) {
 	.event-detail-title {
-		font-size: 37px;
+		font-size: 32px;
 		margin-bottom: 2rem;
 		font-weight: 900;
-		overflow: auto;
 		letter-spacing: 10px;
 		width: 100%;
 		display: block;
@@ -177,13 +181,28 @@
 		border: 1px solid #ffffff24;
 	}
 
+	.button-container {
+		text-align: center;
+	}
+
+	.event-detail-purchase-button {
+		margin: 0 auto;
+	}
+
 	.box {
 		background-color: rgba(255, 255, 255, 0.082) !important;
 		padding: 1rem;
 		border-radius: 15px;
 	}
 
+	.box-title-container {
+		border: none;
+	}
+
 	.box-title {
-		font-size: 30px;
+		text-align: center !important;
+		font-size: 20px;
+		letter-spacing: 5px;
+		margin-bottom: 2rem;
 	}
 }

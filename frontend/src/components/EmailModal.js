@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Modal from 'react-modal'
+import ticketsServices from '../services/tickets.js'
 
 import './EmailModal.css'
 
@@ -8,6 +9,8 @@ const EmailModal = ({ isOpen, closeModal, shoppingCart }) => {
 	const [email, setEmail] = useState('')
 	const [confirmEmail, setConfirmEmail] = useState('')
 	const [emailError, setEmailError] = useState('')
+	const [matchClassName, setMatchClassName] = useState('')
+	const [timeoutId, setTimeoutId] = useState(0)
 
 	const validateEmail = (e) => {
 		e.preventDefault()
@@ -16,12 +19,37 @@ const EmailModal = ({ isOpen, closeModal, shoppingCart }) => {
 			setEmailError(
 				'Por favor, introduce una dirección de correo electrónico que sea correcta y que coincida en ambos campos'
 			)
-			setTimeout(() => setEmailError(''), 5000)
+			clearTimeout(timeoutId)
+			setTimeoutId(setTimeout(() => setEmailError(''), 5000))
 			return false
 		} else {
 			setEmailError('')
-			closeModal()
+			const purchaseInfo = `${shoppingCart.tickets}x${shoppingCart.price}€;${shoppingCart.packTickets}x${shoppingCart.packPrice}€;${shoppingCart.amount}€;`
+
+			const purchaseDetails = {
+				eventId: shoppingCart.eventId,
+				tickets: shoppingCart.tickets,
+				packTickets: shoppingCart.packTickets,
+				amount: shoppingCart.amount,
+				purchaseInfo,
+				email,
+			}
+			ticketsServices.buyTickets(purchaseDetails).then(closeModal())
 		}
+	}
+
+	const resetStates = () => {
+		setEmail('')
+		setConfirmEmail('')
+		setEmailError('')
+		setMatchClassName('')
+		setTimeoutId(0)
+	}
+
+	const handleCloseModal = (e) => {
+		e.preventDefault()
+		resetStates()
+		closeModal()
 	}
 
 	const ticketsInfo = shoppingCart.tickets ? (
@@ -61,14 +89,42 @@ const EmailModal = ({ isOpen, closeModal, shoppingCart }) => {
 		''
 	)
 
+	const areMatching = (match, empty) => {
+		if (empty) {
+			setMatchClassName('')
+		} else if (match) {
+			setMatchClassName('matched')
+		} else {
+			setMatchClassName('unmatched')
+		}
+	}
+
+	const handleEmailChange = (e) => {
+		setEmail(e.target.value)
+		areMatching(
+			confirmEmail === e.target.value,
+			confirmEmail === '' || e.target.value === ''
+		)
+	}
+
+	const handleConfirmChange = (e) => {
+		setConfirmEmail(e.target.value)
+		areMatching(email === e.target.value, e.target.value === '' || email === '')
+	}
+
 	return (
-		<Modal isOpen={isOpen} onRequestClose={closeModal}>
+		<Modal
+			isOpen={isOpen}
+			onRequestClose={handleCloseModal}
+			shouldCloseOnOverlayClick={true}>
 			<h2>Comprar entradas</h2>
 
 			<table className="email-modal-cart-info">
-				{ticketsInfo}
-				{packInfo}
-				{amountInfo}
+				<tbody>
+					{ticketsInfo}
+					{packInfo}
+					{amountInfo}
+				</tbody>
 			</table>
 			<p className="email-modal-info">
 				Introduce una dirección de <b>correo electronico</b> válida donde se
@@ -79,20 +135,29 @@ const EmailModal = ({ isOpen, closeModal, shoppingCart }) => {
 					type="email"
 					placeholder="jacky@perlanegra.com"
 					value={email}
-					onChange={(e) => setEmail(e.target.value)}
-					className="email-input"
+					onChange={(e) => handleEmailChange(e)}
+					className={`email-input ${matchClassName}`}
 				/>
 				<input
 					type="email"
 					placeholder="Confirmar correo"
 					value={confirmEmail}
-					onChange={(e) => setConfirmEmail(e.target.value)}
-					className="email-input"
+					onChange={(e) => handleConfirmChange(e)}
+					className={`email-input ${matchClassName}`}
 				/>
 				<p className="email-error">{emailError}</p>
-				<button className="purchase-button" onClick={(e) => validateEmail(e)}>
-					PAGAR
-				</button>
+				<div className="buttons-container">
+					<button
+						className="close-button buy-button"
+						onClick={(e) => handleCloseModal(e)}>
+						Cerrar
+					</button>
+					<button
+						className="purchase-button buy-button"
+						onClick={(e) => validateEmail(e)}>
+						Continuar
+					</button>
+				</div>
 			</form>
 		</Modal>
 	)

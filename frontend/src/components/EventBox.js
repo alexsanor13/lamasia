@@ -24,7 +24,7 @@ const EventBox = ({ event }) => {
 
 	const showBuyTickets = isUpcomingEvent() ? (
 		<Link to={`/events/${event.id}`} id="events-page">
-			<button className="buy-ticket-button">COMPRAR ENTRADA</button>
+			<button className="buy-button">COMPRAR ENTRADA</button>
 		</Link>
 	) : (
 		<button className="finished-button">EVENTO FINALIZADO</button>

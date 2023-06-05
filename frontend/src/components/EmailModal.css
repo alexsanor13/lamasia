@@ -11,16 +11,12 @@
 	max-width: 500px;
 }
 
-.ReactModal__Content form button {
-	margin: 0 auto 5px;
-	cursor: pointer;
-}
-
 .ReactModal__Content input {
 	padding: 5px !important;
 	margin: 10px auto;
 	width: 200px;
 	display: block;
+	outline: none;
 }
 
 .ReactModal__Overlay {
@@ -50,8 +46,30 @@ tr {
 	margin: 2rem auto;
 }
 
-.purchase-button {
-	padding: 8px;
-	font-size: 14px;
-	font-weight: 900;
+.purchase-button,
+.close-button {
+	margin: 0;
+}
+
+.close-button {
+	background-color: grey;
+}
+
+.close-button:hover {
+	background-color: rgb(27, 27, 27);
+}
+
+.buttons-container {
+	display: flex;
+	gap: 10px;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.matched {
+	background-color: #86d986;
+}
+
+.unmatched {
+	background-color: #ff000091;
 }

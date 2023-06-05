@@ -6,6 +6,7 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import Events from './pages/Events'
 import EventDetail from './pages/EventDetail'
+import QRScannerPage from './pages/QRScannerPage'
 
 import About from './pages/About'
 import Blog from './pages/Blog'
@@ -58,6 +59,7 @@ const App = () => {
 						<Route path="/events/:id" element={<EventDetail />} />
 						<Route path="/about" element={<About handlePage={handlePage} />} />
 						<Route path="/blog" element={<Blog handlePage={handlePage} />} />
+						<Route path="/scanner" element={<QRScannerPage />} />
 					</Routes>
 				</main>
 				<Footer />

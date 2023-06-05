@@ -73,7 +73,6 @@
 	color: white;
 }
 
-.buy-ticket-button,
 .finished-button {
 	padding: 10px;
 	margin-top: 5px;
@@ -85,10 +84,6 @@
 	font-weight: bold;
 	cursor: pointer;
 	transition: background-color 0.2s ease-in-out;
-}
-
-.buy-ticket-button:hover {
-	background-color: #431009;
 }
 
 .finished-button {
@@ -108,7 +103,7 @@
 	.event-box {
 		width: fit-content;
 		height: 400px;
-		max-height: 400px;
+		max-height: 450px;
 		max-width: 90%;
 	}
 }

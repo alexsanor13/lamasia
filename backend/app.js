@@ -33,7 +33,9 @@ app.use(cors())
 // app.use(express.static('build'))
 app.use(express.json())
 
-app.use('/api/', config.apiLimiter)
+if (config.debugMode) {
+	app.use('/api/', config.apiLimiter)
+}
 
 // end-points
 app.use('/api/events', eventsRouter)

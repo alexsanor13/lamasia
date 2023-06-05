@@ -54,3 +54,21 @@ footer {
 .d3-text-white {
 	text-shadow: 2px 2px 0 #fff, -2px -2px 0 #fff, 0 0 6px #000;
 }
+
+.buy-button:hover {
+	background-color: #431009;
+}
+
+.buy-button {
+	margin-top: 10px;
+	padding: 10px;
+	background-color: #e8381de6;
+	color: #fff;
+	font-size: 15px;
+	font-weight: bold;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	outline: none;
+	transition: background-color 0.2s ease-in-out;
+}
