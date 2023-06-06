@@ -13,7 +13,7 @@ const Events = ({ handlePage }) => {
 		setLoading(true)
 		eventsServices.getAllEvents().then((fetchedEvents) => {
 			setEvents(fetchedEvents)
-			setLoading(true)
+			setLoading(false)
 		})
 	}, [])
 
