@@ -6,6 +6,8 @@
 	border-radius: 50%;
 	animation: spin 1s infinite linear;
 	z-index: 100 !important;
+	cursor: none;
+	user-select: none;
 }
 
 @keyframes spin {
