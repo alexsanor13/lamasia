@@ -60,29 +60,31 @@ const QrCodeScanner = forwardRef((props, ref) => {
 	)
 
 	return (
-		<div className="container">
-			<div className="open-camera">
+		<section className="scanner">
+			<div className="action-buttons">
 				<button onClick={handleScanCamera}>{cameraSVG}</button>
-			</div>
-			<div className="close-camera">
 				<button onClick={handleCameraClose}>Cerrar cámara</button>
 			</div>
-			<div className="camera-display">
-				{isCameraOpen ? (
+			{isCameraOpen ? (
+				<div className="qr-container">
 					<QrScanner
 						onDecode={handleDecode}
 						onError={handleError}
 						constraints={{ facingMode: 'environment' }}
 						ref={scannerRef}
-						videoStyle={{ width: '100%', height: '100%' }}
-						containerStyle={{ height: '100%' }}
-					/>
-				) : (
-					''
-				)}
-			</div>
-			<div className="scan-result">/* Aquí va el resultado del escaneo. */</div>
-		</div>
+						videoStyle={{ width: '100%', height: '400px', maxWidth: '500px' }}
+						containerStyle={{
+							width: '500px',
+							maxWidth: '100%',
+							height: '400px',
+							paddingTop: 'none',
+						}}
+					/>{' '}
+				</div>
+			) : (
+				''
+			)}
+		</section>
 	)
 })
 
