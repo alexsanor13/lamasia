@@ -1,12 +1,13 @@
 import axios from 'axios'
-//const baseUrl = 'https://safe-eyrie-72931.herokuapp.com/api/notes'
 // Como el frontend se ha incluido en el deploy del backend y se encuentran en el mismo dominio, podemos utilizar path relativo
-const baseUrl = '/api/tickets'
+import baseUrl from './baseUrl'
+
+const url = baseUrl + '/tickets'
 
 const buyTickets = async (purchaseDetails) => {
 	console.log('Process purchase')
 	try {
-		const response = await axios.post(baseUrl, purchaseDetails)
+		const response = await axios.post(url, purchaseDetails)
 
 		return response.data
 	} catch (error) {

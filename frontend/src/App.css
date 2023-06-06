@@ -18,12 +18,13 @@ body {
 	background-repeat: repeat;
 	background-size: 100vh;
 	background-position: top;
-	height: 100%;
+	height: 100vh;
+	overflow-x: hidden;
 }
 
 main {
 	padding-top: 130px;
-	min-height: 100vh;
+	min-height: calc(90vh - 75px);
 }
 
 .app {
@@ -71,4 +72,9 @@ footer {
 	cursor: pointer;
 	outline: none;
 	transition: background-color 0.2s ease-in-out;
+}
+
+.center {
+	margin: auto;
+	text-align: center;
 }

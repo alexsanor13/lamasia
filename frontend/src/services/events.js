@@ -1,18 +1,19 @@
 import axios from 'axios'
 //const baseUrl = 'https://safe-eyrie-72931.herokuapp.com/api/notes'
 // Como el frontend se ha incluido en el deploy del backend y se encuentran en el mismo dominio, podemos utilizar path relativo
-const baseUrl = '/api/events'
+import baseUrl from './baseUrl'
+
+const url = baseUrl + '/events'
 
 const getAllEvents = async () => {
-	console.log('Getting events')
-	const response = await axios.get(baseUrl)
+	const response = await axios.get(url)
 	return response.data
 }
 
 const getEventInfo = async (eventId) => {
 	try {
-		const response = await axios.post(baseUrl, {
-			id: eventId, // envía el ID del evento en el cuerpo de la solicitud
+		const response = await axios.post(url, {
+			id: eventId,
 		})
 
 		return response.data

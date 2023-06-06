@@ -43,8 +43,6 @@ const App = () => {
 		}
 	}
 
-	console.log('App rendered')
-
 	return (
 		<Router>
 			<div className="app">
