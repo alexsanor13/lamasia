@@ -33,6 +33,8 @@ const EventDetail = () => {
 			setIsMobile(window.innerWidth < 768)
 		}
 
+		window.scrollTo(0, 0)
+
 		window.addEventListener('resize', handleResize)
 
 		return () => {

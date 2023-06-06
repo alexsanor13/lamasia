@@ -10,6 +10,7 @@ const Events = ({ handlePage }) => {
 	const [loading, setLoading] = useState(false)
 
 	useEffect(() => {
+		window.scrollTo(0, 0)
 		setLoading(true)
 		eventsServices.getAllEvents().then((fetchedEvents) => {
 			setEvents(fetchedEvents)

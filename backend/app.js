@@ -38,7 +38,7 @@ if (config.debugMode) {
 app.use('/api/events', eventsRouter)
 app.use('/api/tickets', ticketsRouter)
 
-if (config.debugMode) {
+if (!config.debugMode) {
 	app.use(express.static(path.join(__dirname, 'build')))
 
 	app.get('*', function (req, res) {
