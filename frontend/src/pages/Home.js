@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './Home.css'
 
-const Home = ({ handlePage }) => {
+const Home = () => {
+	useEffect(() => {
+		document.title = 'La Masia - Página principal'
+	}, [])
 	return <></>
 }
 

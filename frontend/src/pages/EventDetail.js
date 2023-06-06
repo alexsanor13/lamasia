@@ -29,6 +29,10 @@ const EventDetail = () => {
 	}
 
 	useEffect(() => {
+		document.title = eventInfo ? `La Masia - ${eventInfo.title}` : ''
+	}, [eventInfo])
+
+	useEffect(() => {
 		const handleResize = () => {
 			setIsMobile(window.innerWidth < 768)
 		}

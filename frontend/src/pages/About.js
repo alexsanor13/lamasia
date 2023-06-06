@@ -1,6 +1,10 @@
 import './About.css'
 import Soon from '../components/Soon'
-const About = ({ handlePage }) => {
+import { useEffect } from 'react'
+const About = () => {
+	useEffect(() => {
+		document.title = `La Masia - Sobre nosotros`
+	}, [])
 	return (
 		<section className="about">
 			<Soon />
