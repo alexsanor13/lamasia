@@ -1,16 +1,15 @@
 const config = require('./utils/config')
 
-// Por defecto configura que cualquier origen puede acceder a la api
 const express = require('express')
 const app = express()
 const cors = require('cors')
+const path = require('path')
 const eventsRouter = require('./controllers/events')
 const ticketsRouter = require('./controllers/tickets')
 
 // MongoDB
 const mongoose = require('mongoose')
 
-// conexión a mongodb
 mongoose
 	.connect(config.MONGO_DB_URI, {
 		useNewUrlParser: true,
@@ -28,10 +27,8 @@ process.on('uncaughtException', () => {
 })
 
 app.use(cors())
-
-// Se incluye el front como static
-app.use(express.static('build'))
 app.use(express.json())
+app.use(express.static('build'))
 
 if (config.debugMode) {
 	app.use('/api/', config.apiLimiter)
@@ -40,5 +37,11 @@ if (config.debugMode) {
 // end-points
 app.use('/api/events', eventsRouter)
 app.use('/api/tickets', ticketsRouter)
+
+app.use(express.static(path.join(__dirname, 'build')))
+
+app.get('*', function (req, res) {
+	res.sendFile(path.join(__dirname, 'build', 'index.html'))
+})
 
 module.exports = app

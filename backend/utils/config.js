@@ -5,7 +5,6 @@ const env = new Env()
 
 const PORT = env.first(['PORT', 'HTTP_PORT'], 8080)
 const MONGO_DB_URI = env.get('MONGO_DB_URI')
-const DEBUG_MODE = env.get('DEBUG_MODE')
 const QR_CONTAINER = env.get('QR_CONTAINER')
 const CRYPTO_QR = env.get('CRYPTO_QR')
 
@@ -18,7 +17,7 @@ const apiLimiter = rateLimit({
 })
 
 let debugMode = false
-if (process.argv.includes('--mode=debug') || DEBUG_MODE) {
+if (process.argv.includes('--mode=debug')) {
 	debugMode = true
 }
 
