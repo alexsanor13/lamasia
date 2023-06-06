@@ -19,7 +19,8 @@ body {
 	background-size: 100vh;
 	background-position: top;
 	height: 100vh;
-	overflow-x: hidden;
+	max-width: 100vw;
+	box-sizing: border-box;
 }
 
 main {
