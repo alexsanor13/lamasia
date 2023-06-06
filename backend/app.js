@@ -30,7 +30,7 @@ process.on('uncaughtException', () => {
 app.use(cors())
 
 // Se incluye el front como static
-// app.use(express.static('build'))
+app.use(express.static('build'))
 app.use(express.json())
 
 if (config.debugMode) {

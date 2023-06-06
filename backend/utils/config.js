@@ -5,11 +5,9 @@ const env = new Env()
 
 const PORT = env.first(['PORT', 'HTTP_PORT'], 8080)
 const MONGO_DB_URI = env.get('MONGO_DB_URI')
-const NODE_ENV = env.get('NODE_ENV')
-const SECRET = env.get('SECRET')
 const DEBUG_MODE = env.get('DEBUG_MODE')
 const QR_CONTAINER = env.get('QR_CONTAINER')
-const CRYPT_QR = env.get('CRYPT_QR')
+const CRYPTO_QR = env.get('CRYPTO_QR')
 
 const rateLimit = require('express-rate-limit')
 
@@ -27,10 +25,8 @@ if (process.argv.includes('--mode=debug') || DEBUG_MODE) {
 module.exports = {
 	PORT,
 	MONGO_DB_URI,
-	NODE_ENV,
-	SECRET,
 	apiLimiter,
 	debugMode,
 	QR_CONTAINER,
-	CRYPT_QR,
+	CRYPTO_QR,
 }
