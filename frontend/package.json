@@ -6,7 +6,6 @@
 		"@jridgewell/sourcemap-codec": "^1.4.15",
 		"@yudiel/react-qr-scanner": "^1.1.8",
 		"axios": "^1.4.0",
-		"nth-check": "^2.0.1",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-lazy-load-image-component": "^1.5.6",
