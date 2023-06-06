@@ -54,12 +54,9 @@ const App = () => {
 							path="/events"
 							element={<Events handlePage={handlePage} />}
 						/>
-						<Route
-							path="/events/:id"
-							element={<EventDetail handlePage={handlePage} s />}
-						/>
-						<Route path="/about" element={<About handlePage={handlePage} />} />
-						<Route path="/blog" element={<Blog handlePage={handlePage} />} />
+						<Route path="/events/:id" element={<EventDetail />} />
+						<Route path="/about" element={<About />} />
+						<Route path="/blog" element={<Blog />} />
 						<Route path="/scanner" element={<QRScannerPage />} />
 					</Routes>
 				</main>
