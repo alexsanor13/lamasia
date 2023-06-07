@@ -219,13 +219,6 @@
 		margin: 0 auto;
 	}
 
-	.date-calendar,
-	.date-schedule {
-		min-width: calc(fit-content + 100px);
-		width: 60%;
-		margin: 0.7rem auto;
-	}
-
 	.box {
 		background-color: rgba(255, 255, 255, 0.082) !important;
 		padding: 1rem;
