@@ -3,10 +3,8 @@ const { Schema, model } = require('mongoose')
 const eventSchema = new Schema({
 	id: Number,
 	title: String,
-	date: {
-		type: Date,
-		default: () => Date.now().toString(),
-	},
+	date: Date,
+	scheduleTime: String,
 	image: String,
 	description: String,
 	location: String,

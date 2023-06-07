@@ -1,18 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import './EventBox.css'
+import utils from '../common/utils'
 
 const EventBox = ({ event }) => {
 	const { title, date, image } = event
-
-	const getFormattedDate = () => {
-		const receivedDate = new Date(date)
-		let day = String(receivedDate.getDate()).padStart(2, '0')
-		let month = String(receivedDate.getMonth() + 1).padStart(2, '0')
-		let year = receivedDate.getFullYear()
-
-		return `${day}/${month}/${year}`
-	}
 
 	const isUpcomingEvent = () => {
 		const eventFinished = new Date(date) < new Date()
@@ -43,7 +35,7 @@ const EventBox = ({ event }) => {
 				<img src={image} alt={title} className="event-image" />
 			</div>
 			<div className="event-info-container outlined-text">
-				<p className={eventClass.dateClass}>{getFormattedDate()}</p>
+				<p className={eventClass.dateClass}>{utils.getDDMMYYYDate(date)}</p>
 				<h2 className="event-title">{title}</h2>
 				{showBuyTickets}
 			</div>
