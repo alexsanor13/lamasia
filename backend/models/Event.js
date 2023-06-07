@@ -5,7 +5,7 @@ const eventSchema = new Schema({
 	title: String,
 	date: {
 		type: Date,
-		default: Date.now,
+		default: () => Date.now().toISOString(),
 	},
 	image: String,
 	description: String,
