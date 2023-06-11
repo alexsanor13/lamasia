@@ -29,7 +29,7 @@ const App = () => {
 			if (e) {
 				let path = e.getAttribute('href')
 				let actual = window.location.href.split('/')
-				if (path === '/' + actual[actual.length - 1]) {
+				if (path === '/' + actual[actual.length - 1] && path !== '/') {
 					e.classList.add('page-visited')
 				} else {
 					e.classList.remove('page-visited')
