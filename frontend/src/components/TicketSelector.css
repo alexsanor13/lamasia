@@ -55,7 +55,7 @@
 
 .plus-svg:hover,
 .minus-svg:hover {
-	fill: #f7c02a;
+	fill: var(--pirate-gold);
 }
 
 .value {

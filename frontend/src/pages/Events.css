@@ -9,7 +9,7 @@ h1 {
 	width: 100%;
 	display: block;
 	height: fit-content;
-	color: #f7c02a;
+	color: var(--pirate-gold);
 	text-shadow: 4px -2px #b18a1f;
 }
 

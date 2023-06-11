@@ -45,7 +45,7 @@
 	display: block;
 	height: fit-content;
 	text-align: center !important;
-	color: #f7c02a;
+	color: var(--pirate-gold);
 	text-shadow: 4px -2px #b18a1f;
 	box-sizing: border-box;
 	overflow-x: hidden;
@@ -127,12 +127,12 @@
 
 .box-title-container {
 	width: 100%;
-	border-bottom: 1px solid #f7c02a5d;
+	border-bottom: 1px solid var(--pirate-gold-dark);
 }
 
 .box-title {
 	margin: 0 0 8px;
-	color: #f7c02a;
+	color: var(--pirate-gold);
 	text-align: right !important;
 	font-size: 20px;
 	letter-spacing: 10px;
@@ -193,7 +193,7 @@
 		background-color: rgba(0, 0, 0, 0.398);
 		padding: 2em;
 		border-radius: 0;
-		color: #f7c02a;
+		color: var(--pirate-gold);
 		max-width: 90%;
 		margin: auto;
 		box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -234,5 +234,9 @@
 		font-size: 20px;
 		letter-spacing: 5px;
 		margin-bottom: 1rem;
+	}
+
+	.location-description {
+		white-space: nowrap;
 	}
 }

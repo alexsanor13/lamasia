@@ -16,7 +16,7 @@
 .event-box-upcoming {
 	background-color: #9f806873;
 	height: 700px;
-	min-width: 50%;
+	min-width: 40%;
 }
 
 .event-image-container {
@@ -87,7 +87,7 @@
 }
 
 .finished-button {
-	background-color: #f7c02a56;
+	background-color: var(--pirate-gold-dark);
 	cursor: auto;
 	padding: 7px;
 	font-size: 12px;

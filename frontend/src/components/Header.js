@@ -5,15 +5,18 @@ import 'react-lazy-load-image-component/src/effects/blur.css'
 import logo from '../assets/images/logo.webp'
 import logoPlaceholder from '../assets/placeholders/logo-placeholder.svg'
 import './Header.css'
+import { ReactComponent as InstagramSVG } from '../assets/svg/instagram_no_color.svg'
+import { ReactComponent as BurgerMenuSVG } from '../assets/svg/burger_menu.svg'
+import NavBar from './NavBar'
 
-const Header = ({ handlePage }) => {
+const Header = ({ handlePage, setIsMenuOpen }) => {
 	const [visible, setVisible] = useState(true)
 	const [previousScrollPosition, setPreviousScrollPosition] = useState(0)
 
 	// The header is hidden everytime a scrolldown event is triggered
 	useEffect(() => {
 		const handleScroll = () => {
-			const currentScrollPosition = window.pageYOffset
+			const currentScrollPosition = window.scrollY
 
 			const isVisible =
 				previousScrollPosition > currentScrollPosition ||
@@ -40,30 +43,22 @@ const Header = ({ handlePage }) => {
 					/>
 				</Link>
 			</div>
-
-			<nav className="header-nav">
-				<Link
-					to="/events"
-					id="events-page"
-					className="header-nav-link"
-					onClick={() => handlePage('events')}>
-					EVENTOS
-				</Link>
-				<Link
-					to="/blog"
-					id="blog-page"
-					className="header-nav-link"
-					onClick={() => handlePage('blog')}>
-					BLOG
-				</Link>
-				<Link
-					to="/about"
-					id="about-page"
-					className="header-nav-link"
-					onClick={() => handlePage('about')}>
-					NOSOTROS
-				</Link>
-			</nav>
+			<BurgerMenuSVG
+				className="header-menu-button"
+				onClick={() => setIsMenuOpen(true)}
+			/>
+			<NavBar
+				handlePage={handlePage}
+				setIsMenuOpen={setIsMenuOpen}
+				classNav="header-nav"
+			/>
+			<div className="header-instagram-container">
+				<a
+					className="header-instagram"
+					href="https://www.instagram.com/lamasiaevents/">
+					<InstagramSVG />
+				</a>
+			</div>
 		</header>
 	)
 }

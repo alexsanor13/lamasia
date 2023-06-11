@@ -1,6 +1,9 @@
 :root {
 	background-color: #221810d1;
 	font-family: 'Roboto', sans-serif;
+	--pirate-gold: #f7c02a;
+	--pirate-gold-dark: #f7c02a56;
+	--max-index: 99999999;
 }
 
 * {
@@ -26,6 +29,7 @@ body {
 main {
 	padding-top: 130px;
 	min-height: calc(90vh - 75px);
+	overflow-x: hidden;
 }
 
 .app {
@@ -78,4 +82,70 @@ footer {
 .center {
 	margin: auto;
 	text-align: center;
+}
+
+.mobile-menu,
+.mobile-menu-button {
+	display: none;
+}
+
+@keyframes fade-header-in {
+	0% {
+		opacity: 0;
+		transform: translateY(-4rem);
+	}
+
+	100% {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+/* Mobile header nav menu */
+@media (width < 480px) {
+	.mobile-menu {
+		display: flex;
+		position: fixed;
+		width: 100vw;
+		height: 100vh;
+		background-image: linear-gradient(
+			to bottom,
+			rgba(0, 0, 0, 0.979),
+			var(--pirate-gold)
+		);
+		z-index: calc(var(--max-index) - 1);
+		align-items: center;
+		flex-direction: column;
+		justify-content: center;
+		animation: fade-header-in 0.5s;
+	}
+
+	.mobile-menu-link {
+		color: white;
+		letter-spacing: 10px;
+		text-align: center;
+		font-size: 30px;
+		text-decoration: none;
+		font-weight: 900;
+		margin: 5rem auto;
+	}
+
+	.exit-button-container {
+		display: block;
+		width: 100%;
+		position: fixed;
+		z-index: var(--max-index);
+	}
+
+	.exit-menu-button {
+		display: block;
+		width: 40px;
+		height: 40px;
+		cursor: pointer;
+		fill: var(--pirate-gold);
+		margin: 2rem auto;
+	}
+	.exit-menu-button:hover {
+		fill: white;
+	}
 }
