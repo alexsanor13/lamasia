@@ -42,12 +42,6 @@ footer {
 	flex-shrink: 0;
 }
 
-@media (max-width: 768px) {
-	main {
-		padding-top: 90px;
-	}
-}
-
 .section-title {
 	width: 100%;
 	text-align: center;
@@ -89,6 +83,17 @@ footer {
 	display: none;
 }
 
+.page-visited {
+	padding: 10px;
+	background-color: var(--pirate-gold);
+	color: #000 !important;
+	border-radius: 20px;
+}
+
+.page-visited:hover {
+	color: white !important;
+}
+
 @keyframes fade-header-in {
 	0% {
 		opacity: 0;
@@ -101,8 +106,14 @@ footer {
 	}
 }
 
+@media (max-width: 768px) {
+	main {
+		padding-top: 90px;
+	}
+}
+
 /* Mobile header nav menu */
-@media (width < 500px) {
+@media (width < 768px) {
 	.mobile-menu {
 		display: flex;
 		position: fixed;
@@ -127,7 +138,7 @@ footer {
 		font-size: 30px;
 		text-decoration: none;
 		font-weight: 900;
-		margin: 5rem auto;
+		margin: 5rem auto 5rem 2rem;
 	}
 
 	.exit-button-container {

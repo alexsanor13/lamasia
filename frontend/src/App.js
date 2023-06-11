@@ -30,9 +30,9 @@ const App = () => {
 				let path = e.getAttribute('href')
 				let actual = window.location.href.split('/')
 				if (path === '/' + actual[actual.length - 1]) {
-					e.style.color = '#f6a53b'
+					e.classList.add('page-visited')
 				} else {
-					e.style.color = '#ffffff'
+					e.classList.remove('page-visited')
 				}
 			}
 		})
