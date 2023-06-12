@@ -34,7 +34,7 @@
 	height: 75px;
 	flex: 1;
 	border-radius: 50%;
-	box-shadow: 0px 0px 30px 5px var(--pirate-gold-dark);
+	cursor: pointer;
 }
 
 .header-menu-button {
@@ -66,17 +66,20 @@ a:hover {
 .header-instagram svg {
 	height: 45px;
 	width: 45px;
+}
 
-	fill: var(--pirate-gold);
+.header-instagram svg {
 	cursor: pointer;
 }
 
-.header-instagram svg g {
-	transition: fill 0.3s ease-in;
+.header-instagram rect {
+	fill: var(--pirate-gold);
 }
 
-.header-instagram g:hover {
-	fill: var(--pirate-gold-dark);
+.header-instagram svg:hover {
+	border: 2px solid white;
+	border-radius: 50%;
+	transition: border 0.3s ease-in;
 }
 
 @media (width < 768px) {

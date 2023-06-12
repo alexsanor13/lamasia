@@ -91,7 +91,7 @@ footer {
 }
 
 .page-visited:hover {
-	color: white !important;
+	color: black !important;
 }
 
 @keyframes fade-header-in {
