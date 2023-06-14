@@ -1,10 +1,10 @@
 import './Spinner.css'
-import Skull from '../assets/skull.png'
+import { ReactComponent as SkullSVG } from '../assets/svg/skull.svg'
 
 const Spinner = () => {
 	return (
 		<div className="spinner-container">
-			<img className="skull-loader" src={Skull} alt="Loader"></img>
+			<SkullSVG className="skull-loader" />
 		</div>
 	)
 }

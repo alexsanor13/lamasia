@@ -3,6 +3,9 @@ import { useParams } from 'react-router-dom'
 import TicketSelector from '../components/TicketSelector.js'
 import EmailModal from '../components/EmailModal.js'
 import utils from '../common/utils'
+import { ReactComponent as PinSVG } from '../assets/svg/pin.svg'
+import { ReactComponent as ClockSVG } from '../assets/svg/clock.svg'
+import { ReactComponent as CalendarSVG } from '../assets/svg/calendar.svg'
 
 import eventsServices from '../services/events.js'
 import './EventDetail.css'
@@ -84,24 +87,6 @@ const EventDetail = () => {
 		}
 	}
 
-	const calendarSvg = (
-		<svg className="info-svg" viewBox="0 0 448 512">
-			<path d="M128 0c17.7 0 32 14.3 32 32V64H288V32c0-17.7 14.3-32 32-32s32 14.3 32 32V64h48c26.5 0 48 21.5 48 48v48H0V112C0 85.5 21.5 64 48 64H96V32c0-17.7 14.3-32 32-32zM0 192H448V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V192zm64 80v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm128 0v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H208c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H336zM64 400v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H208zm112 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H336c-8.8 0-16 7.2-16 16z" />
-		</svg>
-	)
-
-	const clockSvg = (
-		<svg className="info-svg" viewBox="0 0 448 512">
-			<path d="M464 256A208 208 0 1 1 48 256a208 208 0 1 1 416 0zM0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM232 120V256c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2V120c0-13.3-10.7-24-24-24s-24 10.7-24 24z" />
-		</svg>
-	)
-
-	const pinSvg = (
-		<svg className="info-svg" viewBox="0 0 448 512">
-			<path d="M16 144a144 144 0 1 1 288 0A144 144 0 1 1 16 144zM160 80c8.8 0 16-7.2 16-16s-7.2-16-16-16c-53 0-96 43-96 96c0 8.8 7.2 16 16 16s16-7.2 16-16c0-35.3 28.7-64 64-64zM128 480V317.1c10.4 1.9 21.1 2.9 32 2.9s21.6-1 32-2.9V480c0 17.7-14.3 32-32 32s-32-14.3-32-32z" />
-		</svg>
-	)
-
 	return (
 		<div className="center">
 			{loading ? (
@@ -166,13 +151,13 @@ const EventDetail = () => {
 									<h2 className="box-title">CUÁNDO</h2>
 								</div>
 								<div className="date-calendar">
-									{calendarSvg}
+									<CalendarSVG className="info-svg" />
 									<span className="date-calendar-info ">
 										<b>{utils.getFormattedDate(eventInfo.date)}</b>
 									</span>
 								</div>
 								<div className="date-schedule">
-									{clockSvg}
+									<ClockSVG className="info-svg" />
 									<span className="date-calendar-info ">
 										<b>{eventInfo.scheduleTime}</b>
 									</span>
@@ -183,13 +168,11 @@ const EventDetail = () => {
 									<h2 className="box-title">DÓNDE</h2>
 								</div>
 								<div className="location-info">
-									{pinSvg}
+									<PinSVG className="info-svg" />
 									<span className="location-description">
-										<b>{eventInfo.locationDescription}</b>
-									</span>
-									-
-									<span className="location-info-text">
-										<b>{eventInfo.location}</b>
+										<b>
+											{eventInfo.locationDescription} - {eventInfo.location}
+										</b>
 									</span>
 								</div>
 								<iframe

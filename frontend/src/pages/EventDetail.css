@@ -5,7 +5,7 @@
 	background-color: rgba(0, 0, 0, 0.398);
 	padding: 2em;
 	border-radius: 10px;
-	max-width: 70%;
+	max-width: 60%;
 	margin: auto;
 	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 	text-align: center;
@@ -37,11 +37,12 @@
 }
 
 .event-detail-title {
-	font-size: 90px;
+	font-size: 5em;
 	margin: 0 auto 2rem;
 	font-weight: 900;
 	letter-spacing: 60px;
 	width: fit-content;
+	max-width: 100%;
 	display: block;
 	height: fit-content;
 	text-align: center !important;
@@ -91,7 +92,8 @@
 	text-align: left;
 }
 
-.info-svg {
+.info-svg,
+.info-svg path {
 	display: inline-block;
 	width: 30px;
 	line-height: 30px;
@@ -110,12 +112,12 @@
 	align-items: center;
 }
 
-.location-info-text,
 .location-description {
 	display: inline-block;
 	height: fit-content;
 	line-height: 30px;
 	text-align: left;
+	flex-wrap: wrap;
 }
 
 .box {
