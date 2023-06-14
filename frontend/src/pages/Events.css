@@ -13,8 +13,12 @@ h1 {
 	text-shadow: 4px -2px #b18a1f;
 }
 
-@media (max-width: 768px) {
+@media (width < 768px) {
 	h1 {
 		font-size: 48px;
+	}
+
+	.events {
+		margin-bottom: 2em;
 	}
 }

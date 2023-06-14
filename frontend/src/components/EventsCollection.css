@@ -1,8 +1,15 @@
 .events-collection {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 15px;
-	justify-content: center;
-	max-width: 80%;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	gap: 30px;
+	width: 70%;
 	margin: 0 auto;
+}
+
+@media screen and (width < 768px) {
+	.events-collection {
+		gap: 30px;
+		width: 100%;
+		margin: 0 auto;
+	}
 }
