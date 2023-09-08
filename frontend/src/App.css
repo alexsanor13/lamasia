@@ -83,11 +83,11 @@ footer {
 	display: none;
 }
 
-.page-event-link {
+/* .page-event-link {
 	padding: 10px;
 	border-color: var(--pirate-gold) !important;
 	border-radius: 20px;
-}
+} */
 
 .active {
 	color: var(--pirate-gold) !important;
