@@ -4,19 +4,7 @@ import baseUrl from './baseUrl'
 
 const url = baseUrl + '/scanner'
 
-const createQR = async (transactionId) => {
-	// console.log('Validation in progress...')
-	// const
-	// try {
-	// 	const response = await axios.post(url + , {
-	// 		encryptedQR,
-	// 	})
-	// 	return response.data
-	// } catch (error) {
-	// 	console.error(error)
-	// 	return null
-	// }
-}
+const createQR = async (transactionId) => {}
 
 const scanQR = async (encryptedQR) => {
 	url += '/scanQR'
