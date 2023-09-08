@@ -6,6 +6,7 @@ const cors = require('cors')
 const path = require('path')
 const eventsRouter = require('./controllers/events')
 const ticketsRouter = require('./controllers/tickets')
+const scannerRouter = require('./controllers/scanner')
 
 // MongoDB
 const mongoose = require('mongoose')
@@ -37,6 +38,7 @@ if (config.debugMode) {
 // end-points
 app.use('/api/events', eventsRouter)
 app.use('/api/tickets', ticketsRouter)
+app.use('/api/scanner', scannerRouter)
 
 if (!config.debugMode) {
 	app.use(express.static(path.join(__dirname, 'build')))

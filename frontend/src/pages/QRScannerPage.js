@@ -1,16 +1,33 @@
 import React, { useRef, useImperativeHandle, forwardRef, useState } from 'react'
 import { QrScanner } from '@yudiel/react-qr-scanner'
+import scannerServices from '../services/qrScanner.js'
 import './QRScannerPage.css'
 
 const QrCodeScanner = forwardRef((props, ref) => {
 	const scannerRef = useRef(null)
 	const [isCameraOpen, setIsCameraOpen] = useState(false)
+	const [validatedData, setValidatedData] = useState('')
+	const [showLoader, setShowLoader] = useState(false)
 
 	const handleDecode = (result) => {
-		if (typeof result !== Number) {
-			console.log(result)
+		if (showLoader || typeof result !== Number) {
+			return
 		}
-		// Puedes manejar el resultado del código QR como prefieras aquí
+
+		// spinner mientras se desencripta y se valida el qr, se actualiza la bd para activarlo
+		// se llama al backend para desencriptar el qr, y este me va a devolver el qr desencriptado y validado
+		// si una vez validado, se escanea de nuevo, el backend me tiene que devolver el html con "qr ya activado"
+		setShowLoader(true)
+		setValidatedData(scannerServices.scanQR(result))
+
+		// Open a new window with the validated qr html
+		const newWindow = window.open()
+		if (newWindow) {
+			newWindow.document.write(validatedData)
+		}
+
+		setValidatedData('')
+		setShowLoader(false)
 	}
 
 	const handleError = (error) => {
@@ -79,7 +96,7 @@ const QrCodeScanner = forwardRef((props, ref) => {
 							height: '400px',
 							paddingTop: 'none',
 						}}
-					/>{' '}
+					/>
 				</div>
 			) : (
 				''
