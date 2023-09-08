@@ -2,7 +2,7 @@ import axios from 'axios'
 // Como el frontend se ha incluido en el deploy del backend y se encuentran en el mismo dominio, podemos utilizar path relativo
 import baseUrl from './baseUrl'
 
-const url = baseUrl + '/scanner'
+let url = baseUrl + '/scanner'
 
 const createQR = async (transactionId) => {}
 
