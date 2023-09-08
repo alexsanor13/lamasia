@@ -1,7 +1,7 @@
 import './App.css'
 import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import Home from './pages/Home'
+// import Home from './pages/Home'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Events from './pages/Events'
@@ -20,22 +20,6 @@ const App = () => {
 
 	useEffect(() => {
 		document.title = title
-		let docs = []
-		docs = docs.concat(document.getElementById('home-page'))
-		docs = docs.concat(document.getElementById('about-page'))
-		docs = docs.concat(document.getElementById('events-page'))
-		docs = docs.concat(document.getElementById('blog-page'))
-		docs.forEach((e) => {
-			if (e) {
-				let path = e.getAttribute('href')
-				let actual = window.location.href.split('/')
-				if (path === '/' + actual[actual.length - 1] && path !== '/') {
-					e.classList.add('page-visited')
-				} else {
-					e.classList.remove('page-visited')
-				}
-			}
-		})
 	}, [currentPage, title])
 
 	const handlePage = (page) => {
@@ -52,10 +36,11 @@ const App = () => {
 				<Header handlePage={handlePage} setIsMenuOpen={setIsMenuOpen} />
 				<main>
 					<Routes>
-						<Route path="/" element={<Home handlePage={handlePage} />} index />
+						{/* <Route path="/" element={<Home handlePage={handlePage} />} /> */}
 						<Route
-							path="/events"
+							path="/"
 							element={<Events handlePage={handlePage} />}
+							index
 						/>
 						<Route path="/events/:id" element={<EventDetail />} />
 						<Route path="/about" element={<About />} />

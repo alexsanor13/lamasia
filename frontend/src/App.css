@@ -83,15 +83,14 @@ footer {
 	display: none;
 }
 
-.page-visited {
+.page-event-link {
 	padding: 10px;
-	background-color: var(--pirate-gold);
-	color: #000 !important;
+	border-color: var(--pirate-gold) !important;
 	border-radius: 20px;
 }
 
-.page-visited:hover {
-	color: black !important;
+.active {
+	color: var(--pirate-gold) !important;
 }
 
 @keyframes fade-header-in {

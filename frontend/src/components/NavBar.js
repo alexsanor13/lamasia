@@ -1,6 +1,6 @@
 // NavBar.js
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 const NavBar = ({ handlePage, setIsMenuOpen, classNav = 'header-nav' }) => {
 	const handleClick = (targetPath) => {
@@ -9,27 +9,30 @@ const NavBar = ({ handlePage, setIsMenuOpen, classNav = 'header-nav' }) => {
 	}
 	return (
 		<nav className={classNav} id="headerNav">
-			<Link
-				to="/events"
+			<NavLink
+				to="/"
 				id="events-page"
 				className={`${classNav}-link`}
+				activeClassName="page-visited"
 				onClick={() => handleClick('events')}>
 				EVENTOS
-			</Link>
-			<Link
+			</NavLink>
+			<NavLink
 				to="/blog"
 				id="blog-page"
 				className={`${classNav}-link`}
+				activeClassName="page-visited"
 				onClick={() => handleClick('blog')}>
 				BLOG
-			</Link>
-			<Link
+			</NavLink>
+			<NavLink
 				to="/about"
 				id="about-page"
 				className={`${classNav}-link`}
+				activeClassName="page-visited"
 				onClick={() => handleClick('about')}>
 				NOSOTROS
-			</Link>
+			</NavLink>
 		</nav>
 	)
 }
