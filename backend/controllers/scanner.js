@@ -43,4 +43,4 @@ scannerRouter.post('/scanQR', async (request, response, next) => {
 	}
 })
 
-module.exports = eventsRouter
+module.exports = scannerRouter
