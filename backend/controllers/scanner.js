@@ -6,22 +6,6 @@ const Event = require('../models/Event')
 const Ticket = require('../models/Ticket')
 const Transaction = require('../models/Transaction')
 
-// Aquí se recibirá el id de la transacción y fecha de creación de esta. Con esos datos se creará el qr encriptado
-scannerRouter.post('/createQR', async (request, response, next) => {
-	try {
-		const { id } = request.body
-		const event = await Event.findOne({ id: id }).lean()
-
-		if (event) {
-			return response.status(200).json(event)
-		} else {
-			return response.status(404).json({ error: 'Event not found.' })
-		}
-	} catch (error) {
-		next(error)
-	}
-})
-
 // Se recibirá el qr encriptado y se debe:
 // 1. desenciptar --> obtener la transacción
 // 2. se consultará si el qr se ha validado previamente (status)

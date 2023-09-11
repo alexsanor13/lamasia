@@ -3,13 +3,19 @@ import axios from 'axios'
 import baseUrl from './baseUrl'
 
 const url = baseUrl + '/tickets'
+const redsysUrl = 'https://sis-t.redsys.es:25443/sis/realizarPago'
 
 const buyTickets = async (purchaseDetails) => {
-	console.log('Process purchase')
+	console.log('Purchase in process')
 	try {
-		const response = await axios.post(url, purchaseDetails)
-
-		return response.data
+		const creation = await axios.post(`${url}/createPayment`, purchaseDetails)
+		// TODO SABER COMO REDIRECCIONAR AL USUARIO AL PAGO PARA IMTRPDUCIR DATOS DE LA TARJETA
+		const tpvResponse = await axios.post(redsysUrl, creation.data)
+		const paymentResponse = await axios.post(
+			`${url}/processPayment`,
+			tpvResponse
+		)
+		return paymentResponse.data
 	} catch (error) {
 		console.error(error)
 		return null

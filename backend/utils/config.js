@@ -21,6 +21,24 @@ if (process.argv.includes('--mode=debug')) {
 	debugMode = true
 }
 
+const TPV = {
+	MERCHANTCODE: env.get('TPV_DS_MERCHANT_MERCHANTCODE')
+		? Number(env.get('TPV_DS_MERCHANT_MERCHANTCODE'))
+		: null,
+	TERMINAL: env.get('TPV_DS_MERCHANT_TERMINAL')
+		? Number(env.get('TPV_DS_MERCHANT_TERMINAL'))
+		: null,
+	CURRENCY: env.get('TPV_DS_MERCHANT_CURRENCY')
+		? Number(env.get('TPV_DS_MERCHANT_CURRENCY'))
+		: null,
+	TRANSACTIONTYPE: env.get('TPV_DS_MERCHANT_TRANSACTIONTYPE')
+		? Number(env.get('TPV_DS_MERCHANT_TRANSACTIONTYPE'))
+		: null,
+	SECRET: env.get('TPV_SECRET'),
+	URLCALLBACK: env.get('TPV_CALLBACK'),
+	SIGNATURE_VERSION: env.get('TPV_SIGNATURE_VERSION'),
+}
+
 module.exports = {
 	PORT,
 	MONGO_DB_URI,
@@ -28,4 +46,5 @@ module.exports = {
 	debugMode,
 	QR_CONTAINER,
 	CRYPTO_QR,
+	TPV,
 }

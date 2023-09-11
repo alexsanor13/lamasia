@@ -1,6 +1,7 @@
 const { Schema, model } = require('mongoose')
 
 const TransactionSchema = new Schema({
+	id: Number,
 	email: String,
 	amount: Number,
 	tickets: Number,

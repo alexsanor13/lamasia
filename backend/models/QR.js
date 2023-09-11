@@ -1,23 +1,26 @@
 const { Schema, model } = require('mongoose')
 
-const TicketSchema = new Schema({
-	transactionId: String,
-	eventId: String,
+const QRSchema = new Schema({
+	ticketId: String,
 	qrCode: String,
-	createdAt: {
+	creationDate: {
 		type: Date,
 		default: Date.now,
 	},
-	packTicket: {
+	activated: {
 		type: Boolean,
 		default: false,
 	},
+	activationDate: {
+		type: Date,
+		default: Date.now,
+	},
 })
 
-TicketSchema.set('toJSON', {
+QRSchema.set('toJSON', {
 	transform: (document, returnedObject) => {
 		delete returnedObject.__v
 	},
 })
 
-module.exports = model('Ticket', TicketSchema)
+module.exports = model('QR', QRSchema)
