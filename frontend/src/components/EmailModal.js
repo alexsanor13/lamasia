@@ -54,13 +54,10 @@ const EmailModal = ({ isOpen, closeModal, shoppingCart }) => {
 			return
 		}
 
-		const isMobile =
-			/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-				navigator.userAgent
-			)
+		const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent)
 
-		if (isMobile) {
-			window.open(eTPV.action, '_blank')
+		if (isSafari) {
+			window.location.href = eTPV.action
 		} else {
 			document.body.appendChild(eTPV)
 			eTPV.submit()
