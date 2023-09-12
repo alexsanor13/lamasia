@@ -34,9 +34,11 @@ const EmailModal = ({ isOpen, closeModal, shoppingCart }) => {
 				purchaseInfo,
 				email,
 			}
+			alert(purchaseDetails)
 			const tpvForm = await ticketsServices.getRedsysRedirection(
 				purchaseDetails
 			)
+			alert(tpvForm)
 			redirectToRedsys(tpvForm)
 		}
 	}
