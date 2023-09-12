@@ -5,11 +5,8 @@ import baseUrl from './baseUrl'
 let url = baseUrl + '/scanner'
 
 const scanQR = async (encryptedQR) => {
-	url += '/scanQR'
-
 	try {
-		debugger
-		const response = await axios.post(url, {
+		const response = await axios.post(`${url}/scanQR`, {
 			encryptedQR,
 		})
 
