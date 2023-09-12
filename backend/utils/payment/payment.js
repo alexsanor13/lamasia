@@ -49,12 +49,12 @@ async function createRedirection(total, paymentMethod = '') {
 		DS_MERCHANT_MERCHANTNAME: 'La Masia Events',
 		DS_MERCHANT_TERMINAL: TPV.TERMINAL,
 		DS_MERCHANT_PAYMETHODS: paymentMethod,
-		// DS_MERCHANT_MERCHANTURL: `${TPV.URLCALLBACK}/${orderId}`,
-		// DS_MERCHANT_URLOK: `${TPV.URLCALLBACK}/${orderId}`,
+		DS_MERCHANT_MERCHANTURL: `${TPV.URLCALLBACK}`,
+		DS_MERCHANT_URLOK: `${TPV.URLCALLBACK_OK}${orderId}`,
 		// DS_MERCHANT_URLKO: `${TPV.URLCALLBACK}/${orderId}`,
-		DS_MERCHANT_MERCHANTURL: `https://icy-olives-serve.loca.lt/api/tickets/redsysresponse`,
-		DS_MERCHANT_URLOK: `https://icy-olives-serve.loca.lt/api/tickets/redsysresponseOK`,
-		DS_MERCHANT_URLKO: `https://icy-olives-serve.loca.lt/api/tickets/redsysresponseKO`,
+		// DS_MERCHANT_MERCHANTURL: `https://honest-fans-shine.loca.lt/api/tickets/redsysresponse`,
+		// DS_MERCHANT_URLOK: `https://honest-fans-shine.loca.lt/paymentsuccessful/${orderId}`,
+		// DS_MERCHANT_URLKO: `https://honest-fans-shine.loca.lt/api/tickets/redsysresponseKO`,
 	}
 	const Ds_Signature = redsys.createMerchantSignature(TPV.SECRET, params)
 	const Ds_MerchantParameters = redsys.createMerchantParameters(params)

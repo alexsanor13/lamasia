@@ -1,4 +1,23 @@
-const generateQRScanHTML = (message) => {
+const generateQRScanHTML = ({
+	transactionId,
+	email,
+	eventName,
+	isPack,
+	activated,
+}) => {
+	const message = activated
+		? `
+    <h1 class='correctQR'>¡Código QR escaneado exitosamente!</h1>
+    <p>TRANSACTION ID: ${transactionId}</p>
+    <p>EMAIL: ${email}</p>
+    <p>EVENTO: ${eventName}</p>
+    <p>TIPO DE ENTRADA: ${isPack ? 'PACK' : 'NORMAL'}</p>
+    <button id="closeButton">Cerrar</button>
+    `
+		: `
+    <h1 class='badQR'>El código ya ha sido escaneado previamente</h1>
+    <button id="closeButton">Cerrar</button>
+    `
 	return `
     <!DOCTYPE html>
     <html lang="en">
@@ -22,6 +41,14 @@ const generateQRScanHTML = (message) => {
           border-radius: 5px;
         }
 
+        .correctQR {
+          color: green;
+        }
+
+        .badQR {
+          color: red;
+        }
+
         #closeButton {
           margin-top: 20px;
           cursor: pointer;
@@ -32,9 +59,7 @@ const generateQRScanHTML = (message) => {
     </head>
     <body>
       <div class="message">
-        <h1>¡Código QR escaneado exitosamente!</h1>
-        <p>${message}</p>
-        <button id="closeButton">Cerrar</button>
+        ${message}
       </div>
       <script>
         document.getElementById('closeButton').addEventListener('click', () => {

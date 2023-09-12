@@ -10,7 +10,7 @@ const QrCodeScanner = forwardRef((props, ref) => {
 	const [showLoader, setShowLoader] = useState(false)
 
 	const handleDecode = (result) => {
-		if (showLoader || typeof result !== Number) {
+		if (showLoader || typeof result === 'undefined') {
 			return
 		}
 

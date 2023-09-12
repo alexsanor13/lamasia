@@ -4,12 +4,11 @@ import baseUrl from './baseUrl'
 
 let url = baseUrl + '/scanner'
 
-const createQR = async (transactionId) => {}
-
 const scanQR = async (encryptedQR) => {
 	url += '/scanQR'
 
 	try {
+		debugger
 		const response = await axios.post(url, {
 			encryptedQR,
 		})
@@ -21,6 +20,6 @@ const scanQR = async (encryptedQR) => {
 	}
 }
 
-const exports = { createQR, scanQR }
+const exports = { scanQR }
 
 export default exports

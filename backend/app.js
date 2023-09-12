@@ -8,6 +8,7 @@ const path = require('path')
 const eventsRouter = require('./controllers/events')
 const ticketsRouter = require('./controllers/tickets')
 const scannerRouter = require('./controllers/scanner')
+const transactionsRouter = require('./controllers/transactions')
 
 // MongoDB
 const mongoose = require('mongoose')
@@ -41,6 +42,7 @@ if (config.debugMode) {
 app.use('/api/events', eventsRouter)
 app.use('/api/tickets', ticketsRouter)
 app.use('/api/scanner', scannerRouter)
+app.use('/api/transactions', transactionsRouter)
 
 if (!config.debugMode) {
 	app.use(express.static(path.join(__dirname, 'build')))

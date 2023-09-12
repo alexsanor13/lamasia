@@ -13,7 +13,7 @@ const QRSchema = new Schema({
 	},
 	activationDate: {
 		type: Date,
-		default: Date.now,
+		default: null,
 	},
 })
 

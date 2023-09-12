@@ -1,3 +1,4 @@
+const { QR_CONTAINER } = require('../utils/config')
 const Ticket = require('../models/Ticket')
 const Transaction = require('../models/Transaction')
 const Event = require('../models/Event')
@@ -5,15 +6,14 @@ const Order = require('../models/Order')
 const QR = require('../models/QR')
 const { generateQRCode } = require('../utils/qrManager/qrCreator')
 const { generateQRScanHTML } = require('../utils/qrManager/htmlGenerator')
-const { QR_CONTAINER } = require('../utils/config')
 const { encrypt } = require('../utils/qrManager/qrCrypt')
-
 const {
 	getPaymentParameters,
 	createRedirection,
 } = require('../utils/payment/payment')
 
-const { sendMailWithQR } = require('../utils/email/sendEmail')
+const { sendEmailByGmail } = require('../utils/email/sendEmail')
+
 const ticketsRouter = require('express').Router()
 
 ticketsRouter.post('/getRedirection', async (request, response) => {
@@ -28,26 +28,8 @@ ticketsRouter.post('/getRedirection', async (request, response) => {
 			paymentMethod
 		)
 
-		// createQR(body.email, body.eventId, 12345, true)
-		// sendMailWithQR(
-		// 	'alekox97@gmail.com',
-		// 	[
-		// 		{
-		// 			ticket: {
-		// 				id: 1,
-		// 				packTicket: true,
-		// 			},
-		// 			qr: {
-		// 				qrName: 'alex_4',
-		// 			},
-		// 		},
-		// 	],
-		// 	'Hola pepe',
-		// 	'havd1342352'
-		// )
-
-		// await createNewTransaction(body, orderId)
-		// return response.status(200).json(form)
+		await createNewTransaction(body, orderId)
+		return response.status(200).json(form)
 	} catch (error) {
 		console.error(error)
 		return response.status(404).json({ error })
@@ -87,11 +69,11 @@ ticketsRouter.post('/redsysresponse', async (request, response) => {
 			throw Error('Error creating tickets')
 		}
 
-		const eventName = await Event.findOne({
+		const event = await Event.findOne({
 			id: transactionInfo.eventId,
 		}).select('title')
 
-		sendMailWithQR(transactionInfo.email, newTickets, eventName, Ds_Order)
+		sendEmailByGmail(transactionInfo.email, newTickets, event.title, Ds_Order)
 		return response.status(200).json()
 	} catch (error) {
 		console.error(error)
@@ -101,7 +83,6 @@ ticketsRouter.post('/redsysresponse', async (request, response) => {
 
 ticketsRouter.get('/redsysresponseok', async (request, response) => {
 	try {
-		// savePayment(body)
 		return response.status(200).json()
 	} catch (error) {
 		console.error(error)
@@ -111,22 +92,7 @@ ticketsRouter.get('/redsysresponseok', async (request, response) => {
 
 ticketsRouter.get('/redsysresponseko', async (request, response) => {
 	try {
-		// savePayment(body)
-		return response.status(200).json()
-	} catch (error) {
-		console.error(error)
-		return response.status(404).json({ error })
-	}
-})
-
-ticketsRouter.post('/processPayment', async (request, response) => {
-	try {
-		const body = request.body
-		const processResponse = processPayment(body)
-		if (processResponse) {
-			const newTransactionResponse = createNewTransaction(body)
-			return response.status(200).json(newTransactionResponse)
-		}
+		return response.status(404).json()
 	} catch (error) {
 		console.error(error)
 		return response.status(404).json({ error })
@@ -141,13 +107,12 @@ const convertEmailToFileName = (email) => {
 
 const createQR = async (email, transactionId, eventId, pack) => {
 	try {
-		const qrName = `${convertEmailToFileName(email)}_${id}`
+		const qrName = `${convertEmailToFileName(email)}_${transactionId}`
 		const qrPath = `${QR_CONTAINER}${qrName}`
 		const qrMessage = `${transactionId},${email},${eventId},${pack}`
 		const qrEncripted = encrypt(qrMessage)
-		const qrHtml = generateQRScanHTML(qrEncripted)
 
-		await generateQRCode(qrHtml, qrPath)
+		await generateQRCode(qrEncripted, qrPath)
 
 		return qrName
 	} catch (error) {
@@ -171,15 +136,12 @@ const saveTicket = async (transactionId, eventId, isPack) => {
 	}
 }
 
-const saveQR = async ({ ticketId, qrName }) => {
+const saveQR = async (ticketId, qrName) => {
 	try {
-		const qr = {
+		const qr = new QR({
 			ticketId,
-			qrName: qrName,
-			creationDate: new Date(),
-			activated: false,
-			activationDate: null,
-		}
+			qrName,
+		})
 		await qr.save()
 		return qr
 	} catch (error) {
@@ -190,7 +152,7 @@ const saveQR = async ({ ticketId, qrName }) => {
 async function createAndSaveTicket(transactionId, eventId, email, isPack) {
 	const qrText = await createQR(email, transactionId, eventId, isPack)
 	const newTicket = await saveTicket(transactionId, eventId, isPack)
-	const newQR = await saveQR({ ticketId: newTicket.id, qrText })
+	const newQR = await saveQR(newTicket.id, qrText)
 	return { ticket: newTicket, qr: newQR }
 }
 
@@ -220,13 +182,13 @@ const createNewTickets = async (body) => {
 
 		// Pack tickets
 		for (let packIndex = 0; packIndex < packTickets; packIndex++) {
-			const newTicket = createAndSaveTicket(id, eventId, email, true)
+			const newTicket = await createAndSaveTicket(id, eventId, email, true)
 			savedTickets.push(newTicket)
 		}
 
 		// Standard tickets
 		for (let ticketIndex = 0; ticketIndex < tickets; ticketIndex++) {
-			const newTicket = createAndSaveTicket(id, eventId, email, false)
+			const newTicket = await createAndSaveTicket(id, eventId, email, false)
 			savedTickets.push(newTicket)
 		}
 

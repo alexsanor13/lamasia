@@ -11,6 +11,7 @@ import { ReactComponent as ExitMenuSVG } from './assets/svg/cross.svg'
 
 import About from './pages/About'
 import Blog from './pages/Blog'
+import PaymentSuccessful from './pages/PaymentSuccessful'
 import NavBar from './components/NavBar'
 
 const App = () => {
@@ -46,6 +47,10 @@ const App = () => {
 						<Route path="/about" element={<About />} />
 						<Route path="/blog" element={<Blog />} />
 						<Route path="/scanner" element={<QRScannerPage />} />
+						<Route
+							path="/paymentsuccessful/:order"
+							element={<PaymentSuccessful />}
+						/>
 					</Routes>
 				</main>
 				<Footer />

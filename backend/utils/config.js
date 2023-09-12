@@ -43,8 +43,16 @@ const TPV = {
 	URLCALLBACK: !debugMode
 		? env.get('TPV_CALLBACK')
 		: env.get('TPV_CALLBACK_DEV'),
+	URLCALLBACK_OK: env.get('TPV_CALLBACK_OK'),
 	SIGNATURE_VERSION: env.get('TPV_SIGNATURE_VERSION'),
 	URL: debugMode ? 'https://sis-t.redsys.es:25443/sis/realizarPago' : '',
+}
+
+const GMAIL_CONFIG = {
+	client_id: env.get('GMAIL_CLIENTID'),
+	client_secret: env.get('GMAIL_CLIENTSECRET'),
+	refresh_token: env.get('GMAIL_REFRESHTOKEN'),
+	auth_code: env.get('GMAIL_AUTHCODE'),
 }
 
 module.exports = {
@@ -57,4 +65,5 @@ module.exports = {
 	EMAIL,
 	EMAIL_PASS,
 	TPV,
+	GMAIL_CONFIG,
 }
