@@ -34,11 +34,9 @@ const EmailModal = ({ isOpen, closeModal, shoppingCart }) => {
 				purchaseInfo,
 				email,
 			}
-			alert(purchaseDetails)
 			const tpvForm = await ticketsServices.getRedsysRedirection(
 				purchaseDetails
 			)
-			alert(tpvForm)
 			redirectToRedsys(tpvForm)
 		}
 	}
@@ -47,6 +45,7 @@ const EmailModal = ({ isOpen, closeModal, shoppingCart }) => {
 		if (!tpvForm) {
 			return
 		}
+
 		const dummyContainer = document.createElement('div')
 		dummyContainer.innerHTML = tpvForm
 		const eTPV = dummyContainer.querySelector('form')
@@ -54,8 +53,18 @@ const EmailModal = ({ isOpen, closeModal, shoppingCart }) => {
 		if (!eTPV) {
 			return
 		}
-		document.body.appendChild(eTPV)
-		eTPV.submit()
+
+		const isMobile =
+			/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+				navigator.userAgent
+			)
+
+		if (isMobile) {
+			window.open(eTPV.action, '_blank')
+		} else {
+			document.body.appendChild(eTPV)
+			eTPV.submit()
+		}
 	}
 
 	const resetStates = () => {
