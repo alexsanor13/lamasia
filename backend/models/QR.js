@@ -2,7 +2,7 @@ const { Schema, model } = require('mongoose')
 
 const QRSchema = new Schema({
 	ticketId: String,
-	qrCode: String,
+	qrName: String,
 	creationDate: {
 		type: Date,
 		default: Date.now,

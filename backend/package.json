@@ -11,12 +11,14 @@
 	"license": "ISC",
 	"dependencies": {
 		"@humanwhocodes/env": "^2.2.2",
+		"body-parser": "^1.20.2",
 		"cors": "^2.8.5",
 		"dotenv": "^16.0.3",
 		"express": "^4.18.2",
 		"express-rate-limit": "^6.7.0",
 		"mongoose": "^7.2.1",
 		"node-redsys-api": "^0.0.5",
+		"nodemailer": "^6.9.5",
 		"qrcode": "^1.5.3"
 	},
 	"devDependencies": {

@@ -12,7 +12,7 @@ const EmailModal = ({ isOpen, closeModal, shoppingCart }) => {
 	const [matchClassName, setMatchClassName] = useState('')
 	const [timeoutId, setTimeoutId] = useState(0)
 
-	const validateEmail = (e) => {
+	const validateEmail = async (e) => {
 		e.preventDefault()
 		let regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
 		if (!regex.test(email) || email === '' || email !== confirmEmail) {
@@ -34,8 +34,26 @@ const EmailModal = ({ isOpen, closeModal, shoppingCart }) => {
 				purchaseInfo,
 				email,
 			}
-			ticketsServices.buyTickets(purchaseDetails).then(closeModal())
+			const tpvForm = await ticketsServices.getRedsysRedirection(
+				purchaseDetails
+			)
+			redirectToRedsys(tpvForm)
 		}
+	}
+
+	const redirectToRedsys = (tpvForm) => {
+		if (!tpvForm) {
+			return
+		}
+		const dummyContainer = document.createElement('div')
+		dummyContainer.innerHTML = tpvForm
+		const eTPV = dummyContainer.querySelector('form')
+
+		if (!eTPV) {
+			return
+		}
+		document.body.appendChild(eTPV)
+		eTPV.submit()
 	}
 
 	const resetStates = () => {

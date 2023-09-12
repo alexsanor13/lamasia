@@ -1,10 +1,10 @@
 const { Schema, model } = require('mongoose')
 
 const TicketSchema = new Schema({
-	transactionId: String,
-	eventId: String,
-	qrCode: String,
-	createdAt: {
+	id: Number,
+	transactionId: Number,
+	eventId: Number,
+	creationDate: {
 		type: Date,
 		default: Date.now,
 	},
@@ -17,6 +17,7 @@ const TicketSchema = new Schema({
 TicketSchema.set('toJSON', {
 	transform: (document, returnedObject) => {
 		delete returnedObject.__v
+		delete returnedObject._id
 	},
 })
 
