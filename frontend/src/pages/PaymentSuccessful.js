@@ -29,7 +29,7 @@ const PaymentSuccessful = () => {
 			) : (
 				<div className="success-message">
 					<h2>¡Compra Exitosa!</h2>
-					<p>
+					<p className="text">
 						Tu compra con el ID <span>{order}</span> para el evento{' '}
 						<span>{paymentResponse.eventName}</span> se ha completado con éxito.
 					</p>
@@ -37,7 +37,7 @@ const PaymentSuccessful = () => {
 						Por favor, revisa tus entradas en la dirección de correo electrónico
 						que nos proporcionaste: <span>{paymentResponse.email}</span>
 					</p> */}
-					<p>
+					<p className="text">
 						Por favor, revisa tus entradas en la dirección de correo electrónico
 						que nos proporcionaste.
 					</p>
