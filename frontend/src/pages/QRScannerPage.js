@@ -17,13 +17,27 @@ const QrCodeScanner = forwardRef((props, ref) => {
 
 		const qrData = await scannerServices.scanQR(result)
 
-		// Open a new window with the validated qr html
-		const newWindow = window.open()
-		if (newWindow) {
-			newWindow.document.write(qrData)
+		if (isMobile() || isSafari()) {
+			window.location.href =
+				'data:text/html;charset=UTF-8,' + encodeURIComponent(qrData)
+		} else {
+			const newWindow = window.open()
+			if (newWindow) {
+				newWindow.document.write(qrData)
+			}
 		}
 
 		setShowLoader(false)
+	}
+
+	function isMobile() {
+		return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+			navigator.userAgent
+		)
+	}
+
+	function isSafari() {
+		return /^((?!chrome|android).)*safari/i.test(navigator.userAgent)
 	}
 
 	const handleError = (error) => {
