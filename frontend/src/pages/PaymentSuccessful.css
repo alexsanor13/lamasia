@@ -1,0 +1,20 @@
+.success-message {
+	width: 80%;
+	margin: 2em auto;
+	background-color: #0000004a;
+	padding: 1em;
+}
+
+h2 {
+	color: var(--pirate-gold);
+	font-weight: bold;
+}
+
+span {
+	color: var(--pirate-gold);
+}
+
+p {
+	color: white;
+	line-height: 30px;
+}
