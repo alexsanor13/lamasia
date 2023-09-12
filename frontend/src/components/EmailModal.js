@@ -41,27 +41,45 @@ const EmailModal = ({ isOpen, closeModal, shoppingCart }) => {
 		}
 	}
 
+	// const redirectToRedsys = (tpvForm) => {
+	// 	if (!tpvForm) {
+	// 		return
+	// 	}
+
+	// 	const dummyContainer = document.createElement('div')
+	// 	dummyContainer.innerHTML = tpvForm
+	// 	const eTPV = dummyContainer.querySelector('form')
+
+	// 	if (!eTPV) {
+	// 		return
+	// 	}
+
+	// 	const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent)
+
+	// 	if (isSafari) {
+	// 		window.location.href = eTPV.action
+	// 	} else {
+	// 		document.body.appendChild(eTPV)
+	// 		eTPV.submit()
+	// 	}
+	// }
+
 	const redirectToRedsys = (tpvForm) => {
 		if (!tpvForm) {
 			return
 		}
 
-		const dummyContainer = document.createElement('div')
-		dummyContainer.innerHTML = tpvForm
-		const eTPV = dummyContainer.querySelector('form')
+		// Crear un elemento form para contener el formulario
+		const form = document.createElement('form')
+		form.method = 'POST'
+		form.action = 'https://sis-t.redsys.es:25443/sis/realizarPago' // La URL de pago
 
-		if (!eTPV) {
-			return
-		}
+		// Agregar el formulario HTML al formulario recién creado
+		form.innerHTML = tpvForm
 
-		const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent)
-
-		if (isSafari) {
-			window.location.href = eTPV.action
-		} else {
-			document.body.appendChild(eTPV)
-			eTPV.submit()
-		}
+		// Agregar el formulario al DOM y enviarlo
+		document.body.appendChild(form)
+		form.submit()
 	}
 
 	const resetStates = () => {
