@@ -5,16 +5,16 @@
 	padding: 1em;
 }
 
-h2 {
+.success-message h2 {
 	color: var(--pirate-gold);
 	font-weight: bold;
 }
 
-span {
+.success-message span {
 	color: var(--pirate-gold);
 }
 
-p {
+.success-message .text {
 	color: white;
 	line-height: 30px;
 }
