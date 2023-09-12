@@ -17,27 +17,15 @@ const QrCodeScanner = forwardRef((props, ref) => {
 
 		const qrData = await scannerServices.scanQR(result)
 
-		if (isMobile() || isSafari()) {
-			window.location.href =
-				'data:text/html;charset=UTF-8,' + encodeURIComponent(qrData)
+		const newWindow = window.open()
+		if (newWindow) {
+			newWindow.document.write(qrData)
 		} else {
-			const newWindow = window.open()
-			if (newWindow) {
-				newWindow.document.write(qrData)
-			}
+			const contentDiv = document.getElementById('contentDiv')
+			contentDiv.innerHTML = qrData
 		}
 
 		setShowLoader(false)
-	}
-
-	function isMobile() {
-		return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-			navigator.userAgent
-		)
-	}
-
-	function isSafari() {
-		return /^((?!chrome|android).)*safari/i.test(navigator.userAgent)
 	}
 
 	const handleError = (error) => {
@@ -111,6 +99,7 @@ const QrCodeScanner = forwardRef((props, ref) => {
 			) : (
 				''
 			)}
+			<div class="QR RESULT"></div>
 		</section>
 	)
 })
