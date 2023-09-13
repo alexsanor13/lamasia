@@ -9,11 +9,12 @@ async function generateEmailHTML(eventName, orderId, tickets) {
 		const qrListPromises = tickets.map(async ({ ticket, qr }) => {
 			const qrImage = await readQRImage(qr.qrName)
 			return `
-			<div>
+			<div style="margin-bottom: 1em;">
 			  <p>Ticket ID: ${ticket.id}</p>
 			  <p>Tipo de Ticket: ${ticket.packTicket ? 'PACK' : 'NORMAL'}</p>
 			  <img src="data:image/png;base64,${qrImage}" alt="QR Code" />
 			</div>
+			<hr>
 		  `
 		})
 
@@ -21,12 +22,14 @@ async function generateEmailHTML(eventName, orderId, tickets) {
 
 		const emailHTML = `
 		  <html>
-			<body>
-			  <h1>Evento: ${eventName}</h1>
+			<body style="padding: 1em;">
+			  <h1>Evento ${eventName}</h1>
 			  <p>ID del Pedido: ${orderId}</p>
 			  <h2>Tus Entradas:</h2>
 			  ${qrListHTML.join('')}
 			</body>
+			<br>
+			<hr>
 		  </html>
 		`
 

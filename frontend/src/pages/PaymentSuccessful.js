@@ -8,11 +8,9 @@ import Spinner from '../components/Spinner'
 const PaymentSuccessful = () => {
 	const { order } = useParams()
 	const [loading, setLoading] = useState(true)
-	const [paymentResponse, setPaymentResponse] = useState({
-		eventName: 'PANDORA',
-	})
-
+	const [paymentResponse, setPaymentResponse] = useState({})
 	useEffect(() => {
+		console.log('entré', paymentResponse)
 		// Esta función se ejecutará solo una vez, después del primer renderizado
 		transactionsService.getPaymentInfoByOrderId(order).then((fetchedInfo) => {
 			setPaymentResponse(fetchedInfo)
@@ -24,22 +22,19 @@ const PaymentSuccessful = () => {
 
 	return (
 		<div className="center">
-			{loading ? (
+			{loading && paymentResponse ? (
 				<Spinner />
 			) : (
 				<div className="success-message">
 					<h2>¡Compra Exitosa!</h2>
 					<p className="text">
 						Tu compra con el ID <span>{order}</span> para el evento{' '}
-						<span>{paymentResponse.eventName}</span> se ha completado con éxito.
+						<span>{paymentResponse?.eventName}</span> se ha completado con
+						éxito.
 					</p>
-					{/* <p>
-						Por favor, revisa tus entradas en la dirección de correo electrónico
-						que nos proporcionaste: <span>{paymentResponse.email}</span>
-					</p> */}
 					<p className="text">
 						Por favor, revisa tus entradas en la dirección de correo electrónico
-						que nos proporcionaste.
+						que nos proporcionaste: <span>{paymentResponse?.email}</span>
 					</p>
 				</div>
 			)}

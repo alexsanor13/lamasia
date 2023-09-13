@@ -9,6 +9,7 @@ const generateQRCode = async (text, outputPath) => {
 	}
 }
 
+// TODO REVISAR
 const deleteQRFile = async (name) => {
 	const path = `${QR_CONTAINER}${name}`
 	fs.unlink(path, (err) => {
