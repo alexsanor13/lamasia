@@ -20,31 +20,15 @@ ticketsRouter.post('/getRedirection', async (request, response) => {
 		const body = request.body
 		const paymentMethod = body.payment_method ? body.payment_method : ''
 
-		// const { form, orderId } = await createRedirection(
-		// 	body.amount,
-		// 	body.email,
-		// 	body.eventId,
-		// 	paymentMethod
-		// )
-		sendEmailByGmail(
+		const { form, orderId } = await createRedirection(
+			body.amount,
 			body.email,
-			[
-				{
-					tickets: {
-						id: generateRandomCode(),
-						transactionId: 1,
-						eventId: 1,
-						creationDate: new Date(),
-						packTicket: true,
-					},
-					qr: { qrName: 'alekox97_448904618' },
-				},
-			],
-			'HOLAPEPE',
-			'47474747'
+			body.eventId,
+			paymentMethod
 		)
-		// await createNewTransaction(body, orderId)
-		// return response.status(200).json(form)
+
+		await createNewTransaction(body, orderId)
+		return response.status(200).json(form)
 	} catch (error) {
 		console.error(error)
 		return response.status(404).json({ error })
