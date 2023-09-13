@@ -17,16 +17,14 @@ const QrCodeScanner = forwardRef((props, ref) => {
 
 		const qrData = await scannerServices.scanQR(result)
 
-		// Abre una nueva pestaña del navegador y muestra el contenido HTML
-		const newWindow = window.open('', '_blank')
+		const newWindow = window.open()
 		if (newWindow) {
 			newWindow.document.write(qrData)
-			newWindow.document.close()
 		} else {
-			// Si no se pudo abrir la pestaña, puedes mostrar una alerta o manejarlo de otra manera
-			alert(
-				'No se pudo abrir una nueva pestaña para mostrar el contenido HTML.'
-			)
+			const container = document.getElementById('qrResult')
+			container.width = '600'
+			container.height = '400'
+			container.innerHTML = qrData
 		}
 
 		setShowLoader(false)
@@ -103,6 +101,7 @@ const QrCodeScanner = forwardRef((props, ref) => {
 			) : (
 				''
 			)}
+			<div id="qrResult"></div>
 		</section>
 	)
 })
