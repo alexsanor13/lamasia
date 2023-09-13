@@ -13,42 +13,39 @@ const QrCodeScanner = forwardRef((props, ref) => {
 			return
 		}
 
-		const pQR = document.getElementById('resultQR')
-		const qrContainerResult = document.getElementById('qrContainerResult')
-		const buttonClearQR = document.getElementById('clearQR')
-
-		qrContainerResult.style.display = 'none'
-		buttonClearQR.style.display = 'none'
-		pQR.style.display = 'none'
-
 		setShowLoader(true)
 
 		const qrData = await scannerServices.scanQR(result)
-
-		const newWindow = window.open()
-		if (newWindow) {
-			newWindow.document.write(qrData.html)
-		} else {
-			alert(qrData.qrStatus)
-			qrContainerResult.style.display = 'block'
-			buttonClearQR.style.display = 'block'
-			pQR.style.display = 'block'
-			pQR.textContent = qrData.qrStatus
-		}
+		mobileMessage(qrData.qrStatus)
+		// const newWindow = window.open()
+		// if (newWindow) {
+		// 	newWindow.document.write(qrData.html)
+		// } else {
+		// 	mobileMessage(qrData.qrStatus)
+		// }
 
 		setShowLoader(false)
 		handleCameraClose()
 	}
 
+	const mobileMessage = (message) => {
+		const pQR = document.getElementById('resultQR')
+		const qrContainerResult = document.getElementById('qrContainerResult')
+
+		alert(message)
+
+		qrContainerResult.style.display = 'block'
+		pQR.style.display = 'block'
+		pQR.textContent = message
+	}
+
 	const resetQRResult = () => {
 		const pQR = document.getElementById('resultQR')
 		const qrContainerResult = document.getElementById('qrContainerResult')
-		const buttonClearQR = document.getElementById('clearQR')
 
 		pQR.textContent = ''
 
 		qrContainerResult.style.display = 'none'
-		buttonClearQR.style.display = 'none'
 		pQR.style.display = 'none'
 	}
 
@@ -59,6 +56,7 @@ const QrCodeScanner = forwardRef((props, ref) => {
 	const handleScanCamera = () => {
 		if (!isCameraOpen) {
 			setIsCameraOpen(true)
+			resetQRResult()
 		}
 	}
 
@@ -125,9 +123,6 @@ const QrCodeScanner = forwardRef((props, ref) => {
 			)}
 			<div id="qrContainerResult">
 				<p id="resultQR"></p>
-				<button onClick={() => resetQRResult()} id="clearQR">
-					clear
-				</button>
 			</div>
 		</section>
 	)
