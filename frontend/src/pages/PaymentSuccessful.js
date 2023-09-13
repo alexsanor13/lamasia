@@ -9,6 +9,7 @@ const PaymentSuccessful = () => {
 	const { order } = useParams()
 	const [loading, setLoading] = useState(true)
 	const [paymentResponse, setPaymentResponse] = useState({})
+
 	useEffect(() => {
 		console.log('entré', paymentResponse)
 		// Esta función se ejecutará solo una vez, después del primer renderizado
