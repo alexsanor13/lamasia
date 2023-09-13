@@ -50,7 +50,7 @@ async function createRedirection(total, paymentMethod = '') {
 		DS_MERCHANT_TERMINAL: TPV.TERMINAL,
 		DS_MERCHANT_PAYMETHODS: paymentMethod,
 		DS_MERCHANT_MERCHANTURL: `${TPV.URLCALLBACK}`,
-		DS_MERCHANT_URLOK: `${TPV.URLCALLBACK_OK}${orderId}`,
+		// DS_MERCHANT_URLOK: `${TPV.URLCALLBACK_OK}${orderId}`,
 		// DS_MERCHANT_URLKO: `${TPV.URLCALLBACK}/${orderId}`,
 		// DS_MERCHANT_MERCHANTURL: `https://honest-fans-shine.loca.lt/api/tickets/redsysresponse`,
 		// DS_MERCHANT_URLOK: `https://honest-fans-shine.loca.lt/paymentsuccessful/${orderId}`,

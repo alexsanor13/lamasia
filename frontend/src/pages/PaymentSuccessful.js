@@ -21,7 +21,6 @@ const PaymentSuccessful = () => {
 				setPaymentResponse(fetchedInfo)
 			} catch (error) {
 				console.error(error)
-				// Aquí puedes manejar el error de manera adecuada, por ejemplo, mostrar un mensaje de error.
 			} finally {
 				setLoading(false)
 			}
