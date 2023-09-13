@@ -1,6 +1,7 @@
 const qr = require('qrcode')
 const { QR_CONTAINER } = require('../config')
 const { throwErrors } = require('../middleware/throwErrors')
+const path = require('path')
 
 const generateQRCode = async (text, outputPath) => {
 	try {
@@ -10,20 +11,26 @@ const generateQRCode = async (text, outputPath) => {
 	}
 }
 
-// TODO REVISAR
-const deleteQRFile = async (name) => {
+async function deleteQRFile(qrName) {
 	try {
-		const path = `${QR_CONTAINER}${name}`
-		fs.unlink(path, (err) => {
-			if (err) {
-				throw err
-			} else {
-				console.log('QR temp file deleted')
-			}
-		})
-	} catch (e) {
-		throwErrors(`Error deleting the qr files: ${e}`)
+		const qrFilePath = path.join(QR_CONTAINER, `${qrName}.png`)
+
+		try {
+			await fs.access(qrFilePath, fs.constants.F_OK)
+		} catch (err) {
+			console.log(` ${qrName}.png no existe.`)
+			return
+		}
+
+		await fs.unlink(qrFilePath)
+		console.log(`QR with filename${qrName}.png has been deleted.`)
+	} catch (error) {
+		throwErrors(`Error deleting QR ${qrName}.png: ${error.message}`)
 	}
+}
+
+module.exports = {
+	deleteQRFile,
 }
 
 module.exports = {

@@ -12,7 +12,7 @@ const getPaymentInfoByOrderId = async (orderId) => {
 		return response.data
 	} catch (error) {
 		console.error(error)
-		return null
+		return {}
 	}
 }
 
