@@ -34,39 +34,25 @@ const EmailModal = ({ isOpen, closeModal, shoppingCart }) => {
 				purchaseInfo,
 				email,
 			}
-			const tpvForm = await ticketsServices.getRedsysRedirection(
+			const tpvInfo = await ticketsServices.getRedsysRedirection(
 				purchaseDetails
 			)
-			redirectToRedsys(tpvForm)
+
+			if (tpvInfo.form && tpvInfo.actionURL) {
+				redirectToRedsys(tpvInfo)
+			}
 		}
 	}
 
-	const redirectToRedsys = (tpvForm) => {
-		if (!tpvForm) {
-			return
-		}
+	const redirectToRedsys = (tpvInfo) => {
+		const form = document.createElement('form')
+		form.method = 'POST'
+		form.action = tpvInfo.actionURL
 
-		const dummy = document.createElement('div')
-		dummy.innerHTML = tpvForm
+		form.innerHTML = tpvInfo.form
 
-		const form = dummy.querySelector('form')
-
-		if (isMobileDevice()) {
-			openFormInNewWindow(form)
-		} else {
-			document.body.appendChild(form)
-			form.submit()
-		}
-	}
-
-	const isMobileDevice = () => {
-		return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
-	}
-
-	const openFormInNewWindow = (form) => {
-		const newWindow = window.open('', '_blank')
-		newWindow.document.write(form.outerHTML)
-		newWindow.document.forms[0].submit()
+		document.body.appendChild(form)
+		form.submit()
 	}
 
 	const resetStates = () => {

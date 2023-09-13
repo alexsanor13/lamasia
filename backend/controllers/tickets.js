@@ -23,7 +23,7 @@ ticketsRouter.post('/getRedirection', async (request, response) => {
 		const body = request.body
 		const paymentMethod = body.payment_method ? body.payment_method : ''
 
-		const { form, orderId } = await createRedirection(
+		const { form, actionURL, orderId } = await createRedirection(
 			body.amount,
 			body.email,
 			body.eventId,
@@ -31,7 +31,7 @@ ticketsRouter.post('/getRedirection', async (request, response) => {
 		)
 
 		await createNewTransaction(body, orderId)
-		return response.status(200).json(form)
+		return response.status(200).json({ form, actionURL })
 	} catch (error) {
 		return response.status(404).json({ error })
 	}

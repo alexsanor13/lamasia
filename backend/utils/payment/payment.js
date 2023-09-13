@@ -78,7 +78,7 @@ async function createRedirection(total, paymentMethod = '') {
 			</body>
 			</html>
 		`
-		return { form: formHtml, orderId }
+		return { form: formHtml, actionURL: TPV.URL, orderId }
 	} catch (error) {
 		throw new Error(`Error creating redirection to redsys: ${error}`)
 	}
