@@ -1,4 +1,5 @@
 const qr = require('qrcode')
+const { QR_CONTAINER } = require('../config')
 
 const generateQRCode = async (text, outputPath) => {
 	try {
@@ -8,6 +9,18 @@ const generateQRCode = async (text, outputPath) => {
 	}
 }
 
+const deleteQRFile = async (name) => {
+	const path = `${QR_CONTAINER}${name}`
+	fs.unlink(path, (err) => {
+		if (err) {
+			console.error('Error deleting file:', err)
+		} else {
+			console.log('QR temp file deleted')
+		}
+	})
+}
+
 module.exports = {
 	generateQRCode,
+	deleteQRFile,
 }

@@ -1,7 +1,8 @@
 const nodemailer = require('nodemailer')
 
 const { EMAIL, EMAIL_PASS, GMAIL_CONFIG } = require('../config.js')
-const { readQRImage } = require('../qrManager/readQRImage.js')
+const { readQRImage, readQRImageFile } = require('../qrManager/readQRImage.js')
+const { deleteQRFile } = require('../qrManager/qrCreator.js')
 
 async function generateEmailHTML(eventName, orderId, tickets) {
 	try {
@@ -35,6 +36,19 @@ async function generateEmailHTML(eventName, orderId, tickets) {
 	}
 }
 
+const getAttachments = async (tickets) => {
+	const attachments = []
+
+	for (const { _ticket, qr } of tickets) {
+		const qrImageBuffer = await readQRImageFile(qr.qrName)
+
+		attachments.push({
+			filename: `${qr.qrName}.png`,
+			content: qrImageBuffer,
+		})
+	}
+}
+
 async function sendEmailByGmail(to, tickets, eventName, orderId) {
 	try {
 		const htmlContent = await generateEmailHTML(eventName, orderId, tickets)
@@ -50,11 +64,14 @@ async function sendEmailByGmail(to, tickets, eventName, orderId) {
 				refreshToken: GMAIL_CONFIG.refresh_token,
 			},
 		})
+		const attachments = getAttachments()
+
 		const mailOptions = {
 			from: EMAIL,
 			to: to,
 			subject: `LA MASIA ${eventName}`,
 			html: htmlContent,
+			attachments: attachments,
 		}
 
 		transporter.sendMail(mailOptions, function (error, info) {
@@ -63,6 +80,9 @@ async function sendEmailByGmail(to, tickets, eventName, orderId) {
 				throw new Error(error)
 			} else {
 				console.log('Email sent: ' + info.response)
+				attachments.forEach(({ filename, content }) => {
+					deleteQRFile(filename)
+				})
 			}
 		})
 	} catch (e) {

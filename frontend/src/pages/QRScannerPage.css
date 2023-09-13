@@ -58,12 +58,12 @@
 }
 
 #qrContainerResult,
-#resultQR,
-#clearQR {
+#resultQR {
 	display: none;
 }
 
 #qrContainerResult {
+	font-size: 20px;
 	width: 80%;
 	margin: 0.75em auto;
 	padding: 1em;
