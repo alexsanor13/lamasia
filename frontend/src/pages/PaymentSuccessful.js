@@ -12,18 +12,27 @@ const PaymentSuccessful = () => {
 
 	useEffect(() => {
 		console.log('entré', paymentResponse)
-		// Esta función se ejecutará solo una vez, después del primer renderizado
-		transactionsService.getPaymentInfoByOrderId(order).then((fetchedInfo) => {
-			setPaymentResponse(fetchedInfo)
-		})
-		setLoading(false)
 
-		// eslint-disable-next-line
-	}, [])
+		const fetchPaymentInfo = async () => {
+			try {
+				const fetchedInfo = await transactionsService.getPaymentInfoByOrderId(
+					order
+				)
+				setPaymentResponse(fetchedInfo)
+			} catch (error) {
+				console.error(error)
+				// Aquí puedes manejar el error de manera adecuada, por ejemplo, mostrar un mensaje de error.
+			} finally {
+				setLoading(false)
+			}
+		}
+
+		fetchPaymentInfo()
+	}, [order])
 
 	return (
 		<div className="center">
-			{loading && paymentResponse ? (
+			{loading ? (
 				<Spinner />
 			) : (
 				<div className="success-message">
