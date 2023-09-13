@@ -16,13 +16,12 @@ const QrCodeScanner = forwardRef((props, ref) => {
 		setShowLoader(true)
 
 		const qrData = await scannerServices.scanQR(result)
-		mobileMessage(qrData.qrStatus)
-		// const newWindow = window.open()
-		// if (newWindow) {
-		// 	newWindow.document.write(qrData.html)
-		// } else {
-		// 	mobileMessage(qrData.qrStatus)
-		// }
+		const newWindow = window.open()
+		if (newWindow) {
+			newWindow.document.write(qrData.html)
+		} else {
+			mobileMessage(qrData.qrStatus)
+		}
 
 		setShowLoader(false)
 		handleCameraClose()

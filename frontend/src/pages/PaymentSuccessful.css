@@ -11,7 +11,7 @@
 }
 
 .success-message span {
-	color: var(--pirate-gold);
+	color: red;
 }
 
 .success-message .text {

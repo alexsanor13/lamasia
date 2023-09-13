@@ -63,10 +63,11 @@
 }
 
 #qrContainerResult {
-	font-size: 20px;
+	background-color: #0000004d;
+	font-size: 35px;
 	width: 80%;
 	margin: 0.75em auto;
-	padding: 1em;
+	padding: 0.8em;
 	text-align: center;
 	color: var(--pirate-gold);
 	font-weight: bold;
