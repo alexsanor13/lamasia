@@ -82,9 +82,9 @@ scannerRouter.post('/scanQR', async (request, response) => {
 			activated,
 		}
 
-		const qrHtml = generateQRScanHTML(qrInfo)
+		const qrResult = generateQRScanHTML(qrInfo)
 
-		return response.status(200).json(qrHtml)
+		return response.status(200).json(qrResult)
 	} catch (error) {
 		handleError(response, error)
 	}

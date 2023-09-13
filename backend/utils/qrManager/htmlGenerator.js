@@ -5,7 +5,7 @@ const generateQRScanHTML = ({
 	isPack,
 	activated,
 }) => {
-	const message = activated
+	const message = !activated
 		? `
     <h1 class='correctQR'>¡Código QR escaneado exitosamente!</h1>
     <p>TRANSACTION ID: ${transactionId}</p>
@@ -18,7 +18,8 @@ const generateQRScanHTML = ({
     <h1 class='badQR'>El código ya ha sido escaneado previamente</h1>
     <button id="closeButton">Cerrar</button>
     `
-	return `
+	return {
+		html: `
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -68,7 +69,13 @@ const generateQRScanHTML = ({
       </script>
     </body>
     </html>
-  `
+  `,
+		qrStatus: !activated
+			? `OK! Entrada ${
+					isPack ? 'PACK' : 'NORMAL'
+			  } para ${eventName} validada exitosamente.`
+			: `ERROR. La entrada ya está validada`,
+	}
 }
 
 module.exports = {

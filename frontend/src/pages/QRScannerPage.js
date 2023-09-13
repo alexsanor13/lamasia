@@ -19,12 +19,9 @@ const QrCodeScanner = forwardRef((props, ref) => {
 
 		const newWindow = window.open()
 		if (newWindow) {
-			newWindow.document.write(qrData)
+			newWindow.document.write(qrData.html)
 		} else {
-			const container = document.getElementById('qrResult')
-			container.width = '600'
-			container.height = '400'
-			container.innerHTML = qrData
+			alert(qrData.qrStatus)
 		}
 
 		setShowLoader(false)
@@ -101,7 +98,6 @@ const QrCodeScanner = forwardRef((props, ref) => {
 			) : (
 				''
 			)}
-			<div id="qrResult"></div>
 		</section>
 	)
 })
