@@ -13,6 +13,14 @@ const QrCodeScanner = forwardRef((props, ref) => {
 			return
 		}
 
+		const pQR = document.getElementById('resultQR')
+		const qrContainerResult = document.getElementById('qrContainerResult')
+		const buttonClearQR = document.getElementById('clearQR')
+
+		qrContainerResult.style.display = 'none'
+		buttonClearQR.style.display = 'none'
+		pQR.style.display = 'none'
+
 		setShowLoader(true)
 
 		const qrData = await scannerServices.scanQR(result)
@@ -22,9 +30,26 @@ const QrCodeScanner = forwardRef((props, ref) => {
 			newWindow.document.write(qrData.html)
 		} else {
 			alert(qrData.qrStatus)
+			qrContainerResult.style.display = 'block'
+			buttonClearQR.style.display = 'block'
+			pQR.style.display = 'block'
+			pQR.textContent = qrData.qrStatus
 		}
 
 		setShowLoader(false)
+		handleCameraClose()
+	}
+
+	const resetQRResult = () => {
+		const pQR = document.getElementById('resultQR')
+		const qrContainerResult = document.getElementById('qrContainerResult')
+		const buttonClearQR = document.getElementById('clearQR')
+
+		pQR.textContent = ''
+
+		qrContainerResult.style.display = 'none'
+		buttonClearQR.style.display = 'none'
+		pQR.style.display = 'none'
 	}
 
 	const handleError = (error) => {
@@ -98,6 +123,12 @@ const QrCodeScanner = forwardRef((props, ref) => {
 			) : (
 				''
 			)}
+			<div id="qrContainerResult">
+				<p id="resultQR"></p>
+				<button onClick={() => resetQRResult()} id="clearQR">
+					clear
+				</button>
+			</div>
 		</section>
 	)
 })

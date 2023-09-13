@@ -56,3 +56,9 @@
 .qr-container svg {
 	border: 60px solid rgba(0, 0, 0, 0.1) !important;
 }
+
+#qrContainerResult,
+#resultQR,
+#clearQR {
+	display: none;
+}
