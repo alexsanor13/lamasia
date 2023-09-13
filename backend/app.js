@@ -10,6 +10,16 @@ const ticketsRouter = require('./controllers/tickets')
 const scannerRouter = require('./controllers/scanner')
 const transactionsRouter = require('./controllers/transactions')
 
+// redirect http to https
+if (!config.debugMode) {
+	app.use((req, res, next) => {
+		if (req.headers['x-forwarded-proto'] !== 'https') {
+			return res.redirect('https://' + req.get('host') + req.url)
+		}
+		return next()
+	})
+}
+
 // MongoDB
 const mongoose = require('mongoose')
 
