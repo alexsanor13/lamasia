@@ -62,3 +62,12 @@
 #clearQR {
 	display: none;
 }
+
+#qrContainerResult {
+	width: 80%;
+	margin: 0.75em auto;
+	padding: 1em;
+	text-align: center;
+	color: var(--pirate-gold);
+	font-weight: bold;
+}
