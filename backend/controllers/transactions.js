@@ -1,6 +1,8 @@
 const Transaction = require('../models/Transaction')
 const Event = require('../models/Event')
 
+const { throwErrors } = require('../utils/middleware/throwErrors')
+
 const transactionsRouter = require('express').Router()
 
 transactionsRouter.post('/getPaymentInfo', async (request, response) => {
@@ -10,13 +12,13 @@ transactionsRouter.post('/getPaymentInfo', async (request, response) => {
 		const transactionInfo = await Transaction.findOne({ orderId: orderId })
 
 		if (!transactionInfo) {
-			throw new Error('Transaction not found')
+			throwErrors(`Transaction not found in order ${orderId}`)
 		}
 
 		const eventInfo = await Event.findOne({ id: transactionInfo.eventId })
 
 		if (!eventInfo) {
-			throw new Error('Event not found')
+			throwErrors(`Event not found in order ${orderId}`)
 		}
 
 		const paymentInfo = {
@@ -27,7 +29,6 @@ transactionsRouter.post('/getPaymentInfo', async (request, response) => {
 
 		return response.status(200).json(paymentInfo)
 	} catch (error) {
-		console.error(error)
 		return response.status(404).json({ error })
 	}
 })

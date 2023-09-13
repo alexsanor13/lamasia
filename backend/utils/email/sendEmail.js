@@ -3,6 +3,7 @@ const nodemailer = require('nodemailer')
 const { EMAIL, EMAIL_PASS, GMAIL_CONFIG } = require('../config.js')
 const { readQRImage, readQRImageFile } = require('../qrManager/readQRImage.js')
 const { deleteQRFile } = require('../qrManager/qrCreator.js')
+const { throwErrors } = require('../middleware/throwErrors')
 
 async function generateEmailHTML(eventName, orderId, tickets) {
 	try {
@@ -35,22 +36,26 @@ async function generateEmailHTML(eventName, orderId, tickets) {
 
 		return emailHTML
 	} catch (e) {
-		throw new Error(`Error creating html:${e}`)
+		throwErrors(`Error creating html:${e}`)
 	}
 }
 
 const getAttachments = async (tickets) => {
-	const attachments = []
+	try {
+		const attachments = []
 
-	for (const { _ticket, qr } of tickets) {
-		const qrImageBuffer = await readQRImageFile(qr.qrName)
+		for (const { _ticket, qr } of tickets) {
+			const qrImageBuffer = await readQRImageFile(qr.qrName)
 
-		attachments.push({
-			filename: `${qr.qrName}.png`,
-			content: qrImageBuffer,
-		})
+			attachments.push({
+				filename: `${qr.qrName}.png`,
+				content: qrImageBuffer,
+			})
+		}
+		return attachments
+	} catch (e) {
+		throwErrors(`Error getting the qr attachment: ${e}`)
 	}
-	return attachments
 }
 
 async function sendEmailByGmail(to, tickets, eventName, orderId) {
@@ -90,7 +95,7 @@ async function sendEmailByGmail(to, tickets, eventName, orderId) {
 			}
 		})
 	} catch (e) {
-		throw new Error(`Email was not sent:${e}`)
+		throwErrors(`Email was not sent:${e}`)
 	}
 }
 

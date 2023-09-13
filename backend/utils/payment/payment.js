@@ -5,73 +5,83 @@ const Order = require('../../models/Order')
 const redsys = new Redsys()
 
 function generateOrderId() {
-	const numericChars = '0123456789'
-	const alphanumericChars =
-		'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+	try {
+		const numericChars = '0123456789'
+		const alphanumericChars =
+			'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
 
-	let orderId = ''
+		let orderId = ''
 
-	// Generar los primeros 4 caracteres numéricos
-	for (let i = 0; i < 4; i++) {
-		orderId += numericChars.charAt(
-			Math.floor(Math.random() * numericChars.length)
-		)
+		for (let i = 0; i < 4; i++) {
+			orderId += numericChars.charAt(
+				Math.floor(Math.random() * numericChars.length)
+			)
+		}
+
+		for (let i = 0; i < 8; i++) {
+			orderId += alphanumericChars.charAt(
+				Math.floor(Math.random() * alphanumericChars.length)
+			)
+		}
+
+		return orderId
+	} catch (e) {
+		throw new Error('Error creating random OrderId')
 	}
-
-	// Generar los 8 caracteres restantes alfanuméricos
-	for (let i = 0; i < 8; i++) {
-		orderId += alphanumericChars.charAt(
-			Math.floor(Math.random() * alphanumericChars.length)
-		)
-	}
-
-	return orderId
 }
 
 async function createRedirection(total, paymentMethod = '') {
-	const orderId = generateOrderId()
+	try {
+		const orderId = generateOrderId()
 
-	const newOrder = new Order({
-		orderId,
-		amount: total,
-		currency: TPV.CURRENCY,
-		status: 'PENDING_PAYMENT',
-	})
+		const newOrder = new Order({
+			orderId,
+			amount: total,
+			currency: TPV.CURRENCY,
+			status: 'PENDING_PAYMENT',
+		})
 
-	await newOrder.save()
+		await newOrder.save()
 
-	const params = {
-		DS_MERCHANT_TRANSACTIONTYPE: TPV.TRANSACTIONTYPE,
-		DS_MERCHANT_ORDER: orderId,
-		DS_MERCHANT_AMOUNT: total * 100,
-		DS_MERCHANT_CURRENCY: TPV.CURRENCY,
-		DS_MERCHANT_MERCHANTCODE: TPV.MERCHANTCODE,
-		DS_MERCHANT_MERCHANTNAME: 'La Masia Events',
-		DS_MERCHANT_TERMINAL: TPV.TERMINAL,
-		DS_MERCHANT_PAYMETHODS: paymentMethod,
-		DS_MERCHANT_MERCHANTURL: `${TPV.URLCALLBACK}`,
-		DS_MERCHANT_URLOK: `${TPV.URLCALLBACK_OK}${orderId}`,
-		// DS_MERCHANT_URLKO: `${TPV.URLCALLBACK}/${orderId}`,
-		// DS_MERCHANT_MERCHANTURL: `https://honest-fans-shine.loca.lt/api/tickets/redsysresponse`,
-		// DS_MERCHANT_URLOK: `https://honest-fans-shine.loca.lt/paymentsuccessful/${orderId}`,
-		// DS_MERCHANT_URLKO: `https://honest-fans-shine.loca.lt/api/tickets/redsysresponseKO`,
+		console.log(
+			`New order saved with ID: ${orderId} in status 'PENDING_PAYMENT'`
+		)
+
+		const params = {
+			DS_MERCHANT_TRANSACTIONTYPE: TPV.TRANSACTIONTYPE,
+			DS_MERCHANT_ORDER: orderId,
+			DS_MERCHANT_AMOUNT: total * 100,
+			DS_MERCHANT_CURRENCY: TPV.CURRENCY,
+			DS_MERCHANT_MERCHANTCODE: TPV.MERCHANTCODE,
+			DS_MERCHANT_MERCHANTNAME: 'La Masia Events',
+			DS_MERCHANT_TERMINAL: TPV.TERMINAL,
+			DS_MERCHANT_PAYMETHODS: paymentMethod,
+			DS_MERCHANT_MERCHANTURL: `${TPV.URLCALLBACK}`,
+			DS_MERCHANT_URLOK: `${TPV.URLCALLBACK_OK}${orderId}`,
+			// DS_MERCHANT_URLKO: `${TPV.URLCALLBACK}/${orderId}`,
+			// DS_MERCHANT_MERCHANTURL: `https://honest-fans-shine.loca.lt/api/tickets/redsysresponse`,
+			// DS_MERCHANT_URLOK: `https://honest-fans-shine.loca.lt/paymentsuccessful/${orderId}`,
+			// DS_MERCHANT_URLKO: `https://honest-fans-shine.loca.lt/api/tickets/redsysresponseKO`,
+		}
+		const Ds_Signature = redsys.createMerchantSignature(TPV.SECRET, params)
+		const Ds_MerchantParameters = redsys.createMerchantParameters(params)
+		const Ds_SignatureVersion = TPV.SIGNATURE_VERSION
+		const formHtml = `
+			<!DOCTYPE html>
+			<html>
+			<body>
+			<form action="${TPV.URL}" method="post" target="_blank">
+				<input type="hidden" id="Ds_SignatureVersion" name="Ds_SignatureVersion" value="${Ds_SignatureVersion}" />
+				<input type="hidden" id="Ds_MerchantParameters" name="Ds_MerchantParameters" value="${Ds_MerchantParameters}" />
+				<input type="hidden" id="Ds_Signature" name="Ds_Signature" value="${Ds_Signature}"/>
+			</form>
+			</body>
+			</html>
+		`
+		return { form: formHtml, orderId }
+	} catch (error) {
+		throw new Error(`Error creating redirection to redsys: ${error}`)
 	}
-	const Ds_Signature = redsys.createMerchantSignature(TPV.SECRET, params)
-	const Ds_MerchantParameters = redsys.createMerchantParameters(params)
-	const Ds_SignatureVersion = TPV.SIGNATURE_VERSION
-	const formHtml = `
-		<!DOCTYPE html>
-		<html>
-		<body>
-		<form action="${TPV.URL}" method="post" target="_blank">
-			<input type="hidden" id="Ds_SignatureVersion" name="Ds_SignatureVersion" value="${Ds_SignatureVersion}" />
-			<input type="hidden" id="Ds_MerchantParameters" name="Ds_MerchantParameters" value="${Ds_MerchantParameters}" />
-			<input type="hidden" id="Ds_Signature" name="Ds_Signature" value="${Ds_Signature}"/>
-		</form>
-		</body>
-		</html>
-	`
-	return { form: formHtml, orderId }
 }
 
 function getPaymentParameters(paymentInfo) {
@@ -106,7 +116,7 @@ function getPaymentParameters(paymentInfo) {
 			return null
 		}
 	} catch (error) {
-		throw Error('Payment process failed')
+		throw Error('Error getting the merchantParamsDecoded')
 	}
 }
 

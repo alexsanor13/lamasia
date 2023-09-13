@@ -1,9 +1,12 @@
 const { QR_CONTAINER } = require('../utils/config')
+
 const Ticket = require('../models/Ticket')
 const Transaction = require('../models/Transaction')
 const Event = require('../models/Event')
 const Order = require('../models/Order')
 const QR = require('../models/QR')
+
+const { throwErrors } = require('../utils/middleware/throwErrors')
 const { generateQRCode } = require('../utils/qrManager/qrCreator')
 const { encrypt } = require('../utils/qrManager/qrCrypt')
 const {
@@ -30,7 +33,6 @@ ticketsRouter.post('/getRedirection', async (request, response) => {
 		await createNewTransaction(body, orderId)
 		return response.status(200).json(form)
 	} catch (error) {
-		console.error(error)
 		return response.status(404).json({ error })
 	}
 })
@@ -42,12 +44,11 @@ ticketsRouter.post('/redsysresponse', async (request, response) => {
 		const { Ds_Order } = getPaymentParameters(body)
 
 		if (!Ds_Order) {
-			console.log(`Payment for order ${Ds_Order} failed`)
 			Order.updateOne(
 				{ orderId: Ds_Order },
 				{ $set: { status: 'PAYMENT_FAILED' } }
 			)
-			return response.status(500).json(new Error('Payment not completed'))
+			throwErrors(`Payment for order ${Ds_Order} failed`)
 		}
 
 		console.log(`Payment for order ${Ds_Order} succeded`)
@@ -59,13 +60,13 @@ ticketsRouter.post('/redsysresponse', async (request, response) => {
 		const transactionInfo = await Transaction.findOne({ orderId: Ds_Order })
 
 		if (!transactionInfo) {
-			return
+			throwErrors(`Transaction for order ${Ds_Order} not found`)
 		}
 
 		const newTickets = await createNewTickets(transactionInfo)
 
 		if (!newTickets.length) {
-			throw Error('Error creating tickets')
+			throwErrors(`Error creating tickets in order ${Ds_Order}`)
 		}
 
 		const event = await Event.findOne({
@@ -75,25 +76,6 @@ ticketsRouter.post('/redsysresponse', async (request, response) => {
 		sendEmailByGmail(transactionInfo.email, newTickets, event.title, Ds_Order)
 		return response.status(200).json()
 	} catch (error) {
-		console.error(error)
-		return response.status(404).json({ error })
-	}
-})
-
-ticketsRouter.get('/redsysresponseok', async (request, response) => {
-	try {
-		return response.status(200).json()
-	} catch (error) {
-		console.error(error)
-		return response.status(404).json({ error })
-	}
-})
-
-ticketsRouter.get('/redsysresponseko', async (request, response) => {
-	try {
-		return response.status(404).json()
-	} catch (error) {
-		console.error(error)
 		return response.status(404).json({ error })
 	}
 })
@@ -115,7 +97,7 @@ const createQR = async (email, transactionId, eventId, pack) => {
 
 		return qrName
 	} catch (error) {
-		throw new Error('QR creation error')
+		throwErrors(`Error creating QR: ${error}`)
 	}
 }
 
@@ -131,7 +113,7 @@ const saveTicket = async (transactionId, eventId, isPack) => {
 		await ticket.save()
 		return ticket
 	} catch (error) {
-		throw new Error('Error saving Ticket')
+		throwErrors('Error saving Ticket')
 	}
 }
 
@@ -144,7 +126,7 @@ const saveQR = async (ticketId, qrName) => {
 		await qr.save()
 		return qr
 	} catch (error) {
-		throw Error('Error saving QR')
+		throwErrors('Error saving QR')
 	}
 }
 
@@ -156,21 +138,25 @@ async function createAndSaveTicket(transactionId, eventId, email, isPack) {
 }
 
 const createNewTransaction = async (body, orderId) => {
-	const { email, amount, tickets, packTickets, purchaseInfo, eventId } = body
+	try {
+		const { email, amount, tickets, packTickets, purchaseInfo, eventId } = body
 
-	const transaction = new Transaction({
-		id: generateRandomCode(),
-		email,
-		amount,
-		tickets,
-		packTickets,
-		purchaseInfo,
-		date: new Date(),
-		orderId,
-		eventId,
-	})
+		const transaction = new Transaction({
+			id: generateRandomCode(),
+			email,
+			amount,
+			tickets,
+			packTickets,
+			purchaseInfo,
+			date: new Date(),
+			orderId,
+			eventId,
+		})
 
-	await transaction.save()
+		await transaction.save()
+	} catch (e) {
+		throwErrors(`Error saving the new transaction with orderId ${orderId}`)
+	}
 }
 
 const createNewTickets = async (body) => {
@@ -193,7 +179,7 @@ const createNewTickets = async (body) => {
 
 		return savedTickets
 	} catch {
-		console.error('Tickets not saved')
+		throwErrors(`Tickets creation for transaction ${id} failed`)
 	}
 }
 

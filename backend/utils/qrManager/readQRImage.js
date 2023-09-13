@@ -2,6 +2,7 @@ const fs = require('fs')
 const promisify = require('util').promisify
 const readFileAsync = promisify(fs.readFile)
 const { QR_CONTAINER } = require('../config')
+const { throwErrors } = require('../middleware/throwErrors')
 
 async function readQRImage(qrName) {
 	try {
@@ -11,7 +12,7 @@ async function readQRImage(qrName) {
 
 		return qrImageBase64
 	} catch (e) {
-		throw new Error('Error reading qr')
+		throwErrors(`Error reading qr: ${qrName}`)
 	}
 }
 
@@ -22,7 +23,7 @@ async function readQRImageFile(qrName) {
 
 		return qrImageBuffer
 	} catch (e) {
-		throw new Error('Error reading qr')
+		throwErrors(`Error reading qr: ${qrName}`)
 	}
 }
 
