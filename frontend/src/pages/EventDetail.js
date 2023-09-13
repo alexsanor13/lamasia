@@ -33,10 +33,6 @@ const EventDetail = () => {
 	}
 
 	useEffect(() => {
-		document.title = eventInfo ? `La Masia - ${eventInfo.title}` : ''
-	}, [eventInfo])
-
-	useEffect(() => {
 		const handleResize = () => {
 			setIsMobile(window.innerWidth < 768)
 		}
@@ -45,31 +41,25 @@ const EventDetail = () => {
 
 		window.addEventListener('resize', handleResize)
 
-		return () => {
-			window.removeEventListener('resize', handleResize)
-		}
-	}, [])
+		eventsServices.getEventInfo(id).then((fetchedEvent) => {
+			setEventInfo(fetchedEvent)
+			document.title = `La Masia - ${fetchedEvent.title}`
+			setLoading(false)
+		})
 
-	useEffect(() => {
 		if (isMobile) {
 			document.documentElement.style.background = 'black'
 		}
 
 		return () => {
+			window.removeEventListener('resize', handleResize)
 			document.documentElement.style.background = null
 		}
-	}, [isMobile])
-
-	useEffect(() => {
-		eventsServices.getEventInfo(id).then((fetchedEvent) => {
-			setEventInfo(fetchedEvent)
-			setLoading(false)
-		})
-	}, [id])
+	}, [id, isMobile])
 
 	const handlePurchase = () => {
 		const amount =
-			packTickets * eventInfo.extraPrice + selectedTickets * eventInfo.price
+			packTickets * eventInfo.priceVIP || 0 + selectedTickets * eventInfo.price
 
 		if (amount) {
 			setCart({
@@ -77,7 +67,7 @@ const EventDetail = () => {
 				tickets: selectedTickets,
 				price: eventInfo.price,
 				packTickets: packTickets,
-				packPrice: eventInfo.extraPrice,
+				packPrice: eventInfo?.priceVIP,
 				amount,
 			})
 
@@ -111,20 +101,21 @@ const EventDetail = () => {
 								</div>
 								<TicketSelector
 									className="event-ticket-option"
-									label={'Entrada pirata'}
+									label={'Entrada normal'}
 									price={`${eventInfo.price ? eventInfo.price : 12}€`}
-									max={5}
+									max={7}
 									selection={setSelectedTickets}
 								/>
-								<TicketSelector
-									className="event-ticket-option"
-									label={'Mesa con botella y shisha (5 personas)'}
-									price={`${
-										eventInfo.extraPrice ? eventInfo.extraPrice : 100
-									}€`}
-									max={1}
-									selection={setPackTickets}
-								/>
+								{eventInfo.priceVIP && (
+									<TicketSelector
+										className="event-ticket-option"
+										label={'Mesa con botella y shisha (5 personas)'}
+										price={`${eventInfo.priceVIP}€`}
+										max={1}
+										selection={setPackTickets}
+									/>
+								)}
+
 								<div className="button-container">
 									<button
 										onClick={handlePurchase}

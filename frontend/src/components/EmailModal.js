@@ -69,12 +69,12 @@ const EmailModal = ({ isOpen, closeModal, shoppingCart }) => {
 		closeModal()
 	}
 
-	const ticketsInfo = shoppingCart.tickets ? (
+	const ticketsAmount = shoppingCart.tickets ? (
 		<tr>
 			<td>
-				<b>Entrada estándard</b>
+				<b>Entrada estándard *</b>
 			</td>
-			<td>
+			<td className="amount">
 				{shoppingCart.tickets} x {shoppingCart.price}€
 			</td>
 		</tr>
@@ -82,7 +82,15 @@ const EmailModal = ({ isOpen, closeModal, shoppingCart }) => {
 		''
 	)
 
-	const packInfo = shoppingCart.packTickets ? (
+	const ticketsInfo = shoppingCart.tickets ? (
+		<tr className="standardTicketInfo">
+			<td colSpan="2">* Acceso al recinto y canjeable por una consumición.</td>
+		</tr>
+	) : (
+		''
+	)
+
+	const packAmount = shoppingCart.packTickets ? (
 		<tr>
 			<td>
 				<b>Entrada especial</b>
@@ -97,10 +105,10 @@ const EmailModal = ({ isOpen, closeModal, shoppingCart }) => {
 
 	const amountInfo = shoppingCart.amount ? (
 		<tr>
-			<td>
+			<td className="totalTD">
 				<b>Total</b>
 			</td>
-			<td>{shoppingCart.amount}€</td>
+			<td className="amount totalTD">{shoppingCart.amount}€</td>
 		</tr>
 	) : (
 		''
@@ -138,8 +146,9 @@ const EmailModal = ({ isOpen, closeModal, shoppingCart }) => {
 
 			<table className="email-modal-cart-info">
 				<tbody>
+					{ticketsAmount}
 					{ticketsInfo}
-					{packInfo}
+					{packAmount}
 					{amountInfo}
 				</tbody>
 			</table>

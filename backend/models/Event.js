@@ -10,8 +10,9 @@ const eventSchema = new Schema({
 	location: String,
 	locationMap: String,
 	locationDescription: String,
-	price: Number,
-	extras: String,
+	price1: Number,
+	price2: Number,
+	priceFinal: Number,
 })
 
 eventSchema.set('toJSON', {
