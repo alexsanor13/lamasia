@@ -51,8 +51,22 @@ const EmailModal = ({ isOpen, closeModal, shoppingCart }) => {
 
 		const form = dummy.querySelector('form')
 
-		document.body.appendChild(form)
-		form.submit()
+		if (isMobileDevice()) {
+			openFormInNewWindow(form)
+		} else {
+			document.body.appendChild(form)
+			form.submit()
+		}
+	}
+
+	const isMobileDevice = () => {
+		return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+	}
+
+	const openFormInNewWindow = (form) => {
+		const newWindow = window.open('', '_blank')
+		newWindow.document.write(form.outerHTML)
+		newWindow.document.forms[0].submit()
 	}
 
 	const resetStates = () => {
