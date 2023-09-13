@@ -47,6 +47,7 @@ const getAttachments = async (tickets) => {
 			content: qrImageBuffer,
 		})
 	}
+	return attachments
 }
 
 async function sendEmailByGmail(to, tickets, eventName, orderId) {
@@ -64,7 +65,7 @@ async function sendEmailByGmail(to, tickets, eventName, orderId) {
 				refreshToken: GMAIL_CONFIG.refresh_token,
 			},
 		})
-		const attachments = getAttachments()
+		const attachments = await getAttachments(tickets)
 
 		const mailOptions = {
 			from: EMAIL,
