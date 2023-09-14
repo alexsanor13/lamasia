@@ -26,7 +26,7 @@ function generateOrderId() {
 
 		return orderId
 	} catch (e) {
-		throw new Error('Error creating random OrderId')
+		throw new Error('Error creating random orderId')
 	}
 }
 

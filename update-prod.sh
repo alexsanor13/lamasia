@@ -29,7 +29,7 @@ if [ $CHANGES -eq 1 ] || $FORCE_DEPLOY; then
         rm -r ./frontend/build && rm -r ./backend/build
     fi
 
-    cd frontend && npm run build && \
+    cd frontend && NODE_ENV=production npm run build && \
     cp -r build ../backend/ && echo -e "${GREEN}Build updated${NC}" && \
     cd .. && \
     git add .
