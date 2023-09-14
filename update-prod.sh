@@ -3,13 +3,16 @@ GREEN='\033[0;32m'
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 TIMESTAMP=$(date "+%Y.%m.%d-%H.%M.%S")
-
 FORCE_DEPLOY=false
+CUSTOM_COMMIT_MESSAGE=""
 
-while getopts ":f" opt; do
+while getopts ":fm:" opt; do
   case $opt in
     f)
       FORCE_DEPLOY=true
+      ;;
+    m)
+      CUSTOM_COMMIT_MESSAGE="$OPTARG"
       ;;
     \?)
       echo "Opción inválida: -$OPTARG" >&2
@@ -32,7 +35,13 @@ if [ $CHANGES -eq 1 ] || $FORCE_DEPLOY; then
     git add .
 
     if [[ -n $(git status -s) ]]; then
-        git commit -m "build updated $TIMESTAMP" && \
+        if [ -z "$CUSTOM_COMMIT_MESSAGE" ]; then
+            COMMIT_MESSAGE="build updated $TIMESTAMP"
+        else
+            COMMIT_MESSAGE="$CUSTOM_COMMIT_MESSAGE"
+        fi
+
+        git commit -m "$COMMIT_MESSAGE" && \
         git push origin main && echo -e "${GREEN}Dev branch updated${NC}"
     else
         echo -e "${RED}No changes to commit on dev branch${NC}"
@@ -55,7 +64,13 @@ if [ $CHANGES -eq 1 ] || $FORCE_DEPLOY; then
     cd ../lamasiaevents && git add .
 
     if [[ -n $(git status -s) ]] || $FORCE_DEPLOY; then
-        git commit -m "build updated $TIMESTAMP" && git push heroku master && \
+        if [ -z "$CUSTOM_COMMIT_MESSAGE" ]; then
+            COMMIT_MESSAGE="build updated $TIMESTAMP"
+        else
+            COMMIT_MESSAGE="$CUSTOM_COMMIT_MESSAGE"
+        fi
+
+        git commit -m "$COMMIT_MESSAGE" && git push heroku master && \
         echo -e "${GREEN}Build update and deploy completed${NC}"
     else
         echo -e "${RED}No changes to commit on Heroku branch${NC}"
