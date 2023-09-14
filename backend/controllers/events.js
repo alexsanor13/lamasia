@@ -4,6 +4,7 @@ const eventsRouter = require('express').Router()
 const Event = require('../models/Event')
 
 const { throwErrors } = require('../utils/middleware/throwErrors')
+const { getPrice } = require('../utils/events/eventsUtils')
 
 eventsRouter.get('/', async (request, response) => {
 	const events = await Event.find({})
@@ -27,30 +28,23 @@ eventsRouter.post('/', async (request, response) => {
 			return response.status(400).json({ error: 'Event has already finished' })
 		}
 
-		const soldTickets = await getTicketAlreadySold(id)
+		const { price, release, priceLabel } = await getPrice(event)
 
-		if (soldTickets < 50) {
-			event.price = event.price1
-		} else if (soldTickets >= 50 && soldTickets < 100) {
-			event.price = event.price2
-		} else {
-			event.price = event.priceFinal
-		}
+		event.price = price
+		event.release = release
+		event.priceLabel = priceLabel
 
 		delete event.price1
 		delete event.price2
 		delete event.priceFinal
+		delete event.release1
+		delete event.release2
+		delete event.releaseFinal
 
 		return response.status(200).json(event)
 	} catch (error) {
 		return response.status(404).json({ error, message: error.message })
 	}
 })
-
-const getTicketAlreadySold = async (eventId) => {
-	const Ticket = require('../models/Ticket')
-	const soldTickets = await Ticket.find({ eventId: eventId })
-	return soldTickets.length
-}
 
 module.exports = eventsRouter

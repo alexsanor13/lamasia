@@ -101,7 +101,7 @@ const EventDetail = () => {
 								</div>
 								<TicketSelector
 									className="event-ticket-option"
-									label={'Entrada normal'}
+									label={eventInfo.priceLabel}
 									price={`${eventInfo.price ? eventInfo.price : 12}€`}
 									max={7}
 									selection={setSelectedTickets}
@@ -110,7 +110,7 @@ const EventDetail = () => {
 									<TicketSelector
 										className="event-ticket-option"
 										label={'Mesa con botella y shisha (5 personas)'}
-										price={`${eventInfo.priceVIP}€`}
+										price={`${eventInfo.price}€`}
 										max={1}
 										selection={setPackTickets}
 									/>

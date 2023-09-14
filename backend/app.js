@@ -20,6 +20,11 @@ if (!config.debugMode) {
 	})
 }
 
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(cors())
+app.use(express.json())
+app.use(express.static('build'))
+
 // MongoDB
 const mongoose = require('mongoose')
 
@@ -38,11 +43,6 @@ mongoose
 process.on('uncaughtException', () => {
 	mongoose.disconnect()
 })
-
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(cors())
-app.use(express.json())
-app.use(express.static('build'))
 
 if (config.debugMode) {
 	app.use('/api/', config.apiLimiter)

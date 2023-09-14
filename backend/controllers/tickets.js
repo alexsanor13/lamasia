@@ -1,5 +1,7 @@
 const { QR_CONTAINER } = require('../utils/config')
 
+const events = require('./events')
+
 const Ticket = require('../models/Ticket')
 const Transaction = require('../models/Transaction')
 const Event = require('../models/Event')
@@ -9,6 +11,7 @@ const QR = require('../models/QR')
 const { throwErrors } = require('../utils/middleware/throwErrors')
 const { generateQRCode } = require('../utils/qrManager/qrCreator')
 const { encrypt } = require('../utils/qrManager/qrCrypt')
+const { getPrice } = require('../utils/events/eventsUtils')
 const {
 	getPaymentParameters,
 	createRedirection,
@@ -22,6 +25,8 @@ ticketsRouter.post('/getRedirection', async (request, response) => {
 	try {
 		const body = request.body
 		const paymentMethod = body.payment_method ? body.payment_method : ''
+
+		calculateAmount(body.eventId, body.amount, body.tickets)
 
 		const { form, actionURL, orderId } = await createRedirection(
 			body.amount,
@@ -44,15 +49,17 @@ ticketsRouter.post('/redsysresponse', async (request, response) => {
 		const { Ds_Order } = getPaymentParameters(body)
 
 		if (!Ds_Order) {
-			Order.updateOne(
+			await Order.updateOne(
 				{ orderId: Ds_Order },
 				{ $set: { status: 'PAYMENT_FAILED' } }
 			)
 			throwErrors(`Payment for order ${Ds_Order} failed`)
 		}
 
+		//TODO MIRAR PQ PETA AQUI Y SE QUEDA BLOQUEADO EL SERVIDOR
+
 		console.log(`Payment for order ${Ds_Order} succeded`)
-		Order.updateOne(
+		await Order.updateOne(
 			{ orderId: Ds_Order },
 			{ $set: { status: 'PAYMENT_SUCCEDED' } }
 		)
@@ -80,6 +87,24 @@ ticketsRouter.post('/redsysresponse', async (request, response) => {
 	}
 })
 
+const calculateAmount = async (eventId, amountCalculated, orderedTickets) => {
+	let event = await Event.findOne({ id: eventId }).lean()
+
+	if (!event) {
+		throwErrors(`Event with id ${eventId} not found`)
+	}
+
+	const { price } = await getPrice(event)
+
+	const validAmount = Number(price) * orderedTickets === amountCalculated
+
+	if (validAmount) {
+		return true
+	} else {
+		throwErrors('The price applied to the tickets is not correct')
+	}
+}
+
 const createNewTransaction = async (body, orderId) => {
 	try {
 		const { email, amount, tickets, packTickets, purchaseInfo, eventId } = body
@@ -97,6 +122,8 @@ const createNewTransaction = async (body, orderId) => {
 		})
 
 		await transaction.save()
+
+		console.log(`Transaction for orderId ${orderId} has been saved`)
 	} catch (e) {
 		throwErrors(`Error saving the new transaction with orderId ${orderId}`)
 	}

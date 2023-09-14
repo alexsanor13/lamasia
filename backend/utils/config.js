@@ -3,8 +3,15 @@ require('dotenv').config()
 const { Env } = require('@humanwhocodes/env')
 const env = new Env()
 
+let debugMode = false
+if (process.argv.includes('--mode=debug')) {
+	debugMode = true
+}
+
 const PORT = env.first(['PORT', 'HTTP_PORT'], 8080)
-const MONGO_DB_URI = env.get('MONGO_DB_URI')
+const MONGO_DB_URI = debugMode
+	? env.get('MONGO_DB_URI')
+	: env.get('MONGO_DB_URI_PROD')
 
 const CRYPTO_QR = env.get('CRYPTO_QR')
 
@@ -15,11 +22,6 @@ const apiLimiter = rateLimit({
 	max: 200, // limit each IP to 100 requests per windowMs
 	message: 'Too many requests from this IP, please try again later',
 })
-
-let debugMode = false
-if (process.argv.includes('--mode=debug')) {
-	debugMode = true
-}
 
 const QR_CONTAINER = env.get('QR_CONTAINER')
 

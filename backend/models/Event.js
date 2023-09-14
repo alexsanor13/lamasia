@@ -13,6 +13,13 @@ const eventSchema = new Schema({
 	price1: Number,
 	price2: Number,
 	priceFinal: Number,
+	release1: Number,
+	release2: Number,
+	release3: Number,
+	priceVIP: {
+		type: Number,
+		default: 100,
+	},
 })
 
 eventSchema.set('toJSON', {

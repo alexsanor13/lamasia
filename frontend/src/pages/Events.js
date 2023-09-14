@@ -7,17 +7,23 @@ import './Events.css'
 
 const Events = () => {
 	const [events, setEvents] = useState([])
-	const [loading, setLoading] = useState(false)
+	const [loading, setLoading] = useState(true)
+	const [dataLoaded, setDataLoaded] = useState(false)
 
 	useEffect(() => {
 		document.title = 'La Masia - Eventos'
 		window.scrollTo(0, 0)
-		setLoading(true)
-		eventsServices.getAllEvents().then((fetchedEvents) => {
-			setEvents(fetchedEvents)
+
+		if (!dataLoaded) {
+			eventsServices.getAllEvents().then((fetchedEvents) => {
+				setEvents(fetchedEvents)
+				setDataLoaded(true)
+				setLoading(false)
+			})
+		} else {
 			setLoading(false)
-		})
-	}, [])
+		}
+	}, [dataLoaded])
 
 	const sectionTitle = events.length ? (
 		<h1 className="section-title">EVENTOS</h1>
