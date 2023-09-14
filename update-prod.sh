@@ -31,14 +31,7 @@ if [ $CHANGES -eq 1 ] || $FORCE_DEPLOY; then
 
     cd frontend && NODE_ENV=production npm run build && \
     cp -r build ../backend/ && echo -e "${GREEN}Build updated${NC}" && \
-    cd ..
-
-    # Obtener el nombre del archivo JavaScript minificado en el directorio de backend
-    FILE_NAME=$(ls ./backend/static/js/*.js)
-
-    # Aplicar UglifyJS en el archivo JavaScript minificado conservando el mismo nombre
-    uglifyjs $FILE_NAME --compress --mangle -o $FILE_NAME
-
+    cd .. && \
     git add .
 
     if [[ -n $(git status -s) ]]; then
