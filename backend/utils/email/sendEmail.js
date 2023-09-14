@@ -17,7 +17,6 @@ async function generateEmailHTML(eventName, orderId, tickets) {
 				<img src="data:image/png;base64,${qrImage}" alt="QR Code" />
 			  </div>
 			</div>
-			<hr>
 		  `
 		})
 
@@ -43,9 +42,6 @@ async function generateEmailHTML(eventName, orderId, tickets) {
 					.qr-code {
 						text-align: center;
 						margin-top: 1em;
-					}
-					hr {
-						border: 1px solid #ccc;
 					}
 				</style>
   			</head>
