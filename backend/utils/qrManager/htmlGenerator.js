@@ -79,7 +79,7 @@ const generateQRScanHTML = ({
     `,
 			qrStatus: !activated
 				? `OK! Entrada ${
-						isPack ? 'PACK' : 'NORMAL'
+						isPack === 'true' ? 'PACK' : 'NORMAL'
 				  } para ${eventName} validada exitosamente.`
 				: `ERROR. La entrada ya está validada`,
 		}

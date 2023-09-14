@@ -103,8 +103,8 @@ const createNewTransaction = async (body, orderId) => {
 }
 
 async function createAndSaveTicket(transactionId, eventId, email, isPack) {
-	const qrText = await createQR(email, transactionId, eventId, isPack)
 	const newTicket = await saveTicket(transactionId, eventId, isPack)
+	const qrText = await createQR(email, newTicket.id, eventId, isPack)
 	const newQR = await saveQR(newTicket.id, qrText)
 	return { ticket: newTicket, qr: newQR }
 }
@@ -133,11 +133,11 @@ const createNewTickets = async (body) => {
 	}
 }
 
-const createQR = async (email, transactionId, eventId, pack) => {
+const createQR = async (email, ticketId, eventId, pack) => {
 	try {
-		const qrName = `${convertEmailToFileName(email)}_${transactionId}`
+		const qrName = `${convertEmailToFileName(email)}_${ticketId}`
 		const qrPath = `${QR_CONTAINER}${qrName}`
-		const qrMessage = `${transactionId},${email},${eventId},${pack}`
+		const qrMessage = `${ticketId},${email},${eventId},${pack}`
 		const qrEncripted = encrypt(qrMessage)
 
 		await generateQRCode(qrEncripted, qrPath)

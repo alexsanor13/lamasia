@@ -41,24 +41,26 @@ scannerRouter.post('/scanQR', async (request, response) => {
 			throwErrors('QR code format is incorrect')
 		}
 
-		const [transactionId, email, eventId, isPack] = decryptedQRSplitted
+		const [ticketId, email, eventId, isPack] = decryptedQRSplitted
+
+		const ticketInfo = await Ticket.findOne({
+			id: ticketId,
+			eventId,
+			packTicket: isPack,
+		})
+
+		if (!ticketInfo) {
+			throwErrors('Ticket not found')
+		}
 
 		const transactionInfo = await Transaction.findOne({
-			id: transactionId,
+			id: ticketInfo.transactionId,
 			email,
 			eventId,
 		})
 
 		if (!transactionInfo) {
 			throwErrors('Transaction not found')
-		}
-
-		const ticketInfo = await Ticket.findOne({
-			transactionId,
-		})
-
-		if (!ticketInfo) {
-			throwErrors('Ticket not found')
 		}
 
 		const eventInfo = await Event.findOne({
@@ -73,7 +75,7 @@ scannerRouter.post('/scanQR', async (request, response) => {
 		let activated = await handleQR(ticketInfo)
 
 		const qrInfo = {
-			transactionId,
+			transactionId: transactionInfo.id,
 			email,
 			eventName: eventInfo.title,
 			isPack,
