@@ -12,7 +12,7 @@ const getAllEvents = async () => {
 
 const getEventInfo = async (eventId) => {
 	try {
-		console.log('Getting event ${eventId} info')
+		console.log(`Getting event ${eventId} info`)
 
 		const response = await axios.post(url, {
 			id: eventId,
