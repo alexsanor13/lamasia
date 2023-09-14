@@ -11,8 +11,6 @@ const PaymentSuccessful = () => {
 	const [paymentResponse, setPaymentResponse] = useState({})
 
 	useEffect(() => {
-		console.log('entré', paymentResponse)
-
 		const fetchPaymentInfo = async () => {
 			try {
 				const fetchedInfo = await transactionsService.getPaymentInfoByOrderId(
