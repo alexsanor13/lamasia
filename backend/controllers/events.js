@@ -43,7 +43,7 @@ eventsRouter.post('/', async (request, response) => {
 
 		return response.status(200).json(event)
 	} catch (error) {
-		return response.status(404).json({ error })
+		return response.status(404).json({ error, message: error.message })
 	}
 })
 

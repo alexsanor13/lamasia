@@ -33,7 +33,7 @@ ticketsRouter.post('/getRedirection', async (request, response) => {
 		await createNewTransaction(body, orderId)
 		return response.status(200).json({ form, actionURL })
 	} catch (error) {
-		return response.status(404).json({ error })
+		return response.status(404).json({ error, message: error.message })
 	}
 })
 
@@ -76,73 +76,16 @@ ticketsRouter.post('/redsysresponse', async (request, response) => {
 		sendEmailByGmail(transactionInfo.email, newTickets, event.title, Ds_Order)
 		return response.status(200).json()
 	} catch (error) {
-		return response.status(404).json({ error })
+		return response.status(404).json({ error, message: error.message })
 	}
 })
-
-const convertEmailToFileName = (email) => {
-	const [username] = email.split('@')
-	const validFileName = username.replace(/[^a-zA-Z0-9_-]/g, '_') // Replace unvalid char with "_"
-	return validFileName
-}
-
-const createQR = async (email, transactionId, eventId, pack) => {
-	try {
-		const qrName = `${convertEmailToFileName(email)}_${transactionId}`
-		const qrPath = `${QR_CONTAINER}${qrName}`
-		const qrMessage = `${transactionId},${email},${eventId},${pack}`
-		const qrEncripted = encrypt(qrMessage)
-
-		await generateQRCode(qrEncripted, qrPath)
-
-		return qrName
-	} catch (error) {
-		throwErrors(`Error creating QR: ${error}`)
-	}
-}
-
-const saveTicket = async (transactionId, eventId, isPack) => {
-	try {
-		const ticket = new Ticket({
-			id: generateRandomCode(),
-			transactionId: transactionId,
-			eventId: eventId,
-			creationDate: new Date(),
-			packTicket: isPack,
-		})
-		await ticket.save()
-		return ticket
-	} catch (error) {
-		throwErrors('Error saving Ticket')
-	}
-}
-
-const saveQR = async (ticketId, qrName) => {
-	try {
-		const qr = new QR({
-			ticketId,
-			qrName,
-		})
-		await qr.save()
-		return qr
-	} catch (error) {
-		throwErrors('Error saving QR')
-	}
-}
-
-async function createAndSaveTicket(transactionId, eventId, email, isPack) {
-	const qrText = await createQR(email, transactionId, eventId, isPack)
-	const newTicket = await saveTicket(transactionId, eventId, isPack)
-	const newQR = await saveQR(newTicket.id, qrText)
-	return { ticket: newTicket, qr: newQR }
-}
 
 const createNewTransaction = async (body, orderId) => {
 	try {
 		const { email, amount, tickets, packTickets, purchaseInfo, eventId } = body
 
 		const transaction = new Transaction({
-			id: generateRandomCode(),
+			id: generateRandomNumericCode(),
 			email,
 			amount,
 			tickets,
@@ -157,6 +100,13 @@ const createNewTransaction = async (body, orderId) => {
 	} catch (e) {
 		throwErrors(`Error saving the new transaction with orderId ${orderId}`)
 	}
+}
+
+async function createAndSaveTicket(transactionId, eventId, email, isPack) {
+	const qrText = await createQR(email, transactionId, eventId, isPack)
+	const newTicket = await saveTicket(transactionId, eventId, isPack)
+	const newQR = await saveQR(newTicket.id, qrText)
+	return { ticket: newTicket, qr: newQR }
 }
 
 const createNewTickets = async (body) => {
@@ -183,7 +133,58 @@ const createNewTickets = async (body) => {
 	}
 }
 
-function generateRandomCode() {
+const createQR = async (email, transactionId, eventId, pack) => {
+	try {
+		const qrName = `${convertEmailToFileName(email)}_${transactionId}`
+		const qrPath = `${QR_CONTAINER}${qrName}`
+		const qrMessage = `${transactionId},${email},${eventId},${pack}`
+		const qrEncripted = encrypt(qrMessage)
+
+		await generateQRCode(qrEncripted, qrPath)
+
+		return qrName
+	} catch (error) {
+		throwErrors(`Error creating QR: ${error}`)
+	}
+}
+
+const saveTicket = async (transactionId, eventId, isPack) => {
+	try {
+		const ticket = new Ticket({
+			id: generateRandomNumericCode(),
+			transactionId: transactionId,
+			eventId: eventId,
+			creationDate: new Date(),
+			packTicket: isPack,
+		})
+		await ticket.save()
+		return ticket
+	} catch (error) {
+		throwErrors('Error saving Ticket')
+	}
+}
+
+const saveQR = async (ticketId, qrName) => {
+	try {
+		const qr = new QR({
+			ticketId,
+			qrName,
+		})
+
+		await qr.save()
+		return qr
+	} catch (error) {
+		throwErrors('Error saving QR')
+	}
+}
+
+const convertEmailToFileName = (email) => {
+	const [username] = email.split('@')
+	const validFileName = username.replace(/[^a-zA-Z0-9_-]/g, '_') // Replace unvalid char with "_"
+	return validFileName
+}
+
+function generateRandomNumericCode() {
 	const min = 100000000 // Valor mínimo de 100,000,000
 	const max = 999999999 // Valor máximo de 999,999,999
 	const ticketCode = Math.floor(Math.random() * (max - min + 1)) + min

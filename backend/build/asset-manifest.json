@@ -1,23 +1,24 @@
 {
   "files": {
-    "main.css": "/static/css/main.b6be486e.css",
-    "main.js": "/static/js/main.4ef3cb49.js",
+    "main.css": "/static/css/main.96046721.css",
+    "main.js": "/static/js/main.e68a4725.js",
     "static/media/soon.gif": "/static/media/soon.3aa4ca6ec0cb3f2256ed.gif",
     "static/media/logo-placeholder.svg": "/static/media/logo-placeholder.0a7108d62188dcaaebe6215a77b93f4a.svg",
     "static/media/logo.webp": "/static/media/logo.342ea19a2728daf9bd98.webp",
     "static/media/skull.svg": "/static/media/skull.3a9358424c5484c727563011ff681d1c.svg",
     "static/media/instagram_no_color.svg": "/static/media/instagram_no_color.5f8b6a03901fa0f631cef1375624fa69.svg",
+    "static/media/camera.svg": "/static/media/camera.6c9e23fbc3c7787833a8db991266725c.svg",
     "index.html": "/index.html",
     "static/media/calendar.svg": "/static/media/calendar.cb106e9d8a1a943411e55a97b4db931c.svg",
     "static/media/pin.svg": "/static/media/pin.1364bbcdef4eb48661ae1e1762d25688.svg",
     "static/media/clock.svg": "/static/media/clock.5af154c91cf8f82c30b2fc183810952b.svg",
     "static/media/cross.svg": "/static/media/cross.ffe9672a0b41e7a57e2082de791a811b.svg",
     "static/media/burger_menu.svg": "/static/media/burger_menu.976e3f598a89576f18aba6ce25096d0e.svg",
-    "main.b6be486e.css.map": "/static/css/main.b6be486e.css.map",
-    "main.4ef3cb49.js.map": "/static/js/main.4ef3cb49.js.map"
+    "main.96046721.css.map": "/static/css/main.96046721.css.map",
+    "main.e68a4725.js.map": "/static/js/main.e68a4725.js.map"
   },
   "entrypoints": [
-    "static/css/main.b6be486e.css",
-    "static/js/main.4ef3cb49.js"
+    "static/css/main.96046721.css",
+    "static/js/main.e68a4725.js"
   ]
 }

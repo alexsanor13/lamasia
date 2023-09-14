@@ -29,7 +29,7 @@ transactionsRouter.post('/getPaymentInfo', async (request, response) => {
 
 		return response.status(200).json(paymentInfo)
 	} catch (error) {
-		return response.status(404).json({ error })
+		return response.status(404).json({ error, message: error.message })
 	}
 })
 

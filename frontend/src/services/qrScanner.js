@@ -1,8 +1,8 @@
 import axios from 'axios'
-// Como el frontend se ha incluido en el deploy del backend y se encuentran en el mismo dominio, podemos utilizar path relativo
-import baseUrl from './baseUrl'
+import utils from '../common/utils.js'
+const { showResponseErrors, baseUrl } = utils
 
-let url = baseUrl + '/scanner'
+const url = baseUrl + '/scanner'
 
 const scanQR = async (encryptedQR) => {
 	try {
@@ -12,7 +12,7 @@ const scanQR = async (encryptedQR) => {
 
 		return response.data
 	} catch (error) {
-		console.error(error)
+		showResponseErrors(error)
 		return null
 	}
 }

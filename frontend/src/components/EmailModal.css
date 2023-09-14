@@ -38,11 +38,12 @@ th {
 	border-left: none;
 	border-bottom: none;
 	padding: 5px;
+	font-size: 16px;
 }
 
-.standardTicketInfo {
-	font-size: 12px;
-	text-align: center;
+.standardTicketInfo td {
+	font-size: 9px;
+	text-align: left;
 	color: grey;
 	border-bottom: 1px solid grey;
 }
@@ -92,9 +93,11 @@ th {
 }
 
 .matched {
-	background-color: #86d986;
+	border: 2px solid rgb(7, 179, 7);
+	border-radius: 5px;
 }
 
 .unmatched {
-	background-color: #ff000091;
+	border: 2px solid rgb(234 88 88);
+	border-radius: 5px;
 }

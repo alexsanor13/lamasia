@@ -1,5 +1,6 @@
 import axios from 'axios'
-import baseUrl from './baseUrl'
+import utils from '../common/utils.js'
+const { showResponseErrors, baseUrl } = utils
 
 const url = baseUrl + '/transactions'
 
@@ -11,7 +12,7 @@ const getPaymentInfoByOrderId = async (orderId) => {
 
 		return response.data
 	} catch (error) {
-		console.error(error)
+		showResponseErrors(error)
 		return {}
 	}
 }

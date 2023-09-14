@@ -16,5 +16,19 @@ const getFormattedDate = (dateString) => {
 	return `${day} de ${month} de ${year}`
 }
 
-const exportUtils = { getDDMMYYYDate, getFormattedDate }
+const showResponseErrors = (error) => {
+	console.error(
+		`${error?.response?.data?.message} - ${error?.code} ${error?.response?.status}.`
+	)
+}
+
+const baseUrl =
+	process.env.REACT_APP_MODE === 'dev' ? 'http://localhost:3001/api' : '/api'
+
+const exportUtils = {
+	getDDMMYYYDate,
+	getFormattedDate,
+	showResponseErrors,
+	baseUrl,
+}
 export default exportUtils

@@ -9,11 +9,6 @@ const Ticket = require('../models/Ticket')
 const Transaction = require('../models/Transaction')
 const QR = require('../models/QR')
 
-function handleError(response, error) {
-	console.error('Error:', error)
-	response.status(404).json({ error })
-}
-
 async function handleQR(ticket) {
 	try {
 		const existingQR = await QR.findOne({ ticketId: ticket.id })
@@ -89,7 +84,7 @@ scannerRouter.post('/scanQR', async (request, response) => {
 
 		return response.status(200).json(qrResult)
 	} catch (error) {
-		return response.status(404).json({ error })
+		return response.status(404).json({ error, message: error.message })
 	}
 })
 

@@ -1,7 +1,6 @@
 import axios from 'axios'
-//const baseUrl = 'https://safe-eyrie-72931.herokuapp.com/api/notes'
-// Como el frontend se ha incluido en el deploy del backend y se encuentran en el mismo dominio, podemos utilizar path relativo
-import baseUrl from './baseUrl'
+import utils from '../common/utils.js'
+const { showResponseErrors, baseUrl } = utils
 
 const url = baseUrl + '/events'
 
@@ -18,7 +17,7 @@ const getEventInfo = async (eventId) => {
 
 		return response.data
 	} catch (error) {
-		console.error(error)
+		showResponseErrors(error)
 		return null
 	}
 }

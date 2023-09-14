@@ -1,6 +1,6 @@
 import axios from 'axios'
-// Como el frontend se ha incluido en el deploy del backend y se encuentran en el mismo dominio, podemos utilizar path relativo
-import baseUrl from './baseUrl'
+import utils from '../common/utils.js'
+const { showResponseErrors, baseUrl } = utils
 
 const url = baseUrl + '/tickets'
 
@@ -9,7 +9,7 @@ const getRedsysRedirection = async (purchaseDetails) => {
 		const params = await axios.post(`${url}/getRedirection`, purchaseDetails)
 		return params.data
 	} catch (error) {
-		console.error(error)
+		showResponseErrors(error)
 		return null
 	}
 }
@@ -22,7 +22,7 @@ const buyTickets = async (purchaseDetails) => {
 		)
 		return paymentResponse.data
 	} catch (error) {
-		console.error(error)
+		showResponseErrors(error)
 		return null
 	}
 }
