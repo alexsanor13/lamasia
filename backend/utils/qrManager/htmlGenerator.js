@@ -11,10 +11,10 @@ const generateQRScanHTML = ({
 		const message = !activated
 			? `
       <h1 class='correctQR'>¡Código QR escaneado exitosamente!</h1>
-      <p>TRANSACTION ID: ${transactionId}</p>
-      <p>EMAIL: ${email}</p>
-      <p>EVENTO: ${eventName}</p>
-      <p>TIPO DE ENTRADA: ${isPack ? 'PACK' : 'NORMAL'}</p>
+      <p>TRANSACTION ID: <span>${transactionId}</span></p>
+      <p>EMAIL: <span>${email}</span></p>
+      <p>EVENTO: <span>${eventName}</span></p>
+      <p>ENTRADA: <span>${isPack === 'true' ? 'PACK' : 'NORMAL'}</span></p>
       <button id="closeButton">Cerrar</button>
       `
 			: `
@@ -51,6 +51,10 @@ const generateQRScanHTML = ({
   
           .badQR {
             color: red;
+          }
+
+          span {
+            color: green;
           }
   
           #closeButton {

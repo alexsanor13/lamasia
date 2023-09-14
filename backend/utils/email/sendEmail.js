@@ -10,10 +10,12 @@ async function generateEmailHTML(eventName, orderId, tickets) {
 		const qrListPromises = tickets.map(async ({ ticket, qr }) => {
 			const qrImage = await readQRImage(qr.qrName)
 			return `
-			<div style="margin-bottom: 1em;">
+			<div class="order-details">
 			  <p>Ticket ID: ${ticket.id}</p>
 			  <p>Tipo de Ticket: ${ticket.packTicket ? 'PACK' : 'NORMAL'}</p>
-			  <img src="data:image/png;base64,${qrImage}" alt="QR Code" />
+			  <div class="qr-code">
+				<img src="data:image/png;base64,${qrImage}" alt="QR Code" />
+			  </div>
 			</div>
 			<hr>
 		  `
@@ -23,14 +25,41 @@ async function generateEmailHTML(eventName, orderId, tickets) {
 
 		const emailHTML = `
 		  <html>
+			<head>
+				<style>
+					body {
+						padding: 1em;
+					}
+					.email-header {
+						text-align: center;
+						background-color: #f0f0f0;
+						padding: 1em;
+					}
+					.order-details {
+						margin-bottom: 1em;
+						border: 1px solid #ccc;
+						padding: 1em;
+					}
+					.qr-code {
+						text-align: center;
+						margin-top: 1em;
+					}
+					hr {
+						border: 1px solid #ccc;
+					}
+				</style>
+  			</head>
 			<body style="padding: 1em;">
-			  <h1>Evento ${eventName}</h1>
-			  <p>ID del Pedido: ${orderId}</p>
-			  <h2>Tus Entradas:</h2>
-			  ${qrListHTML.join('')}
+			  <div class="email-header">
+				<h1>Evento ${eventName}</h1>
+		  	  </div>
+			  <div class="order-details">
+			  	<p>ID del Pedido: ${orderId}</p>
+			  	<h2>Tus Entradas:</h2>
+			  	${qrListHTML.join('')}
+			  </div>
+			  <br>
 			</body>
-			<br>
-			<hr>
 		  </html>
 		`
 
