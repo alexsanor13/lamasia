@@ -9,7 +9,7 @@ if (process.argv.includes('--mode=debug')) {
 }
 
 const PORT = env.first(['PORT', 'HTTP_PORT'], 8080)
-const MONGO_DB_URI = !debugMode
+const MONGO_DB_URI = debugMode
 	? env.get('MONGO_DB_URI')
 	: env.get('MONGO_DB_URI_PROD')
 
