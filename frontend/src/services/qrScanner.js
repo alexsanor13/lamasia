@@ -2,7 +2,7 @@ import axios from 'axios'
 import utils from '../common/utils.js'
 const { showResponseErrors, baseUrl } = utils
 
-const url = baseUrl + '/scanner'
+const url = `${baseUrl}/scanner`
 
 const scanQR = async (encryptedQR) => {
 	try {

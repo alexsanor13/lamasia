@@ -2,7 +2,7 @@ import axios from 'axios'
 import utils from '../common/utils.js'
 const { showResponseErrors, baseUrl } = utils
 
-const url = baseUrl + '/transactions'
+const url = `${baseUrl}/transactions`
 
 const getPaymentInfoByOrderId = async (orderId) => {
 	try {

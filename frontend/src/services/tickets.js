@@ -2,7 +2,7 @@ import axios from 'axios'
 import utils from '../common/utils.js'
 const { showResponseErrors, baseUrl } = utils
 
-const url = baseUrl + '/tickets'
+const url = `${baseUrl}/tickets`
 
 const getRedsysRedirection = async (purchaseDetails) => {
 	try {

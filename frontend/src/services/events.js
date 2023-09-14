@@ -2,7 +2,7 @@ import axios from 'axios'
 import utils from '../common/utils.js'
 const { showResponseErrors, baseUrl } = utils
 
-const url = baseUrl + '/events'
+const url = `${baseUrl}/events`
 
 const getAllEvents = async () => {
 	const response = await axios.get(url)
