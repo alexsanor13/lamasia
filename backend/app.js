@@ -10,7 +10,7 @@ const ticketsRouter = require('./controllers/tickets')
 const scannerRouter = require('./controllers/scanner')
 const transactionsRouter = require('./controllers/transactions')
 
-// redirect http to https
+// Redirect http to https
 if (!config.debugMode) {
 	app.use((req, res, next) => {
 		if (req.headers['x-forwarded-proto'] !== 'https') {
