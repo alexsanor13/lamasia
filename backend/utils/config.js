@@ -23,7 +23,8 @@ const apiLimiter = rateLimit({
 	message: 'Too many requests from this IP, please try again later',
 })
 
-const QR_CONTAINER = env.get('QR_CONTAINER')
+const path = require('path')
+const QR_CONTAINER = path.join(__dirname, env.get('QR_CONTAINER'))
 
 const EMAIL = env.get('EMAIL')
 const EMAIL_PASS = env.get('EMAIL_PASS')
