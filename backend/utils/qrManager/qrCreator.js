@@ -17,13 +17,13 @@ async function deleteQRFile(qrName) {
 		const qrFilePath = `${QR_CONTAINER}${qrName}`
 
 		try {
-			await fs.access(qrFilePath, fs.constants.F_OK) // Utiliza await
+			await fs.access(qrFilePath, fs.constants.F_OK)
 		} catch (err) {
 			console.log(` ${qrName} no existe.`)
 			return
 		}
 
-		await fs.unlink(qrFilePath) // Utiliza await
+		await fs.unlink(qrFilePath)
 		console.log(`QR with filename ${qrName} has been deleted.`)
 	} catch (error) {
 		console.error(`Error deleting QR ${qrName}: ${error.message}`)

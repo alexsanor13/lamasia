@@ -56,8 +56,6 @@ ticketsRouter.post('/redsysresponse', async (request, response) => {
 			throwErrors(`Payment for order ${Ds_Order} failed`)
 		}
 
-		//TODO MIRAR PQ PETA AQUI Y SE QUEDA BLOQUEADO EL SERVIDOR
-
 		console.log(`Payment for order ${Ds_Order} succeded`)
 		await Order.updateOne(
 			{ orderId: Ds_Order },
@@ -131,8 +129,8 @@ const createNewTransaction = async (body, orderId) => {
 
 async function createAndSaveTicket(transactionId, eventId, email, isPack) {
 	const newTicket = await saveTicket(transactionId, eventId, isPack)
-	const qrText = await createQR(email, newTicket.id, eventId, isPack)
-	const newQR = await saveQR(newTicket.id, qrText)
+	const qrName = await createQR(email, newTicket.id, eventId, isPack)
+	const newQR = await saveQR(newTicket.id, qrName)
 	return { ticket: newTicket, qr: newQR }
 }
 

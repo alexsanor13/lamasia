@@ -24,7 +24,7 @@ const apiLimiter = rateLimit({
 })
 
 const path = require('path')
-const QR_CONTAINER = path.join(__dirname, env.get('QR_CONTAINER'))
+const QR_CONTAINER = path.join(__dirname, `..${env.get('QR_CONTAINER')}`)
 
 const EMAIL = env.get('EMAIL')
 const EMAIL_PASS = env.get('EMAIL_PASS')
