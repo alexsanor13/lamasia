@@ -1,7 +1,3 @@
-const { QR_CONTAINER } = require('../utils/config')
-
-const events = require('./events')
-
 const Ticket = require('../models/Ticket')
 const Transaction = require('../models/Transaction')
 const Event = require('../models/Event')
@@ -161,11 +157,10 @@ const createNewTickets = async (body) => {
 const createQR = async (email, ticketId, eventId, pack) => {
 	try {
 		const qrName = `${convertEmailToFileName(email)}_${ticketId}`
-		const qrPath = `..${QR_CONTAINER}${qrName}`
 		const qrMessage = `${ticketId},${email},${eventId},${pack}`
 		const qrEncripted = encrypt(qrMessage)
 
-		await generateQRCode(qrEncripted, qrPath)
+		await generateQRCode(qrEncripted, qrName)
 
 		return qrName
 	} catch (error) {
