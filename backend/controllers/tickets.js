@@ -161,7 +161,7 @@ const createNewTickets = async (body) => {
 const createQR = async (email, ticketId, eventId, pack) => {
 	try {
 		const qrName = `${convertEmailToFileName(email)}_${ticketId}`
-		const qrPath = `${QR_CONTAINER}${qrName}`
+		const qrPath = `..${QR_CONTAINER}${qrName}`
 		const qrMessage = `${ticketId},${email},${eventId},${pack}`
 		const qrEncripted = encrypt(qrMessage)
 

@@ -14,7 +14,7 @@ const generateQRCode = async (text, outputPath) => {
 
 async function deleteQRFile(qrName) {
 	try {
-		const qrFilePath = `${QR_CONTAINER}${qrName}`
+		const qrFilePath = `../..${QR_CONTAINER}${qrName}`
 
 		try {
 			await fs.access(qrFilePath, fs.constants.F_OK)

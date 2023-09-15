@@ -6,7 +6,7 @@ const { throwErrors } = require('../middleware/throwErrors')
 
 async function readQRImage(qrName) {
 	try {
-		const qrImagePath = `${QR_CONTAINER}${qrName}.png`
+		const qrImagePath = `../..${QR_CONTAINER}${qrName}.png`
 		const qrImageBuffer = await readFileAsync(qrImagePath)
 		const qrImageBase64 = qrImageBuffer.toString('base64')
 
@@ -18,7 +18,7 @@ async function readQRImage(qrName) {
 
 async function readQRImageFile(qrName) {
 	try {
-		const qrImagePath = `${QR_CONTAINER}${qrName}.png`
+		const qrImagePath = `../..${QR_CONTAINER}${qrName}.png`
 		const qrImageBuffer = await readFileAsync(qrImagePath)
 
 		return qrImageBuffer
