@@ -40,3 +40,11 @@ footer a,
 	text-align: center;
 	height: 48px;
 }
+
+.footer-nav-link {
+	margin-left: 20px;
+	color: #ffffff;
+	text-decoration: none;
+	font-size: 14px;
+	width: fit-content;
+}

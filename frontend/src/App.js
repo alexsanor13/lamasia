@@ -13,6 +13,8 @@ import About from './pages/About'
 import Blog from './pages/Blog'
 import PaymentSuccessful from './pages/PaymentSuccessful'
 import NavBar from './components/NavBar'
+import TermsOfUse from './pages/TermsOfUse'
+import PrivacyPolicy from './pages/PrivacyPolicy'
 
 const App = () => {
 	const [currentPage, setPage] = useState(window.location.href)
@@ -51,6 +53,8 @@ const App = () => {
 							path="/paymentsuccessful/:order"
 							element={<PaymentSuccessful />}
 						/>
+						<Route path="/termsofuse" element={<TermsOfUse />} />
+						<Route path="/privacy" element={<PrivacyPolicy />} />
 					</Routes>
 				</main>
 				<Footer />
