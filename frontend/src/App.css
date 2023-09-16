@@ -30,6 +30,7 @@ main {
 	padding-top: 130px;
 	min-height: calc(90vh - 75px);
 	overflow-x: hidden;
+	margin-bottom: 3em;
 }
 
 .app {

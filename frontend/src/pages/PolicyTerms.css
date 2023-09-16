@@ -1,14 +1,15 @@
 .policy-terms-container {
 	max-width: 80%;
 	margin: 0 auto;
-	padding: 20px;
+	padding: 2em;
 	font-family: Arial, sans-serif;
+	background-color: #ffffff17;
 }
 
 .policy-terms-container h1 {
 	font-size: 48px;
 	color: var(--pirate-gold);
-	text-shadow: none;
+	text-align: left;
 }
 
 .last-updated {
@@ -42,8 +43,12 @@
 
 /* Mobile */
 @media (width < 1020px) {
+	.policy-terms-container {
+		max-width: none;
+	}
+
 	.policy-terms-container h1 {
-		font-size: 40px;
+		font-size: 36px;
 		text-align: center;
 	}
 }
