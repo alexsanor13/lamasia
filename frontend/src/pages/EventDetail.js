@@ -166,13 +166,15 @@ const EventDetail = () => {
 										</b>
 									</span>
 								</div>
-								<iframe
-									src={eventInfo.locationMap}
-									allowFullScreen=""
-									className="location-map"
-									title={eventInfo.locationDescription}
-									loading="lazy"
-								/>
+								{eventInfo.locationMap && (
+									<iframe
+										src={eventInfo.locationMap}
+										allowFullScreen=""
+										className="location-map"
+										title={eventInfo.locationDescription}
+										loading="lazy"
+									/>
+								)}
 							</div>
 						</div>
 					</div>
