@@ -18,7 +18,7 @@ const Footer = () => {
 					className={(navData) =>
 						navData.isActive ? `${classNav}-link active` : `${classNav}-link`
 					}
-					aria-label="Privacy">
+					aria-label="Privacidad">
 					Privacidad
 				</NavLink>
 				&nbsp;
@@ -28,7 +28,7 @@ const Footer = () => {
 					className={(navData) =>
 						navData.isActive ? `${classNav}-link active` : `${classNav}-link`
 					}
-					aria-label="Terms of Use">
+					aria-label="Términos de uso">
 					Términos de uso
 				</NavLink>
 			</p>

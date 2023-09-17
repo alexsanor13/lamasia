@@ -15,7 +15,10 @@ const EventBox = ({ event }) => {
 	}
 
 	const showBuyTickets = isUpcomingEvent() ? (
-		<Link aria-label="Event detail" to={`/events/${event.id}`} id="events-page">
+		<Link
+			aria-label="Comprar entrada"
+			to={`/events/${event.id}`}
+			id={`events-page-${event.id}`}>
 			<button className="buy-button">COMPRAR ENTRADA</button>
 		</Link>
 	) : (
