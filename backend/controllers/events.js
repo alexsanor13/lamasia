@@ -30,9 +30,15 @@ eventsRouter.post('/', async (request, response) => {
 
 		const { price, release, priceLabel } = await getPrice(event)
 
-		event.price = price
+		event.price = Number(price)
 		event.release = release
 		event.priceLabel = priceLabel
+
+		event.releases = [
+			{ price: 8, label: 'Primera Release' },
+			{ price: 10, label: 'Segunda Release' },
+			{ price: 12, label: 'Release Final' },
+		]
 
 		delete event.price1
 		delete event.price2

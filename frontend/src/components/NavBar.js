@@ -12,24 +12,27 @@ const NavBar = ({ handlePage, setIsMenuOpen, classNav = 'header-nav' }) => {
 			<NavLink
 				to="/"
 				id="events-page"
-				className={`${classNav}-link`}
-				activeClassName="page-visited"
+				className={(navData) =>
+					navData.isActive ? `${classNav}-link active` : `${classNav}-link`
+				}
 				onClick={() => handleClick('events')}>
 				EVENTOS
 			</NavLink>
 			<NavLink
 				to="/blog"
 				id="blog-page"
-				className={`${classNav}-link`}
-				activeClassName="page-visited"
+				className={(navData) =>
+					navData.isActive ? `${classNav}-link active` : `${classNav}-link`
+				}
 				onClick={() => handleClick('blog')}>
 				BLOG
 			</NavLink>
 			<NavLink
 				to="/about"
 				id="about-page"
-				className={`${classNav}-link`}
-				activeClassName="page-visited"
+				className={(navData) =>
+					navData.isActive ? `${classNav}-link active` : `${classNav}-link`
+				}
 				onClick={() => handleClick('about')}>
 				NOSOTROS
 			</NavLink>

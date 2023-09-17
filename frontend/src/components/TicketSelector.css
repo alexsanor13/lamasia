@@ -1,25 +1,39 @@
-.ticket-selector {
+.ticket-selector,
+.release-info {
 	display: flex;
 	align-items: center;
 	gap: 10px;
 	font-size: 1em;
-	margin: 20px auto;
+	margin: 10px auto;
 	flex-wrap: wrap;
 	background-color: transparent;
 	padding: 10px;
 	border-radius: 10px;
 }
 
+.release-info {
+	color: #80808078;
+	font-size: 0.8em;
+	margin: 20px auto;
+}
+
 .ticket-selector span {
 	text-align: center;
 }
 
-.ticket-label {
+.ticket-label,
+.release-label {
 	width: 40%;
 }
 
-.ticket-selector-price {
+.ticket-selector-price,
+.release-price {
 	width: 20%;
+}
+
+.release-status {
+	text-align: center;
+	flex: 1;
 }
 
 .counter {
@@ -44,6 +58,11 @@
 	cursor: pointer;
 }
 
+.button-minus:hover .minus-svg,
+.button-plus:hover .plus-svg {
+	fill: var(--pirate-gold);
+}
+
 .plus-svg,
 .minus-svg {
 	width: 10px;
@@ -51,11 +70,6 @@
 	display: block;
 	line-height: 30px;
 	fill: white;
-}
-
-.plus-svg:hover,
-.minus-svg:hover {
-	fill: var(--pirate-gold);
 }
 
 .value {
@@ -72,7 +86,8 @@
 }
 
 @media (width < 768px) {
-	.ticket-selector {
+	.ticket-selector,
+	.release-info {
 		background-color: #00000042;
 	}
 
@@ -83,5 +98,22 @@
 	.ticket-selector-price,
 	.counter {
 		min-width: 40%;
+	}
+
+	.release-label {
+		width: 100px;
+		text-align: left;
+	}
+
+	.release-price {
+		width: 50px;
+	}
+
+	.release-status {
+		text-align: center;
+	}
+
+	.release-info {
+		justify-content: center;
 	}
 }

@@ -141,7 +141,7 @@ const EmailModal = ({ isOpen, closeModal, shoppingCart }) => {
 		<Modal
 			isOpen={isOpen}
 			onRequestClose={handleCloseModal}
-			shouldCloseOnOverlayClick={true}>
+			shouldCloseOnOverlayClick={false}>
 			<h2>Comprar entradas</h2>
 
 			<table className="email-modal-cart-info">

@@ -1,7 +1,17 @@
 import { useEffect, useState } from 'react'
+import { ReactComponent as MinusSVG } from '../assets/svg/minus.svg'
+import { ReactComponent as PlusSVG } from '../assets/svg/plus.svg'
+
 import './TicketSelector.css'
 
-const TicketSelector = ({ label, price, max, selection }) => {
+const TicketSelector = ({
+	label,
+	price,
+	max,
+	selection,
+	notBuyable = false,
+	releaseStatus = 'Proximamente',
+}) => {
 	const [value, setValue] = useState(0)
 
 	useEffect(() => {
@@ -21,22 +31,26 @@ const TicketSelector = ({ label, price, max, selection }) => {
 	}
 
 	return (
-		<div className="ticket-selector">
-			<span className="ticket-label">{label}</span>
-			<span className="ticket-selector-price">{price}</span>
-			<div className="counter">
-				<button onClick={handleMinusClick} className="button-minus">
-					<svg className="minus-svg" viewBox="0 0 448 512">
-						<path d="M432 256c0 17.7-14.3 32-32 32L48 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l352 0c17.7 0 32 14.3 32 32z" />
-					</svg>
-				</button>
-				<span className="value">{value}</span>
-				<button onClick={handlePlusClick} className="button-plus">
-					<svg className="plus-svg" viewBox="0 0 448 512">
-						<path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
-					</svg>
-				</button>
-			</div>
+		<div className={!notBuyable ? 'ticket-selector' : 'release-info'}>
+			<span className={!notBuyable ? 'ticket-label' : 'release-label'}>
+				{label}
+			</span>
+			<span className={!notBuyable ? 'ticket-selector-price' : 'release-price'}>
+				{price}
+			</span>
+			{!notBuyable ? (
+				<div className="counter">
+					<button onClick={handleMinusClick} className="button-minus">
+						<MinusSVG className="minus-svg" />
+					</button>
+					<span className="value">{value}</span>
+					<button onClick={handlePlusClick} className="button-plus">
+						<PlusSVG className="plus-svg" />
+					</button>
+				</div>
+			) : (
+				<span className="release-status">{releaseStatus}</span>
+			)}
 		</div>
 	)
 }

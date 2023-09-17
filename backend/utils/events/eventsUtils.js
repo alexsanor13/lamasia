@@ -13,14 +13,14 @@ const getPrice = async (event, isPack = false) => {
 		}
 
 		if (soldTickets < event.release1) {
-			return { price: event.price1, release: 1, priceLabel: 'Primera release' }
+			return { price: event.price1, release: 1, priceLabel: 'Primera Release' }
 		} else if (soldTickets >= event.release1 && soldTickets < event.release2) {
-			return { price: event.price2, release: 2, priceLabel: 'Segunda release' }
+			return { price: event.price2, release: 2, priceLabel: 'Segunda Release' }
 		} else {
 			return {
 				price: event.priceFinal,
 				release: 3,
-				priceLabel: 'Release final',
+				priceLabel: 'Release Final',
 			}
 		}
 	} catch (e) {

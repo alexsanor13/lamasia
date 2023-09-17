@@ -99,13 +99,30 @@ const EventDetail = () => {
 								<div className="box-title-container">
 									<h2 className="box-title">ENTRADAS</h2>
 								</div>
-								<TicketSelector
-									className="event-ticket-option"
-									label={eventInfo.priceLabel}
-									price={`${eventInfo.price ? eventInfo.price : 12}€`}
-									max={7}
-									selection={setSelectedTickets}
-								/>
+								{eventInfo.releases.map((release) => {
+									let notBuyable = false
+									let releaseStatus = ''
+									if (release.price !== eventInfo.price) {
+										notBuyable = true
+										releaseStatus =
+											release.price > eventInfo.price
+												? 'Proximamente'
+												: 'Agotado'
+									}
+									return (
+										<TicketSelector
+											key={release.price}
+											className="event-ticket-option"
+											label={release.label}
+											price={`${release.price}€`}
+											max={7}
+											selection={setSelectedTickets}
+											notBuyable={notBuyable}
+											releaseStatus={releaseStatus}
+										/>
+									)
+								})}
+
 								{eventInfo.priceVIP && (
 									<TicketSelector
 										className="event-ticket-option"
