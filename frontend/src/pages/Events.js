@@ -12,6 +12,16 @@ const Events = () => {
 
 	useEffect(() => {
 		document.title = 'La Masia - Eventos'
+		const metaDescriptionTag = document.querySelector(
+			'meta[name="description"]'
+		)
+		if (metaDescriptionTag) {
+			metaDescriptionTag.setAttribute(
+				'content',
+				'El lugar favorito de Jacky 🏴‍☠️🐒. ¡Compra ya tus entradas!'
+			)
+		}
+
 		window.scrollTo(0, 0)
 
 		if (!dataLoaded) {
