@@ -17,7 +17,8 @@ const Footer = () => {
 					id="privacy-page"
 					className={(navData) =>
 						navData.isActive ? `${classNav}-link active` : `${classNav}-link`
-					}>
+					}
+					aria-label="Privacy">
 					Privacidad
 				</NavLink>
 				&nbsp;
@@ -26,7 +27,8 @@ const Footer = () => {
 					id="termsOfUse-page"
 					className={(navData) =>
 						navData.isActive ? `${classNav}-link active` : `${classNav}-link`
-					}>
+					}
+					aria-label="Terms of Use">
 					Términos de uso
 				</NavLink>
 			</p>

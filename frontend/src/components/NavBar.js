@@ -15,7 +15,8 @@ const NavBar = ({ handlePage, setIsMenuOpen, classNav = 'header-nav' }) => {
 				className={(navData) =>
 					navData.isActive ? `${classNav}-link active` : `${classNav}-link`
 				}
-				onClick={() => handleClick('events')}>
+				onClick={() => handleClick('events')}
+				aria-label="Events">
 				EVENTOS
 			</NavLink>
 			<NavLink
@@ -24,7 +25,8 @@ const NavBar = ({ handlePage, setIsMenuOpen, classNav = 'header-nav' }) => {
 				className={(navData) =>
 					navData.isActive ? `${classNav}-link active` : `${classNav}-link`
 				}
-				onClick={() => handleClick('blog')}>
+				onClick={() => handleClick('blog')}
+				aria-label="Blog">
 				BLOG
 			</NavLink>
 			<NavLink
@@ -33,7 +35,8 @@ const NavBar = ({ handlePage, setIsMenuOpen, classNav = 'header-nav' }) => {
 				className={(navData) =>
 					navData.isActive ? `${classNav}-link active` : `${classNav}-link`
 				}
-				onClick={() => handleClick('about')}>
+				onClick={() => handleClick('about')}
+				aria-label="About">
 				NOSOTROS
 			</NavLink>
 		</nav>

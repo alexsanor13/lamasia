@@ -91,7 +91,7 @@ const PrivacyPolicy = () => {
 			<p>
 				Si tienes alguna pregunta o preocupación sobre nuestra Política de
 				Privacidad, no dudes en contactarnos en{' '}
-				<a href="mailto:lamasiaevents.asoc@gmail.com">
+				<a aria-label="Email" href="mailto:lamasiaevents.asoc@gmail.com">
 					lamasiaevents.asoc@gmail.com
 				</a>
 				.

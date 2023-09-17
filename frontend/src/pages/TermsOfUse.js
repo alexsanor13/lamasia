@@ -80,7 +80,7 @@ const TermsOfUse = () => {
 			<p>
 				Si tienes alguna pregunta o preocupación sobre nuestros Términos de Uso,
 				no dudes en contactarnos en{' '}
-				<a href="mailto:lamasiaevents.asoc@gmail.com">
+				<a aria-label="Email" href="mailto:lamasiaevents.asoc@gmail.com">
 					lamasiaevents.asoc@gmail.com
 				</a>
 				.

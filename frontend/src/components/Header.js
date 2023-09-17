@@ -33,7 +33,11 @@ const Header = ({ handlePage, setIsMenuOpen }) => {
 	return (
 		<header className={`header ${visible ? '' : 'header-hidden'} `}>
 			<div className="header-content">
-				<Link to="/" id="home-page" onClick={() => handlePage('')}>
+				<Link
+					aria-label="Home"
+					to="/"
+					id="home-page"
+					onClick={() => handlePage('')}>
 					<LazyLoadImage
 						src={logo}
 						placeholderSrc={logoPlaceholder}
@@ -54,6 +58,7 @@ const Header = ({ handlePage, setIsMenuOpen }) => {
 			/>
 			<div className="header-instagram-container">
 				<a
+					aria-label="Instagram"
 					className="header-instagram"
 					href="https://www.instagram.com/lamasiaevents/">
 					<InstagramSVG />
