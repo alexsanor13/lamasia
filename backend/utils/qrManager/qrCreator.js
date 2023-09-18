@@ -5,13 +5,15 @@ const path = require('path')
 const { QR_CONTAINER, debugMode } = require('../config')
 const { throwErrors } = require('../middleware/throwErrors')
 
-let actualPath = ''
-if (debugMode) {
-	const actualPath = process.env.PWD ? process.env.PWD : process.cwd()
-	actualPath = path.join(actualPath, QR_CONTAINER)
-} else {
-	actualPath = `.${QR_CONTAINER}`
-}
+// let actualPath = ''
+// if (debugMode) {
+// 	const actualPath = process.env.PWD ? process.env.PWD : process.cwd()
+// 	actualPath = path.join(actualPath, QR_CONTAINER)
+// } else {
+// 	actualPath = `.${QR_CONTAINER}`
+// }
+
+const actualPath = `.${QR_CONTAINER}`
 
 const generateQRCode = async (text, qrName) => {
 	try {

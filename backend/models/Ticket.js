@@ -12,6 +12,7 @@ const TicketSchema = new Schema({
 		type: Boolean,
 		default: false,
 	},
+	status: String,
 })
 
 TicketSchema.set('toJSON', {
