@@ -70,11 +70,22 @@ ticketsRouter.post('/redsysresponse', async (request, response) => {
 			throwErrors(`Error creating tickets in order ${Ds_Order}`)
 		}
 
+		await Order.updateOne(
+			{ orderId: Ds_Order },
+			{ $set: { status: 'TICKETS_QRS_CREATED' } }
+		)
+
 		const event = await Event.findOne({
 			id: transactionInfo.eventId,
 		}).select('title')
 
 		sendEmailByGmail(transactionInfo.email, newTickets, event.title, Ds_Order)
+
+		await Order.updateOne(
+			{ orderId: Ds_Order },
+			{ $set: { status: 'EMAIL_SENT' } }
+		)
+
 		return response.status(200).json()
 	} catch (error) {
 		return response.status(404).json({ error, message: error.message })
@@ -127,6 +138,12 @@ async function createAndSaveTicket(transactionId, eventId, email, isPack) {
 	const newTicket = await saveTicket(transactionId, eventId, isPack)
 	const qrName = await createQR(email, newTicket.id, eventId, isPack)
 	const newQR = await saveQR(newTicket.id, qrName)
+
+	await newTicket.updateOne(
+		{ id: newTicket.id },
+		{ $set: { status: 'QR_CREATED' } }
+	)
+
 	return { ticket: newTicket, qr: newQR }
 }
 
@@ -176,6 +193,7 @@ const saveTicket = async (transactionId, eventId, isPack) => {
 			eventId: eventId,
 			creationDate: new Date(),
 			packTicket: isPack,
+			status: 'CREATING_QR',
 		})
 		await ticket.save()
 		return ticket
