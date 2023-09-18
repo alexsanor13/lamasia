@@ -4,6 +4,7 @@ const Event = require('../models/Event')
 const Order = require('../models/Order')
 const QR = require('../models/QR')
 
+const { QR_CONTAINER } = require('../utils/config')
 const { throwErrors } = require('../utils/middleware/throwErrors')
 const { generateQRCode } = require('../utils/qrManager/qrCreator')
 const { encrypt } = require('../utils/qrManager/qrCrypt')
@@ -157,10 +158,11 @@ const createNewTickets = async (body) => {
 const createQR = async (email, ticketId, eventId, pack) => {
 	try {
 		const qrName = `${convertEmailToFileName(email)}_${ticketId}`
+		const qrPath = `..${QR_CONTAINER}${qrName}`
 		const qrMessage = `${ticketId},${email},${eventId},${pack}`
 		const qrEncripted = encrypt(qrMessage)
 
-		await generateQRCode(qrEncripted, qrName)
+		await generateQRCode(qrEncripted, qrPath)
 
 		return qrName
 	} catch (error) {

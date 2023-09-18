@@ -14,18 +14,10 @@ const { throwErrors } = require('../middleware/throwErrors')
 // 	actualPath = `.${QR_CONTAINER}`
 // }
 
-const actualPath = `.${QR_CONTAINER}`
+const actualPath = `../..${QR_CONTAINER}`
 
 async function readQRImage(qrName) {
 	try {
-		// const qrImagePath = path.join(
-		// 	__dirname,
-		// 	'..',
-		// 	'..',
-		// 	QR_CONTAINER,
-		// 	`${qrName}.png`
-		// )
-
 		const qrImagePath = `${actualPath}${qrName}.png`
 
 		const qrImageBuffer = await readFileAsync(qrImagePath)
@@ -39,14 +31,6 @@ async function readQRImage(qrName) {
 
 async function readQRImageFile(qrName) {
 	try {
-		// const qrImagePath = path.join(
-		// 	__dirname,
-		// 	'..',
-		// 	'..',
-		// 	QR_CONTAINER,
-		// 	`${qrName}.png`
-		// )
-
 		const qrImagePath = `${actualPath}${qrName}.png`
 
 		const qrImageBuffer = await readFileAsync(qrImagePath)
