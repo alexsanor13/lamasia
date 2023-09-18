@@ -25,6 +25,8 @@ const apiLimiter = rateLimit({
 
 const QR_CONTAINER = env.get('QR_CONTAINER')
 
+const ROOT_PATH = process.env.PWD
+
 const EMAIL = env.get('EMAIL')
 const EMAIL_PASS = env.get('EMAIL_PASS')
 
@@ -70,4 +72,5 @@ module.exports = {
 	EMAIL_PASS,
 	TPV,
 	GMAIL_CONFIG,
+	ROOT_PATH,
 }

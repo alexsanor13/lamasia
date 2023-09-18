@@ -1,20 +1,21 @@
 const qr = require('qrcode')
 const fs = require('fs').promises
+const { ROOT_PATH } = require('../config')
 
 const { throwErrors } = require('../middleware/throwErrors')
 
-const generateQRCode = async (text, qrPath) => {
+const generateQRCode = async (text, qrName) => {
 	try {
-		const qrFilePath = `${qrPath}.png`
+		const qrFilePath = `${ROOT_PATH}${qrName}.png`
 		await qr.toFile(qrFilePath, text)
 	} catch (error) {
 		throwErrors(`Error generating QR code file: ${error}`)
 	}
 }
 
-async function deleteQRFile(qrPath, qrFileName) {
+async function deleteQRFile(qrFileName) {
 	try {
-		const qrFilePath = `${qrPath}${qrFileName}`
+		const qrFilePath = `${ROOT_PATH}${qrFileName}`
 		try {
 			await fs.access(qrFilePath, fs.constants.F_OK)
 		} catch (err) {
