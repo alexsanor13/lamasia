@@ -3,13 +3,18 @@ const path = require('path')
 const promisify = require('util').promisify
 const readFileAsync = promisify(fs.readFile)
 
-const { ROOT_PATH } = require('../config')
+const { QR_CONTAINER } = require('../config')
 const { throwErrors } = require('../middleware/throwErrors')
 
 async function readQRImage(qrName) {
 	try {
-		const qrImagePath = `${ROOT_PATH}${qrName}.png`
-
+		const qrImagePath = path.join(
+			__dirname,
+			'..',
+			'..',
+			QR_CONTAINER,
+			`${qrName}.png`
+		)
 		const qrImageBuffer = await readFileAsync(qrImagePath)
 		const qrImageBase64 = qrImageBuffer.toString('base64')
 
@@ -21,8 +26,13 @@ async function readQRImage(qrName) {
 
 async function readQRImageFile(qrName) {
 	try {
-		const qrImagePath = `${ROOT_PATH}${qrName}.png`
-
+		const qrImagePath = path.join(
+			__dirname,
+			'..',
+			'..',
+			QR_CONTAINER,
+			`${qrName}.png`
+		)
 		const qrImageBuffer = await readFileAsync(qrImagePath)
 
 		return qrImageBuffer
