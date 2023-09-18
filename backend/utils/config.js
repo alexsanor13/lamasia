@@ -41,14 +41,13 @@ const TPV = {
 	TRANSACTIONTYPE: env.get('TPV_DS_MERCHANT_TRANSACTIONTYPE')
 		? Number(env.get('TPV_DS_MERCHANT_TRANSACTIONTYPE'))
 		: null,
-	SECRET: 'sq7HjrUOBfKmC576ILgskD5srU870gJ7',
-	// SECRET: env.get('TPV_SECRET'),
+	SECRET: env.get('TPV_SECRET'),
 	URLCALLBACK: !debugMode
 		? env.get('TPV_CALLBACK')
 		: env.get('TPV_CALLBACK_DEV'),
 	URLCALLBACK_OK: env.get('TPV_CALLBACK_OK'),
 	SIGNATURE_VERSION: env.get('TPV_SIGNATURE_VERSION'),
-	URL: !debugMode
+	URL: debugMode
 		? 'https://sis-t.redsys.es:25443/sis/realizarPago'
 		: 'https://sis.redsys.es/sis/realizarPago',
 }
