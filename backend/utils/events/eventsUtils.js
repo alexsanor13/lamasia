@@ -20,7 +20,7 @@ const getPrice = async (event, isPack = false) => {
 			return {
 				price: event.priceFinal,
 				release: 3,
-				priceLabel: 'Release Final',
+				priceLabel: 'Entrada General',
 			}
 		}
 	} catch (e) {

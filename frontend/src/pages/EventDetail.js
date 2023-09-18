@@ -102,7 +102,7 @@ const EventDetail = () => {
 								{eventInfo.releases.map((release) => {
 									let notBuyable = false
 									let releaseStatus = ''
-									if (release.price !== eventInfo.price) {
+									if (release.price != eventInfo.price) {
 										notBuyable = true
 										releaseStatus =
 											release.price > eventInfo.price
