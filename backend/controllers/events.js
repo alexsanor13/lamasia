@@ -35,9 +35,9 @@ eventsRouter.post('/', async (request, response) => {
 		event.priceLabel = priceLabel
 
 		event.releases = [
-			{ price: event.price1, label: 'Primera Release' },
-			{ price: event.price2, label: 'Segunda Release' },
-			{ price: event.priceFinal, label: 'Entrada General' },
+			{ price: Number(event.price1), label: 'Primera Release' },
+			{ price: Number(event.price2), label: 'Segunda Release' },
+			{ price: Number(event.priceFinal), label: 'Entrada General' },
 		]
 
 		delete event.price1

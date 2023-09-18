@@ -50,7 +50,7 @@ async function createRedirection(total, paymentMethod = '') {
 		const params = {
 			DS_MERCHANT_TRANSACTIONTYPE: TPV.TRANSACTIONTYPE,
 			DS_MERCHANT_ORDER: orderId,
-			DS_MERCHANT_AMOUNT: total * 100,
+			DS_MERCHANT_AMOUNT: Number(total) * 100,
 			DS_MERCHANT_CURRENCY: TPV.CURRENCY,
 			DS_MERCHANT_MERCHANTCODE: TPV.MERCHANTCODE,
 			DS_MERCHANT_MERCHANTNAME: 'La Masia Events',
