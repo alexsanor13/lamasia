@@ -9,11 +9,14 @@ const { getPrice } = require('../utils/events/eventsUtils')
 eventsRouter.get('/', async (request, response) => {
 	console.log('GET events')
 
-	const events = await Event.find({})
-		.select('id title date image')
-		.sort({ id: -1 })
-
-	return response.status(200).json(events)
+	try {
+		const events = await Event.find({})
+			.select('id title date image')
+			.sort({ id: -1 })
+		return response.status(200).json(events)
+	} catch (e) {
+		return response.status(404).json({ error, message: 'GET events failed' })
+	}
 })
 
 eventsRouter.post('/', async (request, response) => {
