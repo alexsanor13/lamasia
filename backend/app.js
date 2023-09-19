@@ -44,7 +44,7 @@ process.on('uncaughtException', () => {
 	mongoose.disconnect()
 })
 
-if (config.debugMode) {
+if (!config.debugMode) {
 	app.use('/api/', config.apiLimiter)
 }
 
