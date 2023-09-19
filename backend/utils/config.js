@@ -25,8 +25,6 @@ const apiLimiter = rateLimit({
 
 const QR_CONTAINER = env.get('QR_CONTAINER')
 
-const ROOT_PATH = process.env.PWD
-
 const EMAIL = env.get('EMAIL')
 const EMAIL_PASS = env.get('EMAIL_PASS')
 
@@ -49,10 +47,9 @@ const TPV = {
 		: env.get('TPV_CALLBACK_DEV'),
 	URLCALLBACK_OK: env.get('TPV_CALLBACK_OK'),
 	SIGNATURE_VERSION: env.get('TPV_SIGNATURE_VERSION'),
-	// URL: !debugMode
-	// 	? 'https://sis-t.redsys.es:25443/sis/realizarPago'
-	// 	: 'https://sis.redsys.es/sis/realizarPago',
-	URL: 'https://sis-t.redsys.es:25443/sis/realizarPago',
+	URL: !debugMode
+		? 'https://sis-t.redsys.es:25443/sis/realizarPago'
+		: 'https://sis.redsys.es/sis/realizarPago',
 }
 
 const GMAIL_CONFIG = {

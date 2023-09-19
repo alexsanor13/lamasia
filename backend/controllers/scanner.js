@@ -9,8 +9,30 @@ const Ticket = require('../models/Ticket')
 const Transaction = require('../models/Transaction')
 const QR = require('../models/QR')
 
+// TODO eliminar una vez pasada la fiesta, chapuza pq fallo la creación de QRs el primer dia y se crearon manualmente
+const exceptions = [
+	'179131627',
+	'993871575',
+	'610874634',
+	'206000074',
+	'219158009',
+	'587368786',
+	'901830490',
+	'636348382',
+	'964975842',
+	'862297562',
+	'104918844',
+	'830608545',
+	'467640552',
+	'643943270',
+]
+
 async function handleQR(ticket) {
 	try {
+		// TODO PARCHE PRIMER DIA
+		if (ticket.email === 'QR Generado manualmente') {
+			return true
+		}
 		const existingQR = await QR.findOne({ ticketId: ticket.id })
 
 		if (!existingQR) {
@@ -43,43 +65,55 @@ scannerRouter.post('/scanQR', async (request, response) => {
 
 		const [ticketId, email, eventId, isPack] = decryptedQRSplitted
 
-		const ticketInfo = await Ticket.findOne({
-			id: ticketId,
-			eventId,
-			packTicket: isPack,
-		})
+		let qrInfo = null
 
-		if (!ticketInfo) {
-			throwErrors('Ticket not found')
-		}
+		if (exceptions.includes(ticketId)) {
+			qrInfo = {
+				transactionId: 0,
+				email: 'QR Generado manualmente',
+				eventName: 'Pandora',
+				isPack: false,
+				activated: false,
+			}
+		} else {
+			const ticketInfo = await Ticket.findOne({
+				id: ticketId,
+				eventId,
+				packTicket: isPack,
+			})
 
-		const transactionInfo = await Transaction.findOne({
-			id: ticketInfo.transactionId,
-			email,
-			eventId,
-		})
+			if (!ticketInfo) {
+				throwErrors('Ticket not found')
+			}
 
-		if (!transactionInfo) {
-			throwErrors('Transaction not found')
-		}
+			const transactionInfo = await Transaction.findOne({
+				id: ticketInfo.transactionId,
+				email,
+				eventId,
+			})
 
-		const eventInfo = await Event.findOne({
-			id: eventId,
-		})
+			if (!transactionInfo) {
+				throwErrors('Transaction not found')
+			}
 
-		if (!eventInfo) {
-			throwErrors('Event not found')
-		}
+			const eventInfo = await Event.findOne({
+				id: eventId,
+			})
 
-		// Check that the QR was not already activated
-		let activated = await handleQR(ticketInfo)
+			if (!eventInfo) {
+				throwErrors('Event not found')
+			}
 
-		const qrInfo = {
-			transactionId: transactionInfo.id,
-			email,
-			eventName: eventInfo.title,
-			isPack,
-			activated,
+			// Check that the QR was not already activated
+			let activated = await handleQR(ticketInfo)
+
+			qrInfo = {
+				transactionId: transactionInfo.id,
+				email,
+				eventName: eventInfo.title,
+				isPack,
+				activated,
+			}
 		}
 
 		const qrResult = generateQRScanHTML(qrInfo)

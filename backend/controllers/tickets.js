@@ -139,11 +139,6 @@ async function createAndSaveTicket(transactionId, eventId, email, isPack) {
 	const qrName = await createQR(email, newTicket.id, eventId, isPack)
 	const newQR = await saveQR(newTicket.id, qrName)
 
-	await newTicket.updateOne(
-		{ id: newTicket.id },
-		{ $set: { status: 'QR_CREATED' } }
-	)
-
 	return { ticket: newTicket, qr: newQR }
 }
 
@@ -193,7 +188,6 @@ const saveTicket = async (transactionId, eventId, isPack) => {
 			eventId: eventId,
 			creationDate: new Date(),
 			packTicket: isPack,
-			status: 'CREATING_QR',
 		})
 		await ticket.save()
 		return ticket
