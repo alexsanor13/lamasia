@@ -70,5 +70,4 @@ module.exports = {
 	EMAIL_PASS,
 	TPV,
 	GMAIL_CONFIG,
-	ROOT_PATH,
 }
