@@ -7,18 +7,26 @@ const transactionsRouter = require('express').Router()
 
 transactionsRouter.post('/getPaymentInfo', async (request, response) => {
 	try {
+		console.log('POST getPaymentInfo')
+
 		const { orderId } = request.body
 
 		const transactionInfo = await Transaction.findOne({ orderId: orderId })
 
 		if (!transactionInfo) {
-			throwErrors(`Transaction not found in order ${orderId}`)
+			throwErrors(
+				`Transaction not found in order ${orderId}`,
+				`transactionsRouter.post('/getPaymentInfo')`
+			)
 		}
 
 		const eventInfo = await Event.findOne({ id: transactionInfo.eventId })
 
 		if (!eventInfo) {
-			throwErrors(`Event not found in order ${orderId}`)
+			throwErrors(
+				`Event not found in order ${orderId}`,
+				`transactionsRouter.post('/getPaymentInfo'`
+			)
 		}
 
 		const paymentInfo = {

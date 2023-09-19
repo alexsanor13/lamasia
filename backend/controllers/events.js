@@ -7,6 +7,8 @@ const { throwErrors } = require('../utils/middleware/throwErrors')
 const { getPrice } = require('../utils/events/eventsUtils')
 
 eventsRouter.get('/', async (request, response) => {
+	console.log('GET events')
+
 	const events = await Event.find({})
 		.select('id title date image')
 		.sort({ id: -1 })
@@ -16,16 +18,17 @@ eventsRouter.get('/', async (request, response) => {
 
 eventsRouter.post('/', async (request, response) => {
 	try {
+		console.log('POST event')
 		const { id } = request.body
 		let event = await Event.findOne({ id: id }).lean()
 
 		if (!event) {
-			throwErrors(`Event with id ${id} not found`)
+			throwErrors(`Event with id ${id} not found`, `eventsRouter.POST('/'`)
 		}
 
 		const currentDate = new Date()
 		if (event.date < currentDate) {
-			return response.status(400).json({ error: 'Event has already finished' })
+			throwErrors(`Event has already finished`, `eventsRouter.POST('/'`)
 		}
 
 		const { price, release, priceLabel } = await getPrice(event)

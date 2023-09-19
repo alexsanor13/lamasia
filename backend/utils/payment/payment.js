@@ -43,9 +43,7 @@ async function createRedirection(total, paymentMethod = '') {
 
 		await newOrder.save()
 
-		console.log(
-			`New order saved with ID: ${orderId} in status 'PENDING_PAYMENT'`
-		)
+		console.log(`New ORDER ID ${orderId} with status 'PENDING_PAYMENT'`)
 
 		const params = {
 			DS_MERCHANT_TRANSACTIONTYPE: TPV.TRANSACTIONTYPE,
@@ -56,10 +54,10 @@ async function createRedirection(total, paymentMethod = '') {
 			DS_MERCHANT_MERCHANTNAME: 'La Masia Events',
 			DS_MERCHANT_TERMINAL: TPV.TERMINAL,
 			DS_MERCHANT_PAYMETHODS: '',
-			DS_MERCHANT_MERCHANTURL: `${TPV.URLCALLBACK}`,
+			// DS_MERCHANT_MERCHANTURL: `${TPV.URLCALLBACK}`,
 			DS_MERCHANT_URLOK: `${TPV.URLCALLBACK_OK}${orderId}`,
-			// DS_MERCHANT_URLKO: `${TPV.URLCALLBACK}/${orderId}`,
-			// DS_MERCHANT_MERCHANTURL: `https://rare-houses-change.loca.lt/api/tickets/redsysresponse`,
+			DS_MERCHANT_URLKO: `https://www.lamasiaevents.com`,
+			DS_MERCHANT_MERCHANTURL: `https://stale-ears-pay.loca.lt/api/tickets/redsysresponse`,
 			// DS_MERCHANT_URLOK: `https://honest-fans-shine.loca.lt/paymentsuccessful/${orderId}`,
 			// DS_MERCHANT_URLKO: `https://honest-fans-shine.loca.lt/api/tickets/redsysresponseKO`,
 		}

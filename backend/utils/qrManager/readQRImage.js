@@ -20,7 +20,7 @@ async function readQRImage(qrName) {
 
 		return qrImageBase64
 	} catch (e) {
-		throwErrors(`Error reading qr: ${qrName}`)
+		throwErrors(`Error reading qr: ${qrName}`, `readQRImage`)
 	}
 }
 
@@ -37,7 +37,7 @@ async function readQRImageFile(qrName) {
 
 		return qrImageBuffer
 	} catch (e) {
-		throwErrors(`Error reading qr: ${qrName}`)
+		throwErrors(`Error reading qr: ${qrName}`, `readQRImageFile`)
 	}
 }
 

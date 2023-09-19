@@ -1,6 +1,6 @@
-const throwErrors = (message) => {
-	console.error(message)
-	throw new Error(message)
+const throwErrors = (message, from = '') => {
+	console.error(`${from} - ${message}`)
+	throw new Error(`${from} - ${message}`)
 }
 
 module.exports = {

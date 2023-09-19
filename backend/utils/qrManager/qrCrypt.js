@@ -19,7 +19,7 @@ function encrypt(text) {
 		encrypted = Buffer.concat([encrypted, cipher.final()])
 		return iv.toString('hex') + ':' + encrypted.toString('hex')
 	} catch (e) {
-		throwErrors(`Error encrypting qr: ${e}`)
+		throwErrors(`Error encrypting qr: ${e}`, `encrypt`)
 	}
 }
 
@@ -33,7 +33,7 @@ function decrypt(text) {
 		decrypted = Buffer.concat([decrypted, decipher.final()])
 		return decrypted.toString()
 	} catch (e) {
-		throwErrors(`Error decrypting qr: ${e}`)
+		throwErrors(`Error decrypting qr: ${e}`, `decrypt`)
 	}
 }
 

@@ -24,7 +24,7 @@ const getPrice = async (event, isPack = false) => {
 			}
 		}
 	} catch (e) {
-		throwErrors('Error calculating price')
+		throwErrors('Error calculating price', `getPrice`)
 	}
 }
 

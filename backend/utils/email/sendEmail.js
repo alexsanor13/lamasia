@@ -61,7 +61,7 @@ async function generateEmailHTML(eventName, orderId, tickets) {
 
 		return emailHTML
 	} catch (e) {
-		throwErrors(`Error creating html:${e}`)
+		throwErrors(`Error creating html:${e}`, `generateEmailHTML`)
 	}
 }
 
@@ -79,7 +79,7 @@ const getAttachments = async (tickets) => {
 		}
 		return attachments
 	} catch (e) {
-		throwErrors(`Error getting the qr attachment: ${e}`)
+		throwErrors(`Error getting the qr attachment: ${e}`, `getAttachments`)
 	}
 }
 
@@ -110,8 +110,7 @@ async function sendEmailByGmail(to, tickets, eventName, orderId) {
 
 		transporter.sendMail(mailOptions, function (error, info) {
 			if (error) {
-				console.error(error)
-				throw new Error(error)
+				throwErrors(`Email was not sent:${error}`, `sendEmailByGmail`)
 			} else {
 				console.log('Email sent: ' + info.response)
 				attachments.forEach(({ filename, content }) => {
@@ -120,7 +119,7 @@ async function sendEmailByGmail(to, tickets, eventName, orderId) {
 			}
 		})
 	} catch (e) {
-		throwErrors(`Email was not sent:${e}`)
+		throwErrors(`Email was not sent:${e}`, `sendEmailByGmail`)
 	}
 }
 

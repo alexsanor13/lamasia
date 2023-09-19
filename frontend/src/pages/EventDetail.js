@@ -77,6 +77,24 @@ const EventDetail = () => {
 		}
 	}
 
+	const getTicketSelectorInfo = (release) => {
+		let notBuyable = false
+		let releaseStatus = ''
+		if (release.price == eventInfo.price) {
+			return { notBuyable, releaseStatus }
+		}
+
+		notBuyable = true
+		const total = eventInfo.releases.length
+		if (release === eventInfo.releases[total - 1]) {
+			releaseStatus = 'Taquilla'
+		} else {
+			releaseStatus =
+				release.price > eventInfo.price ? 'Proximamente' : 'Agotado'
+		}
+		return { notBuyable, releaseStatus }
+	}
+
 	return (
 		<div className="center">
 			{loading ? (
@@ -100,15 +118,8 @@ const EventDetail = () => {
 									<h2 className="box-title">ENTRADAS</h2>
 								</div>
 								{eventInfo.releases.map((release) => {
-									let notBuyable = false
-									let releaseStatus = ''
-									if (release.price != eventInfo.price) {
-										notBuyable = true
-										releaseStatus =
-											release.price > eventInfo.price
-												? 'Proximamente'
-												: 'Agotado'
-									}
+									const { notBuyable, releaseStatus } =
+										getTicketSelectorInfo(release)
 									return (
 										<TicketSelector
 											key={release.price}

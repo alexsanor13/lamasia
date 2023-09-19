@@ -19,6 +19,7 @@ const ticketsRouter = require('express').Router()
 
 ticketsRouter.post('/getRedirection', async (request, response) => {
 	try {
+		console.log('POST getRedirection')
 		const body = request.body
 		const paymentMethod = body.payment_method ? body.payment_method : ''
 
@@ -40,6 +41,7 @@ ticketsRouter.post('/getRedirection', async (request, response) => {
 
 ticketsRouter.post('/redsysresponse', async (request, response) => {
 	try {
+		console.log('POST redsysresponse')
 		const body = request.body
 
 		const { Ds_Order } = getPaymentParameters(body)
@@ -49,10 +51,13 @@ ticketsRouter.post('/redsysresponse', async (request, response) => {
 				{ orderId: Ds_Order },
 				{ $set: { status: 'PAYMENT_FAILED' } }
 			)
-			throwErrors(`Payment for order ${Ds_Order} failed`)
+			throwErrors(
+				`Payment for order ${Ds_Order} failed`,
+				`ticketsRouter.post('/redsysresponse')`
+			)
 		}
 
-		console.log(`Payment for order ${Ds_Order} succeded`)
+		console.log(`ORDER ID ${Ds_Order} with status 'PAYMENT_SUCCEDED'`)
 		await Order.updateOne(
 			{ orderId: Ds_Order },
 			{ $set: { status: 'PAYMENT_SUCCEDED' } }
@@ -61,19 +66,27 @@ ticketsRouter.post('/redsysresponse', async (request, response) => {
 		const transactionInfo = await Transaction.findOne({ orderId: Ds_Order })
 
 		if (!transactionInfo) {
-			throwErrors(`Transaction for order ${Ds_Order} not found`)
+			throwErrors(
+				`Transaction for order ${Ds_Order} not found`,
+				`ticketsRouter.post('/redsysresponse')`
+			)
 		}
 
 		const newTickets = await createNewTickets(transactionInfo)
 
 		if (!newTickets.length) {
-			throwErrors(`Error creating tickets in order ${Ds_Order}`)
+			throwErrors(
+				`Error creating tickets in order ${Ds_Order}`,
+				`ticketsRouter.post('/redsysresponse')`
+			)
 		}
 
 		await Order.updateOne(
 			{ orderId: Ds_Order },
 			{ $set: { status: 'TICKETS_QRS_CREATED' } }
 		)
+
+		console.log(`ORDER ID ${Ds_Order} with status 'TICKETS_QRS_CREATED'`)
 
 		const event = await Event.findOne({
 			id: transactionInfo.eventId,
@@ -86,6 +99,8 @@ ticketsRouter.post('/redsysresponse', async (request, response) => {
 			{ $set: { status: 'EMAIL_SENT' } }
 		)
 
+		console.log(`ORDER ID ${Ds_Order} with status 'EMAIL_SENT'`)
+
 		return response.status(200).json()
 	} catch (error) {
 		return response.status(404).json({ error, message: error.message })
@@ -96,7 +111,7 @@ const calculateAmount = async (eventId, amountCalculated, orderedTickets) => {
 	let event = await Event.findOne({ id: eventId }).lean()
 
 	if (!event) {
-		throwErrors(`Event with id ${eventId} not found`)
+		throwErrors(`Event with id ${eventId} not found`, `calculateAmount`)
 	}
 
 	const { price } = await getPrice(event)
@@ -106,7 +121,10 @@ const calculateAmount = async (eventId, amountCalculated, orderedTickets) => {
 	if (validAmount) {
 		return true
 	} else {
-		throwErrors('The price applied to the tickets is not correct')
+		throwErrors(
+			'The price applied to the tickets is not correct',
+			`calculateAmount`
+		)
 	}
 }
 
@@ -130,7 +148,10 @@ const createNewTransaction = async (body, orderId) => {
 
 		console.log(`Transaction for orderId ${orderId} has been saved`)
 	} catch (e) {
-		throwErrors(`Error saving the new transaction with orderId ${orderId}`)
+		throwErrors(
+			`Error saving the new transaction with orderId ${orderId}`,
+			`createNewTransaction`
+		)
 	}
 }
 
@@ -162,7 +183,10 @@ const createNewTickets = async (body) => {
 
 		return savedTickets
 	} catch {
-		throwErrors(`Tickets creation for transaction ${id} failed`)
+		throwErrors(
+			`Tickets creation for transaction ${id} failed`,
+			`createNewTickets`
+		)
 	}
 }
 
@@ -176,7 +200,7 @@ const createQR = async (email, ticketId, eventId, pack) => {
 
 		return qrName
 	} catch (error) {
-		throwErrors(`Error creating QR: ${error}`)
+		throwErrors(`Error creating QR: ${error}`, `createQR`)
 	}
 }
 
@@ -192,7 +216,7 @@ const saveTicket = async (transactionId, eventId, isPack) => {
 		await ticket.save()
 		return ticket
 	} catch (error) {
-		throwErrors('Error saving Ticket')
+		throwErrors('Error saving Ticket', `saveTicket`)
 	}
 }
 
@@ -206,7 +230,7 @@ const saveQR = async (ticketId, qrName) => {
 		await qr.save()
 		return qr
 	} catch (error) {
-		throwErrors('Error saving QR')
+		throwErrors('Error saving QR', `saveQR`)
 	}
 }
 

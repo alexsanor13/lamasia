@@ -85,7 +85,10 @@ const generateQRScanHTML = ({
 		}
 		return qrResult
 	} catch (e) {
-		throwErrors(`Error creating the qrHtml for transaction ${transactionId}`)
+		throwErrors(
+			`Error creating the qrHtml for transaction ${transactionId}`,
+			`generateQRScanHTML`
+		)
 	}
 }
 

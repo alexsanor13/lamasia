@@ -16,7 +16,7 @@ const generateQRCode = async (text, qrName) => {
 		)
 		await qr.toFile(qrFilePath, text)
 	} catch (error) {
-		throwErrors(`Error generating QR code file: ${error}`)
+		throwErrors(`Error generating QR code file: ${error}`, `generateQRCode`)
 	}
 }
 
@@ -34,7 +34,7 @@ async function deleteQRFile(qrName) {
 		await fs.unlink(qrFilePath)
 		console.log(`QR with filename ${qrName} has been deleted.`)
 	} catch (error) {
-		console.error(`Error deleting QR ${qrName}: ${error.message}`)
+		throwErrors(`Error deleting QR ${qrName}: ${error.message}`, `deleteQRFile`)
 	}
 }
 

@@ -25,6 +25,11 @@ const exceptions = [
 	'830608545',
 	'467640552',
 	'643943270',
+	'642991002',
+	'464449183',
+	'157383426',
+	'189511474',
+	'287860013',
 ]
 
 async function handleQR(ticket) {
@@ -36,7 +41,7 @@ async function handleQR(ticket) {
 		const existingQR = await QR.findOne({ ticketId: ticket.id })
 
 		if (!existingQR) {
-			throwErrors(`QR not found for ticket ${ticket.id}`)
+			throwErrors(`QR not found for ticket ${ticket.id}`, 'handleQR')
 		}
 
 		if (existingQR?.activated) {
@@ -55,12 +60,17 @@ async function handleQR(ticket) {
 
 scannerRouter.post('/scanQR', async (request, response) => {
 	try {
+		console.log('POST scanQR')
+
 		const { encryptedQR } = request.body
 		const decryptedQR = qrCrypt.decrypt(encryptedQR)
 		const decryptedQRSplitted = decryptedQR.split(',')
 
 		if (decryptedQRSplitted.length !== 4) {
-			throwErrors('QR code format is incorrect')
+			throwErrors(
+				'QR code format is incorrect',
+				`scannerRouter.post('/scanQR')`
+			)
 		}
 
 		const [ticketId, email, eventId, isPack] = decryptedQRSplitted
@@ -83,7 +93,7 @@ scannerRouter.post('/scanQR', async (request, response) => {
 			})
 
 			if (!ticketInfo) {
-				throwErrors('Ticket not found')
+				throwErrors('Ticket not found', `scannerRouter.post('/scanQR')`)
 			}
 
 			const transactionInfo = await Transaction.findOne({
@@ -93,7 +103,7 @@ scannerRouter.post('/scanQR', async (request, response) => {
 			})
 
 			if (!transactionInfo) {
-				throwErrors('Transaction not found')
+				throwErrors('Transaction not found', `scannerRouter.post('/scanQR')`)
 			}
 
 			const eventInfo = await Event.findOne({
@@ -101,7 +111,7 @@ scannerRouter.post('/scanQR', async (request, response) => {
 			})
 
 			if (!eventInfo) {
-				throwErrors('Event not found')
+				throwErrors('Event not found', `scannerRouter.post('/scanQR')`)
 			}
 
 			// Check that the QR was not already activated
