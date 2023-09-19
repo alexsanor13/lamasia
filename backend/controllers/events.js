@@ -14,7 +14,7 @@ eventsRouter.get('/', async (request, response) => {
 			.select('id title date image')
 			.sort({ id: -1 })
 		return response.status(200).json(events)
-	} catch (e) {
+	} catch (error) {
 		return response.status(404).json({ error, message: 'GET events failed' })
 	}
 })
