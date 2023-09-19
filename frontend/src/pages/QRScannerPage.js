@@ -5,6 +5,7 @@ import { ReactComponent as CameraSVG } from '../assets/svg/camera.svg'
 import './QRScannerPage.css'
 
 const QrCodeScanner = forwardRef((props, ref) => {
+	// TODO review useRef error in dev
 	const scannerRef = useRef(null)
 	const [isCameraOpen, setIsCameraOpen] = useState(false)
 	const [showLoader, setShowLoader] = useState(false)
