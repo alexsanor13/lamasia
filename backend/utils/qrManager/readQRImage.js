@@ -6,6 +6,7 @@ const readFileAsync = promisify(fs.readFile)
 const { QR_CONTAINER } = require('../config')
 const { throwErrors } = require('../middleware/throwErrors')
 
+// Reads the content of the QR and return the Base64
 async function readQRImage(qrName) {
 	try {
 		const qrImagePath = path.join(
@@ -24,6 +25,7 @@ async function readQRImage(qrName) {
 	}
 }
 
+// Reads the content of a QR file and return the file buffer
 async function readQRImageFile(qrName) {
 	try {
 		const qrImagePath = path.join(
