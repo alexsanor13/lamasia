@@ -40,10 +40,17 @@ footer a,
 	height: 48px;
 }
 
+.footer-links {
+	display: flex;
+	gap: 10px;
+	justify-content: center;
+	text-align: center;
+}
+
 .footer-nav-link {
-	margin-left: 20px;
 	color: #ffffff;
 	text-decoration: none;
 	font-size: 14px;
 	width: fit-content;
+	height: auto;
 }

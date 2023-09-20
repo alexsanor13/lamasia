@@ -24,7 +24,7 @@ const EmailModal = ({ isOpen, closeModal, shoppingCart }) => {
 			return false
 		} else {
 			setEmailError('')
-			const purchaseInfo = `${shoppingCart.tickets}x${shoppingCart.price}€;${shoppingCart.packTickets}x${shoppingCart.packPrice}€;${shoppingCart.amount}€;`
+			const purchaseInfo = `${shoppingCart.tickets}x${shoppingCart.price}€=${shoppingCart.amount}€`
 
 			const purchaseDetails = {
 				eventId: shoppingCart.eventId,

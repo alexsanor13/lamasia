@@ -11,7 +11,7 @@ const Footer = () => {
 				&copy; {new Date().getFullYear()} La Masia Events.
 				<br /> Todos los derechos reservados.
 			</p>
-			<p>
+			<p className="footer-links">
 				<NavLink
 					to="/privacy"
 					id="privacy-page"
