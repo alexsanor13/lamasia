@@ -48,7 +48,7 @@ const Events = () => {
 			) : (
 				<section className="events">
 					{sectionTitle}
-					<EventsCollection events={events} setEvents={setEvents} />
+					<EventsCollection events={events} />
 				</section>
 			)}
 		</div>
