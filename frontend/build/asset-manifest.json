@@ -1,8 +1,14 @@
 {
   "files": {
     "main.css": "/static/css/main.a5d4d76e.css",
-    "main.js": "/static/js/main.d617509b.js",
+    "main.js": "/static/js/main.c7746d6d.js",
     "static/media/soon.gif": "/static/media/soon.3aa4ca6ec0cb3f2256ed.gif",
+    "static/media/genesis.svg": "/static/media/genesis.3f4b1a2a5e899e240a8fb5e20e7ef0d9.svg",
+    "static/media/aFuego.svg": "/static/media/aFuego.a60abc0291f32aaa7883c7ab59d7df5d.svg",
+    "static/media/pandora.svg": "/static/media/pandora.63c4fe2df044e939432a78d955be2c95.svg",
+    "static/media/fuckCovid.svg": "/static/media/fuckCovid.6b95f846701558d129f9c09a1fae1b2b.svg",
+    "static/media/revolution.svg": "/static/media/revolution.45dfc5d00409d5458eb38f34a13f848e.svg",
+    "static/media/pecados.svg": "/static/media/pecados.c55e03f1550300982b72e332dfad5205.svg",
     "static/media/logo.svg": "/static/media/logo.b9f7bce7c045a23e922d001a6b017c5a.svg",
     "static/media/logo.webp": "/static/media/logo.342ea19a2728daf9bd98.webp",
     "static/media/skull.svg": "/static/media/skull.3a9358424c5484c727563011ff681d1c.svg",
@@ -17,10 +23,10 @@
     "static/media/plus.svg": "/static/media/plus.c4ad914c4a4c568589ae272f9f4b07bf.svg",
     "static/media/minus.svg": "/static/media/minus.79478ad20f0ad881d784e5ba97ebda04.svg",
     "main.a5d4d76e.css.map": "/static/css/main.a5d4d76e.css.map",
-    "main.d617509b.js.map": "/static/js/main.d617509b.js.map"
+    "main.c7746d6d.js.map": "/static/js/main.c7746d6d.js.map"
   },
   "entrypoints": [
     "static/css/main.a5d4d76e.css",
-    "static/js/main.d617509b.js"
+    "static/js/main.c7746d6d.js"
   ]
 }
