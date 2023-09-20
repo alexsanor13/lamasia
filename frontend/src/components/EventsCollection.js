@@ -1,15 +1,8 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import EventBox from './EventBox'
-import eventsServices from '../services/events.js'
 import './EventsCollection.css'
 
-const EventsCollection = ({ events, setEvents }) => {
-	useEffect(() => {
-		eventsServices.getAllEvents().then((fetchedEvents) => {
-			setEvents(fetchedEvents)
-		})
-	}, [setEvents])
-
+const EventsCollection = ({ events }) => {
 	return (
 		<>
 			{events.length > 0 && (
