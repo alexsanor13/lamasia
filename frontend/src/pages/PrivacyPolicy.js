@@ -14,11 +14,10 @@ const PrivacyPolicy = () => {
 				Última actualización: 16 de Septiembre de 2023
 			</p>
 			<p>
-				Bienvenido a La Masia Events ("Nosotros", "nuestro" o "nos"). En La
-				Masia Events, nos tomamos muy en serio la privacidad de nuestros
-				usuarios. Esta Política de Privacidad describe cómo recopilamos,
-				utilizamos y compartimos información personal cuando visitas nuestro
-				sitio web y utilizas nuestros servicios.
+				Bienvenido a La Masia Events. En La Masia Events, nos tomamos muy en
+				serio la privacidad de nuestros usuarios. Esta Política de Privacidad
+				describe cómo recopilamos, utilizamos y compartimos información personal
+				cuando visitas nuestro sitio web y utilizas nuestros servicios.
 			</p>
 			<h2>Información que Recopilamos</h2>
 			<p>

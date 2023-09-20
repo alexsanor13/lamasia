@@ -14,11 +14,10 @@ const TermsOfUse = () => {
 				Última actualización: 16 de Septiembre de 2023
 			</p>
 			<p>
-				Bienvenido a La Masia Events ("Nosotros", "nuestro" o "nos"). Al acceder
-				y utilizar nuestro sitio web y servicios, aceptas cumplir con los
-				siguientes términos y condiciones. Si no estás de acuerdo con estos
-				términos, por favor, no utilices nuestro sitio web ni nuestros
-				servicios.
+				Bienvenido a La Masia Events. Al acceder y utilizar nuestro sitio web y
+				servicios, aceptas cumplir con los siguientes términos y condiciones. Si
+				no estás de acuerdo con estos términos, por favor, no utilices nuestro
+				sitio web ni nuestros servicios.
 			</p>
 			<h2>Uso del Sitio Web</h2>
 			<ul>
