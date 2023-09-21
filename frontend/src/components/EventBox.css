@@ -18,6 +18,7 @@
 
 .event-image-container {
 	width: 100%;
+	min-height: 250px;
 	overflow: hidden;
 	border-radius: 10px;
 }
