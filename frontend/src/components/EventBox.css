@@ -10,6 +10,11 @@
 	box-shadow: 0 10px 10px #0c0a0a4f;
 	background-color: #00000085;
 	box-sizing: border-box;
+	transition: transform 0.3s ease-in-out;
+}
+
+.event-box:hover {
+	transform: scale(1.075);
 }
 
 .event-box-upcoming {
@@ -18,25 +23,22 @@
 
 .event-image-container {
 	width: 100%;
-	min-height: 250px;
+	min-height: 350px;
 	overflow: hidden;
 	border-radius: 10px;
+	transition: transform 1s ease-in-out;
 }
 
 .event-image-container .lazy-load-image-background.blur.lazy-load-image-loaded {
 	width: inherit;
 	height: inherit;
+	transform: scale(1);
 }
 
 .event-image {
 	width: 100%;
 	height: auto;
 	object-fit: cover;
-	transition: transform 0.5s ease-in-out;
-}
-
-.event-image:hover {
-	transform: scale(1.1);
 }
 
 .event-info-container {

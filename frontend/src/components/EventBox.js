@@ -24,13 +24,7 @@ const placeholderDictionary = {
 const EventBox = ({ event }) => {
 	const { title, date, image } = event
 
-	const isUpcomingEvent = () => {
-		const eventFinished = new Date(date) < new Date()
-		if (eventFinished) {
-			return false
-		}
-		return true
-	}
+	const isUpcomingEvent = () => new Date(date) > new Date()
 
 	const showBuyTickets = isUpcomingEvent() ? (
 		<Link
@@ -50,18 +44,27 @@ const EventBox = ({ event }) => {
 		  }
 		: { containerClass: 'event-box', dateClass: 'event-date' }
 
+	const placeholder = (title) => {
+		const svg = placeholderDictionary[title] || placeholderDictionary['default']
+		return svg
+	}
+
+	const handleLoadImage = () => {
+		const container = document.getElementById(`${title}-container`)
+		container.style.minHeight = '0'
+	}
+
 	return (
 		<div className={eventClass.containerClass}>
-			<div className="event-image-container">
+			<div className="event-image-container" id={`${title}-container`}>
 				{/* <img src={image} alt={title} className="event-image" /> */}
 				<LazyLoadImage
 					src={image}
-					placeholderSrc={() =>
-						placeholderDictionary[title] || placeholderDictionary['default']
-					}
+					placeholderSrc={placeholder(title)}
 					alt={title}
 					effect="blur"
 					className="event-image"
+					onLoad={() => handleLoadImage()}
 				/>
 			</div>
 			<div className="event-info-container outlined-text">
