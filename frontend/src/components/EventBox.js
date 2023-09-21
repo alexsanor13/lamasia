@@ -4,21 +4,15 @@ import './EventBox.css'
 import utils from '../common/utils'
 
 import { LazyLoadImage } from 'react-lazy-load-image-component'
-import fuckCovidSVG from '../assets/placeholders/fuckCovid.svg'
-import aFuegoSVG from '../assets/placeholders/aFuego.svg'
-import genesisSVG from '../assets/placeholders/genesis.svg'
-import pandoraSVG from '../assets/placeholders/pandora.svg'
-import pecadosSVG from '../assets/placeholders/pecados.svg'
-import revolutionSVG from '../assets/placeholders/revolution.svg'
 
 const placeholderDictionary = {
-	PANDORA: pandoraSVG,
-	GÉNESIS: genesisSVG,
-	TOR7UGA: pecadosSVG,
-	R3VOLUTION: revolutionSVG,
-	'A FUEG🔥': aFuegoSVG,
-	'F☠️CK COVID': fuckCovidSVG,
-	default: fuckCovidSVG,
+	PANDORA: '../assets/placeholders/pandora.svg',
+	GÉNESIS: '../assets/placeholders/genesis.svg',
+	TOR7UGA: '../assets/placeholders/pecados.svg',
+	R3VOLUTION: '../assets/placeholders/revolution.svg',
+	'A FUEG🔥': '../assets/placeholders/aFuego.svg',
+	'F☠️CK COVID': '../assets/placeholders/fuckCovid.svg',
+	default: '../assets/placeholders/fuckCovid.svg',
 }
 
 const EventBox = ({ event }) => {
