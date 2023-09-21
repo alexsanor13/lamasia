@@ -5,8 +5,13 @@ const { showResponseErrors, baseUrl } = utils
 const url = `${baseUrl}/events`
 
 const getAllEvents = async () => {
-	const response = await axios.get(url)
-	return response.data
+	try {
+		const response = await axios.get(url)
+		return response.data
+	} catch (error) {
+		showResponseErrors(error)
+		return null
+	}
 }
 
 const getEventInfo = async (eventId) => {
