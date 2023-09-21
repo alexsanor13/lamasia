@@ -101,6 +101,11 @@
 		<noscript
 			>Necesitas habilitar JavaScript para ejecutar esta aplicación.</noscript
 		>
+		<script>
+			document.addEventListener('contextmenu', function (e) {
+				e.preventDefault()
+			})
+		</script>
 		<div id="root"></div>
 	</body>
 </html>

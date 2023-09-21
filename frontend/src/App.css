@@ -43,6 +43,13 @@ footer {
 	flex-shrink: 0;
 }
 
+img {
+	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+}
+
 .section-title {
 	width: 100%;
 	text-align: center;
