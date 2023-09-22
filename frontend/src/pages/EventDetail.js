@@ -59,7 +59,8 @@ const EventDetail = () => {
 
 	const handlePurchase = () => {
 		const amount =
-			packTickets * eventInfo.priceVIP || 0 + selectedTickets * eventInfo.price
+			packTickets * eventInfo.priceVIP ||
+			Number(selectedTickets) * eventInfo.price
 
 		if (amount) {
 			setCart({
@@ -80,7 +81,7 @@ const EventDetail = () => {
 	const getTicketSelectorInfo = (release) => {
 		let notBuyable = false
 		let releaseStatus = ''
-		if (release.price == eventInfo.price) {
+		if (release.price === eventInfo.price) {
 			return { notBuyable, releaseStatus }
 		}
 
@@ -117,32 +118,34 @@ const EventDetail = () => {
 								<div className="box-title-container">
 									<h2 className="box-title">ENTRADAS</h2>
 								</div>
-								{eventInfo.releases.map((release) => {
-									const { notBuyable, releaseStatus } =
-										getTicketSelectorInfo(release)
-									return (
-										<TicketSelector
-											key={release.price}
-											className="event-ticket-option"
-											label={release.label}
-											price={`${release.price}€`}
-											max={7}
-											selection={setSelectedTickets}
-											notBuyable={notBuyable}
-											releaseStatus={releaseStatus}
-										/>
-									)
-								})}
+								<div className="event-ticket-container">
+									{eventInfo.releases.map((release) => {
+										const { notBuyable, releaseStatus } =
+											getTicketSelectorInfo(release)
+										return (
+											<TicketSelector
+												key={release.price}
+												className="event-ticket-option"
+												label={release.label}
+												price={`${release.price}€`}
+												max={7}
+												selection={setSelectedTickets}
+												notBuyable={notBuyable}
+												releaseStatus={releaseStatus}
+											/>
+										)
+									})}
 
-								{eventInfo.priceVIP && (
-									<TicketSelector
-										className="event-ticket-option"
-										label={'Mesa con botella y shisha (5 personas)'}
-										price={`${eventInfo.price}€`}
-										max={1}
-										selection={setPackTickets}
-									/>
-								)}
+									{eventInfo.priceVIP && (
+										<TicketSelector
+											className="event-ticket-option"
+											label={'Mesa con botella y shisha (5 personas)'}
+											price={`${eventInfo.price}€`}
+											max={1}
+											selection={setPackTickets}
+										/>
+									)}
+								</div>
 
 								<div className="button-container">
 									<button

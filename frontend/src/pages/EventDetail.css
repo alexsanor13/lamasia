@@ -150,6 +150,10 @@
 	text-align: right;
 }
 
+.event-ticket-container {
+	margin: 1em 0;
+}
+
 .event-detail-purchase-button {
 	margin-right: 10px;
 }

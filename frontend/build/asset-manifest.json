@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.062ba9ce.css",
-    "main.js": "/static/js/main.415bf212.js",
+    "main.css": "/static/css/main.33e82e7d.css",
+    "main.js": "/static/js/main.b986f09f.js",
     "static/media/soon.gif": "/static/media/soon.3aa4ca6ec0cb3f2256ed.gif",
     "static/media/fuckCovid.svg": "/static/media/fuckCovid.6b95f846701558d129f9c09a1fae1b2b.svg",
     "static/media/logo.svg": "/static/media/logo.b9f7bce7c045a23e922d001a6b017c5a.svg",
@@ -17,11 +17,11 @@
     "static/media/burger_menu.svg": "/static/media/burger_menu.976e3f598a89576f18aba6ce25096d0e.svg",
     "static/media/plus.svg": "/static/media/plus.c4ad914c4a4c568589ae272f9f4b07bf.svg",
     "static/media/minus.svg": "/static/media/minus.79478ad20f0ad881d784e5ba97ebda04.svg",
-    "main.062ba9ce.css.map": "/static/css/main.062ba9ce.css.map",
-    "main.415bf212.js.map": "/static/js/main.415bf212.js.map"
+    "main.33e82e7d.css.map": "/static/css/main.33e82e7d.css.map",
+    "main.b986f09f.js.map": "/static/js/main.b986f09f.js.map"
   },
   "entrypoints": [
-    "static/css/main.062ba9ce.css",
-    "static/js/main.415bf212.js"
+    "static/css/main.33e82e7d.css",
+    "static/js/main.b986f09f.js"
   ]
 }
