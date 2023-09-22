@@ -1,6 +1,5 @@
 h1 {
 	text-align: center;
-	margin-top: 50px;
 	font-size: 90px;
 	font-family: 'Nunito Sans', sans-serif;
 	letter-spacing: 0.3em;
@@ -16,9 +15,5 @@ h1 {
 @media (width < 768px) {
 	h1 {
 		font-size: 48px;
-	}
-
-	.events {
-		margin-bottom: 2em;
 	}
 }

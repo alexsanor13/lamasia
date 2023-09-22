@@ -53,6 +53,7 @@ img {
 .section-title {
 	width: 100%;
 	text-align: center;
+	margin: 0.5em 0;
 }
 
 .outlined-text {
@@ -159,5 +160,9 @@ img {
 	}
 	.exit-menu-button:hover {
 		fill: white;
+	}
+
+	.section-title {
+		margin: 1em 0;
 	}
 }
