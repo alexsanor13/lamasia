@@ -16,4 +16,8 @@ h1 {
 	h1 {
 		font-size: 48px;
 	}
+
+	section.events {
+		margin-bottom: 2em;
+	}
 }
