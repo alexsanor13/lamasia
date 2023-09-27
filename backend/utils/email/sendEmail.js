@@ -102,7 +102,7 @@ async function sendEmailByGmail(to, tickets, eventName, orderId) {
 		const mailOptions = {
 			from: `"La Masia Events 🏴‍☠️" <${EMAIL.user}>`,
 			to: to,
-			subject: `Tus entradas para ${eventName} ✅`,
+			subject: `Tus entradas para ${eventName} ✔️`,
 			html: htmlContent,
 			attachments: attachments,
 		}
