@@ -69,7 +69,7 @@ const getAttachments = async (tickets) => {
 	try {
 		const attachments = []
 
-		for (const { _ticket, qr } of tickets) {
+		for (const { qr } of tickets) {
 			const qrImageBuffer = await readQRImageFile(qr.qrName)
 
 			attachments.push({
@@ -112,7 +112,7 @@ async function sendEmailByGmail(to, tickets, eventName, orderId) {
 				throwErrors(`Email was not sent:${error}`, `sendEmailByGmail`)
 			} else {
 				console.log('Email sent: ' + info.response)
-				attachments.forEach(({ filename, content }) => {
+				attachments.forEach(({ filename }) => {
 					deleteQRFile(filename)
 				})
 			}
