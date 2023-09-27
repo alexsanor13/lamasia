@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer')
 
-const { EMAIL, EMAIL_PASS, GMAIL_CONFIG } = require('../config.js')
+const { EMAIL } = require('../config.js')
 const { readQRImage, readQRImageFile } = require('../qrManager/readQRImage.js')
 const { deleteQRFile } = require('../qrManager/qrCreator.js')
 const { throwErrors } = require('../middleware/throwErrors')
@@ -11,8 +11,8 @@ async function generateEmailHTML(eventName, orderId, tickets) {
 			const qrImage = await readQRImage(qr.qrName)
 			return `
 			<div class="order-details">
-			  <p>Ticket ID: ${ticket.id}</p>
-			  <p>Tipo de Ticket: ${ticket.packTicket ? 'PACK' : 'NORMAL'}</p>
+			  <p>ID: ${ticket.id}</p>
+			  <p>Tipo: ${ticket.packTicket ? 'PACK' : 'NORMAL'}</p>
 			  <div class="qr-code">
 				<img src="data:image/png;base64,${qrImage}" alt="QR Code" />
 			  </div>
@@ -88,22 +88,21 @@ async function sendEmailByGmail(to, tickets, eventName, orderId) {
 		const htmlContent = await generateEmailHTML(eventName, orderId, tickets)
 
 		let transporter = nodemailer.createTransport({
-			service: 'gmail',
+			host: 'smtp.gmail.com',
+			port: 465,
+			secure: true,
 			auth: {
-				type: 'OAuth2',
-				user: EMAIL,
-				pass: EMAIL_PASS,
-				clientId: GMAIL_CONFIG.client_id,
-				clientSecret: GMAIL_CONFIG.client_secret,
-				refreshToken: GMAIL_CONFIG.refresh_token,
+				user: EMAIL.user,
+				pass: EMAIL.appPassword,
 			},
 		})
+
 		const attachments = await getAttachments(tickets)
 
 		const mailOptions = {
-			from: EMAIL,
+			from: `"La Masia Events 🏴‍☠️" <${EMAIL.user}>`,
 			to: to,
-			subject: `LA MASIA ${eventName}`,
+			subject: `Tus entradas para ${eventName} ✅`,
 			html: htmlContent,
 			attachments: attachments,
 		}

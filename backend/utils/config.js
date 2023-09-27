@@ -25,8 +25,11 @@ const apiLimiter = rateLimit({
 
 const QR_CONTAINER = env.get('QR_CONTAINER')
 
-const EMAIL = env.get('EMAIL')
-const EMAIL_PASS = env.get('EMAIL_PASS')
+const EMAIL = {
+	user: env.get('EMAIL'),
+	password: env.get('EMAIL_PASS'),
+	appPassword: env.get('EMAIL_APP_PASSWORD'),
+}
 
 const TPV = {
 	MERCHANTCODE: env.get('TPV_DS_MERCHANT_MERCHANTCODE')
@@ -52,13 +55,6 @@ const TPV = {
 		: 'https://sis.redsys.es/sis/realizarPago',
 }
 
-const GMAIL_CONFIG = {
-	client_id: env.get('GMAIL_CLIENTID'),
-	client_secret: env.get('GMAIL_CLIENTSECRET'),
-	refresh_token: env.get('GMAIL_REFRESHTOKEN'),
-	auth_code: env.get('GMAIL_AUTHCODE'),
-}
-
 module.exports = {
 	PORT,
 	MONGO_DB_URI,
@@ -67,7 +63,5 @@ module.exports = {
 	QR_CONTAINER,
 	CRYPTO_QR,
 	EMAIL,
-	EMAIL_PASS,
 	TPV,
-	GMAIL_CONFIG,
 }

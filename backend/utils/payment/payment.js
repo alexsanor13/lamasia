@@ -57,7 +57,7 @@ async function createRedirection(total, paymentMethod = '') {
 			DS_MERCHANT_MERCHANTURL: `${TPV.URLCALLBACK}`,
 			DS_MERCHANT_URLOK: `${TPV.URLCALLBACK_OK}${orderId}`,
 			DS_MERCHANT_URLKO: `https://www.lamasiaevents.com`,
-			// DS_MERCHANT_MERCHANTURL: `https://stale-ears-pay.loca.lt/api/tickets/redsysresponse`,
+			// DS_MERCHANT_MERCHANTURL: `https://breezy-pens-judge.loca.lt/api/tickets/redsysresponse`,
 			// DS_MERCHANT_URLOK: `https://honest-fans-shine.loca.lt/paymentsuccessful/${orderId}`,
 			// DS_MERCHANT_URLKO: `https://honest-fans-shine.loca.lt/api/tickets/redsysresponseKO`,
 		}
