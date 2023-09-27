@@ -96,6 +96,54 @@ const EventDetail = () => {
 		return { notBuyable, releaseStatus }
 	}
 
+	const ticketsContainer = eventInfo?.price && (
+		<div className="event-detail-purchase box">
+			<div className="box-title-container">
+				<h2 className="box-title">ENTRADAS</h2>
+			</div>
+			<div className="event-ticket-container">
+				{eventInfo.releases.map((release) => {
+					const { notBuyable, releaseStatus } = getTicketSelectorInfo(release)
+					return (
+						<TicketSelector
+							key={release.price}
+							className="event-ticket-option"
+							label={release.label}
+							price={`${release.price}€`}
+							max={7}
+							selection={setSelectedTickets}
+							notBuyable={notBuyable}
+							releaseStatus={releaseStatus}
+						/>
+					)
+				})}
+
+				{eventInfo.priceVIP && (
+					<TicketSelector
+						className="event-ticket-option"
+						label={'Mesa con botella y shisha (5 personas)'}
+						price={`${eventInfo.priceVIP}€`}
+						max={1}
+						selection={setPackTickets}
+					/>
+				)}
+			</div>
+
+			<div className="button-container">
+				<button
+					onClick={handlePurchase}
+					className="event-detail-purchase-button buy-button">
+					Continuar
+				</button>
+				<EmailModal
+					isOpen={modalIsOpen}
+					closeModal={closeModal}
+					shoppingCart={cart}
+				/>
+			</div>
+		</div>
+	)
+
 	return (
 		<div className="center">
 			{loading ? (
@@ -114,52 +162,7 @@ const EventDetail = () => {
 									className="event-detail-image"
 								/>
 							</div>
-							<div className="event-detail-purchase box">
-								<div className="box-title-container">
-									<h2 className="box-title">ENTRADAS</h2>
-								</div>
-								<div className="event-ticket-container">
-									{eventInfo.releases.map((release) => {
-										const { notBuyable, releaseStatus } =
-											getTicketSelectorInfo(release)
-										return (
-											<TicketSelector
-												key={release.price}
-												className="event-ticket-option"
-												label={release.label}
-												price={`${release.price}€`}
-												max={7}
-												selection={setSelectedTickets}
-												notBuyable={notBuyable}
-												releaseStatus={releaseStatus}
-											/>
-										)
-									})}
-
-									{eventInfo.priceVIP && (
-										<TicketSelector
-											className="event-ticket-option"
-											label={'Mesa con botella y shisha (5 personas)'}
-											price={`${eventInfo.price}€`}
-											max={1}
-											selection={setPackTickets}
-										/>
-									)}
-								</div>
-
-								<div className="button-container">
-									<button
-										onClick={handlePurchase}
-										className="event-detail-purchase-button buy-button">
-										Continuar
-									</button>
-									<EmailModal
-										isOpen={modalIsOpen}
-										closeModal={closeModal}
-										shoppingCart={cart}
-									/>
-								</div>
-							</div>
+							{ticketsContainer}
 						</div>
 						<div className="event-detail-info">
 							<div className="event-description box">
