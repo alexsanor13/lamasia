@@ -30,21 +30,20 @@ eventsRouter.post('/', async (request, response) => {
 		}
 
 		const currentDate = new Date()
-		if (event.date < currentDate) {
-			throwErrors(`Event has already finished`, `eventsRouter.POST('/'`)
+		const eventDate = new Date(event.date)
+		if (eventDate > currentDate) {
+			const { price, release, priceLabel } = await getPrice(event)
+
+			event.price = Number(price)
+			event.release = release
+			event.priceLabel = priceLabel
+
+			event.releases = [
+				{ price: Number(event.price1), label: 'Primera Release' },
+				{ price: Number(event.price2), label: 'Segunda Release' },
+				{ price: Number(event.priceFinal), label: 'Entrada General' },
+			]
 		}
-
-		const { price, release, priceLabel } = await getPrice(event)
-
-		event.price = Number(price)
-		event.release = release
-		event.priceLabel = priceLabel
-
-		event.releases = [
-			{ price: Number(event.price1), label: 'Primera Release' },
-			{ price: Number(event.price2), label: 'Segunda Release' },
-			{ price: Number(event.priceFinal), label: 'Entrada General' },
-		]
 
 		delete event.price1
 		delete event.price2
