@@ -30,7 +30,7 @@ cd lamasia/frontend
 npm install
 ```
 
-3.Start the application
+3. Start the application
 
 ```bash
 npm run start
