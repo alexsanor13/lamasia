@@ -35,7 +35,7 @@ const Events = () => {
 		}
 	}, [dataLoaded])
 
-	const sectionTitle = events.length ? (
+	const sectionTitle = events?.length ? (
 		<h1 className="section-title">EVENTOS</h1>
 	) : (
 		''
