@@ -121,11 +121,7 @@ img {
 		position: fixed;
 		width: 100vw;
 		height: 100vh;
-		background-image: linear-gradient(
-			to bottom,
-			rgba(0, 0, 0, 0.979),
-			var(--pirate-gold)
-		);
+		background-color: #958763;
 		z-index: calc(var(--max-index) - 1);
 		align-items: center;
 		flex-direction: column;
