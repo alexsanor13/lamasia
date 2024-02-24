@@ -35,7 +35,7 @@ const Events = () => {
 		}
 	}, [dataLoaded])
 
-	const sectionTitle = <h1 className="section-title">EVENTOS</h1>
+	const sectionTitle = <h1 className="section-title">EVENTS</h1>
 
 	return (
 		<div className="center">
