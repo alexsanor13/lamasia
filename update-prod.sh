@@ -70,7 +70,7 @@ if [ $CHANGES -eq 1 ] || $FORCE_DEPLOY; then
             COMMIT_MESSAGE="$CUSTOM_COMMIT_MESSAGE"
         fi
 
-        git commit -m "$COMMIT_MESSAGE" && git push main main && \
+        git commit -m "$COMMIT_MESSAGE" && git push origin main && \
         echo -e "${GREEN}Build update and deploy completed${NC}"
     else
         echo -e "${RED}No changes to commit on Github branch${NC}"
