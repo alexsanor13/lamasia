@@ -15,7 +15,7 @@ while getopts ":fm:" opt; do
       CUSTOM_COMMIT_MESSAGE="$OPTARG"
       ;;
     \?)
-      echo "La opción es inválida: -$OPTARG" >&2
+      echo "Opción inválida: -$OPTARG" >&2
       exit 1
       ;;
   esac
