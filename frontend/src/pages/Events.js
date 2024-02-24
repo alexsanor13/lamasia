@@ -26,20 +26,16 @@ const Events = () => {
 
 		if (!dataLoaded) {
 			eventsServices.getAllEvents().then((fetchedEvents) => {
-				setEvents(fetchedEvents)
+				setEvents(fetchedEvents ?? [])
 				setDataLoaded(true)
-				setLoading(false)
+				setLoading(fetchedEvents === null)
 			})
 		} else {
 			setLoading(false)
 		}
 	}, [dataLoaded])
 
-	const sectionTitle = events?.length ? (
-		<h1 className="section-title">EVENTOS</h1>
-	) : (
-		''
-	)
+	const sectionTitle = <h1 className="section-title">EVENTOS</h1>
 
 	return (
 		<div className="center">
