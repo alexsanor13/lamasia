@@ -47,21 +47,21 @@ if [ $CHANGES -eq 1 ] || $FORCE_DEPLOY; then
         echo -e "${RED}No changes to commit on dev branch${NC}"
     fi
 
-    if [[ -d "../lamasiaprod" ]]; then
-        rm -r ../lamasiaprod/*
+    if [[ -d "../lamasiaevents" ]]; then
+        rm -r ../lamasiaevents/*
     fi
 
-    cp -r ./backend/* ../lamasiaprod/
+    cp -r ./backend/* ../lamasiaevents/
 
-    if [[ -d "../lamasiaprod/node_modules" ]]; then
-        rm -r ../lamasiaprod/node_modules
+    if [[ -d "../lamasiaevents/node_modules" ]]; then
+        rm -r ../lamasiaevents/node_modules
     fi
 
-    if [[ -f "../lamasiaprod/package-lock.json" ]]; then
-        rm ../lamasiaprod/package-lock.json
+    if [[ -f "../lamasiaevents/package-lock.json" ]]; then
+        rm ../lamasiaevents/package-lock.json
     fi
 
-    cd ../lamasiaprod && git add .
+    cd ../lamasiaevents && git add .
 
     if [[ -n $(git status -s) ]] || $FORCE_DEPLOY; then
         if [ -z "$CUSTOM_COMMIT_MESSAGE" ]; then
@@ -70,10 +70,10 @@ if [ $CHANGES -eq 1 ] || $FORCE_DEPLOY; then
             COMMIT_MESSAGE="$CUSTOM_COMMIT_MESSAGE"
         fi
 
-        git commit -m "$COMMIT_MESSAGE" && git push heroku master && \
+        git commit -m "$COMMIT_MESSAGE" && git push main main && \
         echo -e "${GREEN}Build update and deploy completed${NC}"
     else
-        echo -e "${RED}No changes to commit on Heroku branch${NC}"
+        echo -e "${RED}No changes to commit on Github branch${NC}"
     fi
 else
     echo -e "${RED}No changes detected. Build and deploy skipped.${NC}"
