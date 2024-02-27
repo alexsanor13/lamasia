@@ -64,11 +64,13 @@ async function createRedirection(total, paymentMethod = '') {
 		if (!Ds_Signature) {
 			throw new Error('Error creating Merchant Signature')
 		}
+		console.log(`ORDER ID ${orderId} has created the MS`)
 
 		const Ds_MerchantParameters = redsys.createMerchantParameters(params)
 		if (!Ds_MerchantParameters) {
 			throw new Error('Error creating Merchant Parameters')
 		}
+		console.log(`ORDER ID ${orderId} has created the MP`)
 
 		const Ds_SignatureVersion = TPV.SIGNATURE_VERSION
 		const formHtml = `
