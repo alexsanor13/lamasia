@@ -41,7 +41,7 @@ const TPV = {
 	TRANSACTIONTYPE: env.get('TPV_DS_MERCHANT_TRANSACTIONTYPE')
 		? Number(env.get('TPV_DS_MERCHANT_TRANSACTIONTYPE'))
 		: null,
-	SECRET: [env.get('TPV_SECRET_PROD'), env.get('TPV_SECRET')][++debugMode],
+	SECRET: [env.get('TPV_SECRET_PROD'), env.get('TPV_SECRET')][+debugMode],
 	URLCALLBACK: !debugMode
 		? env.get('TPV_CALLBACK')
 		: env.get('TPV_CALLBACK_DEV'),
