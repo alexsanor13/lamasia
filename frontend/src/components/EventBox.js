@@ -51,7 +51,6 @@ const EventBox = ({ event }) => {
 	return (
 		<div className={eventClass.containerClass}>
 			<div className="event-image-container" id={`${title}-container`}>
-				{/* <img src={image} alt={title} className="event-image" /> */}
 				<LazyLoadImage
 					src={image}
 					placeholderSrc={placeholder(title)}
