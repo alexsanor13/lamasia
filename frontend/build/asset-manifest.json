@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/static/css/main.6d141b3a.css",
+    "main.css": "/static/css/main.edd631ad.css",
     "main.js": "/static/js/main.ae52ee8b.js",
     "static/media/soon.gif": "/static/media/soon.3aa4ca6ec0cb3f2256ed.gif",
     "static/media/fuckCovid.svg": "/static/media/fuckCovid.6b95f846701558d129f9c09a1fae1b2b.svg",
@@ -17,11 +17,11 @@
     "static/media/burger_menu.svg": "/static/media/burger_menu.976e3f598a89576f18aba6ce25096d0e.svg",
     "static/media/plus.svg": "/static/media/plus.c4ad914c4a4c568589ae272f9f4b07bf.svg",
     "static/media/minus.svg": "/static/media/minus.79478ad20f0ad881d784e5ba97ebda04.svg",
-    "main.6d141b3a.css.map": "/static/css/main.6d141b3a.css.map",
+    "main.edd631ad.css.map": "/static/css/main.edd631ad.css.map",
     "main.ae52ee8b.js.map": "/static/js/main.ae52ee8b.js.map"
   },
   "entrypoints": [
-    "static/css/main.6d141b3a.css",
+    "static/css/main.edd631ad.css",
     "static/js/main.ae52ee8b.js"
   ]
 }
