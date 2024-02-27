@@ -59,8 +59,17 @@ async function createRedirection(total, paymentMethod = '') {
 			DS_MERCHANT_URLKO: `https://www.lamasiaevents.com`,
 			// DS_MERCHANT_MERCHANTURL: `https://breezy-pens-judge.loca.lt/api/tickets/redsysresponse`,
 		}
+
 		const Ds_Signature = redsys.createMerchantSignature(TPV.SECRET, params)
+		if (!Ds_Signature) {
+			throw new Error('Error creating Merchant Signature')
+		}
+
 		const Ds_MerchantParameters = redsys.createMerchantParameters(params)
+		if (!Ds_MerchantParameters) {
+			throw new Error('Error creating Merchant Parameters')
+		}
+
 		const Ds_SignatureVersion = TPV.SIGNATURE_VERSION
 		const formHtml = `
 			<!DOCTYPE html>

@@ -3,10 +3,7 @@ require('dotenv').config()
 const { Env } = require('@humanwhocodes/env')
 const env = new Env()
 
-let debugMode = false
-if (process.argv.includes('--mode=debug')) {
-	debugMode = true
-}
+const debugMode = process.argv.includes('--mode=debug')
 
 const PORT = env.first(['PORT', 'HTTP_PORT'], 8080)
 const MONGO_DB_URI = debugMode
@@ -51,8 +48,8 @@ const TPV = {
 	URLCALLBACK_OK: env.get('TPV_CALLBACK_OK'),
 	SIGNATURE_VERSION: env.get('TPV_SIGNATURE_VERSION'),
 	URL: debugMode
-		? 'https://sis-t.redsys.es:25443/sis/realizarPago'
-		: 'https://sis.redsys.es/sis/realizarPago',
+		? 'https://sis.redsys.es/sis/realizarPago'
+		: 'https://sis-t.redsys.es:25443/sis/realizarPago',
 }
 
 module.exports = {
