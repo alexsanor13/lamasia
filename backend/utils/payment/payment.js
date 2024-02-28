@@ -123,7 +123,10 @@ function getPaymentParameters(paymentInfo) {
 
 		const isValidDSResponse = dsResponse > -1 && dsResponse < 100
 		if (!isValidDSResponse) {
-			throwErrors('dsResponse not valid', 'dsResponse > -1 && dsResponse < 100')
+			throwErrors(
+				'dsResponse is not valid:' + dsResponse,
+				'dsResponse > -1 && dsResponse < 100'
+			)
 			return
 		}
 
