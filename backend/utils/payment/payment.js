@@ -100,7 +100,8 @@ function getPaymentParameters(paymentInfo) {
 			Ds_MerchantParameters
 		)
 		if (!merchantParamsDecoded) {
-			throwErrors('MP not decoded ')
+			throwErrors('MP not decoded', 'redsys.decodeMerchantParameters')
+			return
 		}
 
 		const merchantSignatureNotif = redsys.createMerchantSignatureNotif(
@@ -108,7 +109,11 @@ function getPaymentParameters(paymentInfo) {
 			Ds_MerchantParameters
 		)
 		if (!merchantSignatureNotif) {
-			throwErrors('MS notification error ')
+			throwErrors(
+				'MS notification error',
+				'redsys.createMerchantSignatureNotif'
+			)
+			return
 		}
 
 		const dsResponse = parseInt(
@@ -116,20 +121,22 @@ function getPaymentParameters(paymentInfo) {
 			10
 		)
 
-		const isValid =
-			redsys.merchantSignatureIsValid(Ds_Signature, merchantSignatureNotif) &&
-			dsResponse > -1 &&
-			dsResponse < 100
-
-		if (isValid) {
-			/* TPV payment is OK;
-			 */
-			return merchantParamsDecoded
-		} else {
-			/* 'TPV payment is KO;
-			 */
-			throwErrors('MS not valid')
+		const isValidDSResponse = dsResponse > -1 && dsResponse < 100
+		if (!isValidDSResponse) {
+			throwErrors('dsResponse not valid', 'dsResponse > -1 && dsResponse < 100')
+			return
 		}
+
+		const isValidSignature = redsys.merchantSignatureIsValid(
+			Ds_Signature,
+			merchantSignatureNotif
+		)
+		if (!isValidSignature) {
+			throwErrors('MS not valid', 'redsys.merchantSignatureIsValid')
+			return
+		}
+
+		return merchantParamsDecoded
 	} catch (error) {
 		throw Error('Error getting the merchantParamsDecoded' + error)
 	}
