@@ -1,6 +1,7 @@
 const Redsys = require('node-redsys-api').Redsys
 const { TPV } = require('../config')
 const Order = require('../../models/Order')
+const { throwErrors } = require('../middleware/throwErrors')
 
 const redsys = new Redsys()
 
@@ -98,11 +99,18 @@ function getPaymentParameters(paymentInfo) {
 		const merchantParamsDecoded = redsys.decodeMerchantParameters(
 			Ds_MerchantParameters
 		)
+		if (!merchantParamsDecoded) {
+			throwErrors('MP not decoded ')
+		}
 
 		const merchantSignatureNotif = redsys.createMerchantSignatureNotif(
 			TPV.SECRET,
 			Ds_MerchantParameters
 		)
+		if (!merchantSignatureNotif) {
+			throwErrors('MS notification error ')
+		}
+
 		const dsResponse = parseInt(
 			merchantParamsDecoded.Ds_Response || merchantParamsDecoded.DS_RESPONSE,
 			10
@@ -120,10 +128,10 @@ function getPaymentParameters(paymentInfo) {
 		} else {
 			/* 'TPV payment is KO;
 			 */
-			return null
+			throwErrors('MS not valid')
 		}
 	} catch (error) {
-		throw Error('Error getting the merchantParamsDecoded')
+		throw Error('Error getting the merchantParamsDecoded' + error)
 	}
 }
 
