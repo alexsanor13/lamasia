@@ -8,14 +8,5 @@ export default defineConfig({
 	filenameHashing: false,
 	build: {
 		chunkSizeWarningLimit: 1000,
-		rollupOptions: {
-			output: {
-				manualChunks: (id) => {
-					if (id.includes('logo.png')) {
-						return '' // Exclude logo.png
-					}
-				},
-			},
-		},
 	},
 })
