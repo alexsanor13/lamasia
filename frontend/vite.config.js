@@ -10,9 +10,11 @@ export default defineConfig({
 		chunkSizeWarningLimit: 1000,
 		rollupOptions: {
 			output: {
-				manualChunks: undefined,
-				assetFileNames: 'assets/[name].[ext]', // Output assets (e.g., images, SVGs) to the assets folder
-				chunkFileNames: 'assets/[name].[ext]', // Output dynamic imports (chunks) to the assets folder
+				manualChunks: (id) => {
+					if (id.includes('logo.png')) {
+						return '' // Exclude logo.png
+					}
+				},
 			},
 		},
 	},
