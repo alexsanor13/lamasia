@@ -5,16 +5,6 @@ import utils from '../common/utils'
 
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 
-const placeholderDictionary = {
-	PANDORA: '../assets/placeholders/pandora.svg',
-	GÉNESIS: '../assets/placeholders/genesis.svg',
-	TOR7UGA: '../assets/placeholders/pecados.svg',
-	R3VOLUTION: '../assets/placeholders/revolution.svg',
-	'A FUEG🔥': '../assets/placeholders/aFuego.svg',
-	'F☠️CK COVID': '../assets/placeholders/fuckCovid.svg',
-	default: '../assets/placeholders/fuckCovid.svg',
-}
-
 const EventBox = ({ event }) => {
 	const { title, date, image } = event
 
@@ -38,10 +28,7 @@ const EventBox = ({ event }) => {
 		  }
 		: { containerClass: 'event-box', dateClass: 'event-date' }
 
-	const placeholder = (title) => {
-		const svg = placeholderDictionary[title] || placeholderDictionary['default']
-		return svg
-	}
+	const placeholder = '../assets/placeholders/fuckCovid.svg'
 
 	const handleLoadImage = () => {
 		const container = document.getElementById(`${title}-container`)
@@ -53,7 +40,7 @@ const EventBox = ({ event }) => {
 			<div className="event-image-container" id={`${title}-container`}>
 				<LazyLoadImage
 					src={image}
-					placeholderSrc={placeholder(title)}
+					placeholderSrc={placeholder}
 					alt={title}
 					effect="blur"
 					className="event-image"
