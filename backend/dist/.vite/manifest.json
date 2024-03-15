@@ -1,0 +1,97 @@
+{
+  "index.html": {
+    "file": "assets/index-C3VE7jc-.js",
+    "src": "index.html",
+    "isEntry": true,
+    "css": [
+      "assets/index-BnsdjpH2.css"
+    ],
+    "assets": [
+      "assets/logo-DrvRehy7.webp",
+      "assets/logo-DE-o356Q.svg",
+      "assets/scanner-beep-hQk9Q5dh.mp3",
+      "assets/soon-Di7FTmq-.gif",
+      "assets/fuckCovid-CY9O9Nx0.svg",
+      "assets/manifest-Byh5qSja.json",
+      "assets/apple-touch-icon-114x114-C_ooWH-q.png",
+      "assets/apple-touch-icon-72x72-CALQDcXJ.png",
+      "assets/apple-touch-icon-144x144-BiTcKj_a.png",
+      "assets/apple-touch-icon-120x120-CZdaqKc4.png",
+      "assets/apple-touch-icon-76x76-CLT00VYJ.png",
+      "assets/apple-touch-icon-152x152-DyMJnsdT.png",
+      "assets/favicon-196x196-Dv8QG091.png",
+      "assets/favicon-96x96-Cn8N7k8a.png",
+      "assets/favicon-32x32-BL881OmZ.png",
+      "assets/favicon-16x16-8e4C3UkF.png",
+      "assets/favicon-128-D-13Rinz.png"
+    ]
+  },
+  "node_modules/@yudiel/react-qr-scanner/dist/assets/scanner-beep.mp3": {
+    "file": "assets/scanner-beep-hQk9Q5dh.mp3",
+    "src": "node_modules/@yudiel/react-qr-scanner/dist/assets/scanner-beep.mp3"
+  },
+  "public/icon/apple-touch-icon-114x114.png": {
+    "file": "assets/apple-touch-icon-114x114-C_ooWH-q.png",
+    "src": "public/icon/apple-touch-icon-114x114.png"
+  },
+  "public/icon/apple-touch-icon-120x120.png": {
+    "file": "assets/apple-touch-icon-120x120-CZdaqKc4.png",
+    "src": "public/icon/apple-touch-icon-120x120.png"
+  },
+  "public/icon/apple-touch-icon-144x144.png": {
+    "file": "assets/apple-touch-icon-144x144-BiTcKj_a.png",
+    "src": "public/icon/apple-touch-icon-144x144.png"
+  },
+  "public/icon/apple-touch-icon-152x152.png": {
+    "file": "assets/apple-touch-icon-152x152-DyMJnsdT.png",
+    "src": "public/icon/apple-touch-icon-152x152.png"
+  },
+  "public/icon/apple-touch-icon-72x72.png": {
+    "file": "assets/apple-touch-icon-72x72-CALQDcXJ.png",
+    "src": "public/icon/apple-touch-icon-72x72.png"
+  },
+  "public/icon/apple-touch-icon-76x76.png": {
+    "file": "assets/apple-touch-icon-76x76-CLT00VYJ.png",
+    "src": "public/icon/apple-touch-icon-76x76.png"
+  },
+  "public/icon/favicon-128.png": {
+    "file": "assets/favicon-128-D-13Rinz.png",
+    "src": "public/icon/favicon-128.png"
+  },
+  "public/icon/favicon-16x16.png": {
+    "file": "assets/favicon-16x16-8e4C3UkF.png",
+    "src": "public/icon/favicon-16x16.png"
+  },
+  "public/icon/favicon-196x196.png": {
+    "file": "assets/favicon-196x196-Dv8QG091.png",
+    "src": "public/icon/favicon-196x196.png"
+  },
+  "public/icon/favicon-32x32.png": {
+    "file": "assets/favicon-32x32-BL881OmZ.png",
+    "src": "public/icon/favicon-32x32.png"
+  },
+  "public/icon/favicon-96x96.png": {
+    "file": "assets/favicon-96x96-Cn8N7k8a.png",
+    "src": "public/icon/favicon-96x96.png"
+  },
+  "public/manifest.json": {
+    "file": "assets/manifest-Byh5qSja.json",
+    "src": "public/manifest.json"
+  },
+  "src/assets/gifs/soon.gif": {
+    "file": "assets/soon-Di7FTmq-.gif",
+    "src": "src/assets/gifs/soon.gif"
+  },
+  "src/assets/images/logo.webp": {
+    "file": "assets/logo-DrvRehy7.webp",
+    "src": "src/assets/images/logo.webp"
+  },
+  "src/assets/placeholders/fuckCovid.svg": {
+    "file": "assets/fuckCovid-CY9O9Nx0.svg",
+    "src": "src/assets/placeholders/fuckCovid.svg"
+  },
+  "src/assets/placeholders/logo.svg": {
+    "file": "assets/logo-DE-o356Q.svg",
+    "src": "src/assets/placeholders/logo.svg"
+  }
+}
