@@ -6,6 +6,7 @@ export default defineConfig({
 	plugins: [svgr(), react()],
 	publicDir: '/public',
 	build: {
-		manifest: true,
+		// Exclude images for minification
+		assetsInclude: ['favicon.ico', 'logo.png', 'scanner-beep.mp3'],
 	},
 })
