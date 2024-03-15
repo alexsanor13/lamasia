@@ -14,7 +14,7 @@ const Header = ({ handlePage, setIsMenuOpen }) => {
 	const [visible, setVisible] = useState(true)
 	const [previousScrollPosition, setPreviousScrollPosition] = useState(0)
 
-	// The header is hidden everytime a scrolldown event is triggered
+	// The header is hidden everytime a scrolldown event is triggered (20px)
 	useEffect(() => {
 		const handleScroll = () => {
 			const currentScrollPosition = window.scrollY
