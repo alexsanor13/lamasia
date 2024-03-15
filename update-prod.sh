@@ -25,12 +25,12 @@ git diff --quiet
 CHANGES=$?
 
 if [ $CHANGES -eq 1 ] || $FORCE_DEPLOY; then
-    if [[ -d "./frontend/build" && -d "./backend/build" ]]; then
-        rm -r ./frontend/build && rm -r ./backend/build
+    if [[ -d "./frontend/dist" && -d "./backend/dist" ]]; then
+        rm -r ./frontend/dist && rm -r ./backend/dist
     fi
 
     cd frontend && NODE_ENV=production npm run build && \
-    cp -r build ../backend/ && echo -e "${GREEN}Build updated${NC}" && \
+    cp -r dist ../backend/ && echo -e "${GREEN}Build updated${NC}" && \
     cd .. && \
     git add .
 

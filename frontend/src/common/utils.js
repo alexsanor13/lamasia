@@ -22,8 +22,8 @@ const showResponseErrors = (error) => {
 	)
 }
 
-const baseUrl =
-	process.env.REACT_APP_MODE === 'dev' ? 'http://localhost:3001/api' : '/api'
+const mode = import.meta.env.VITE_APP_MODE
+const baseUrl = mode === 'dev' ? 'http://localhost:3001/api' : '/api'
 
 const exportUtils = {
 	getDDMMYYYDate,

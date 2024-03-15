@@ -23,7 +23,7 @@ if (!config.debugMode) {
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cors())
 app.use(express.json())
-app.use(express.static('build'))
+app.use(express.static('dist'))
 
 // MongoDB
 const mongoose = require('mongoose')
@@ -55,10 +55,10 @@ app.use('/api/scanner', scannerRouter)
 app.use('/api/transactions', transactionsRouter)
 
 if (!config.debugMode) {
-	app.use(express.static(path.join(__dirname, 'build')))
+	app.use(express.static(path.join(__dirname, 'dist')))
 
 	app.get('*', function (req, res) {
-		res.sendFile(path.join(__dirname, 'build', 'index.html'))
+		res.sendFile(path.join(__dirname, 'dist', 'index.html'))
 	})
 }
 
