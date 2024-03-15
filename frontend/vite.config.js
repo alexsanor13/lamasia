@@ -5,5 +5,8 @@ import svgr from 'vite-plugin-svgr'
 export default defineConfig({
 	plugins: [svgr(), react()],
 	publicDir: '/public',
-	copyPublicDir: false,
+	build: {
+		copyPublicDir: false,
+		chunkSizeWarningLimit: 1000,
+	},
 })
