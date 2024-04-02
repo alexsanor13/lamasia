@@ -31,6 +31,11 @@ const Header = ({ handlePage, setIsMenuOpen }) => {
 		return () => window.removeEventListener('scroll', handleScroll)
 	}, [previousScrollPosition])
 
+	const openMenu = () => {
+		document.body.style.overflow = 'hidden'
+		setIsMenuOpen(true)
+	}
+
 	return (
 		<header className={`header ${visible ? '' : 'header-hidden'} `}>
 			<div className="header-content">
@@ -48,10 +53,7 @@ const Header = ({ handlePage, setIsMenuOpen }) => {
 					/>
 				</Link>
 			</div>
-			<BurgerMenuSVG
-				className="header-menu-button"
-				onClick={() => setIsMenuOpen(true)}
-			/>
+			<BurgerMenuSVG className="header-menu-button" onClick={openMenu} />
 			<NavBar
 				handlePage={handlePage}
 				setIsMenuOpen={setIsMenuOpen}

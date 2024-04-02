@@ -26,10 +26,16 @@ const App = () => {
 
 	const handlePage = (page) => {
 		try {
+			document.body.style.overflow = 'auto'
 			setPage(page)
 		} catch (err) {
 			console.error(err)
 		}
+	}
+
+	const openMenu = () => {
+		document.body.style.overflow = 'auto'
+		setIsMenuOpen(false)
 	}
 
 	return (
@@ -56,13 +62,10 @@ const App = () => {
 					</Routes>
 				</main>
 				<Footer />
-				{isMenuOpen ? (
+				{isMenuOpen && (
 					<>
 						<div className="exit-button-container">
-							<ExitMenuSVG
-								className="exit-menu-button"
-								onClick={() => setIsMenuOpen(!isMenuOpen)}
-							/>
+							<ExitMenuSVG className="exit-menu-button" onClick={openMenu} />
 						</div>
 						<NavBar
 							handlePage={handlePage}
@@ -70,8 +73,6 @@ const App = () => {
 							classNav={'mobile-menu'}
 						/>
 					</>
-				) : (
-					''
 				)}
 			</div>
 		</Router>
