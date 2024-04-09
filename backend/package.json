@@ -22,10 +22,11 @@
 		"mongoose": "^7.2.1",
 		"node-redsys-api": "^0.0.5",
 		"nodemailer": "^6.9.5",
+		"npm": "^10.5.1",
 		"qrcode": "^1.5.3"
 	},
 	"devDependencies": {
 		"@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-		"nodemon": "^2.0.22"
+		"nodemon": "^3.1.0"
 	}
 }
