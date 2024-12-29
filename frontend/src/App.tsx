@@ -37,7 +37,11 @@ function App() {
 				<Header setIsMenuOpen={setIsMenuOpen} />
 				<main>
 					<Routes>
-						{/* <Route path="/" element={<Events />} index /> */}
+						<Route
+							path="/"
+							element={<>Tests in events before enable routing</>}
+							index
+						/>
 						{/* <Route path="/events/:id" element={<EventDetail />} />
 						<Route path="/about" element={<About />} />
 						<Route path="/blog" element={<Blog />} />
