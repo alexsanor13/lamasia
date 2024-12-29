@@ -1,16 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
 	background-color: #221810d1;
 	font-family: 'Roboto', sans-serif;
 	--pirate-gold: #f7c02a;
 	--pirate-gold-dark: #f7c02a56;
 	--max-index: 99999999;
-}
-
-* {
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
 }
 
 html,

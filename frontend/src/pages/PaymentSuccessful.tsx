@@ -5,7 +5,7 @@ import transactionsService from '../services/transactions.js'
 import './PaymentSuccessful.css'
 import Spinner from '../components/Spinner'
 
-const PaymentSuccessful = () => {
+function PaymentSuccessful() {
 	const { order } = useParams()
 	const [loading, setLoading] = useState(true)
 	const [paymentResponse, setPaymentResponse] = useState({})

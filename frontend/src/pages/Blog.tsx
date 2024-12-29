@@ -1,14 +1,16 @@
 import Soon from '../components/Soon'
 import { useEffect } from 'react'
-const About = () => {
+
+function Blog() {
 	useEffect(() => {
-		document.title = `La Masia - Sobre nosotros`
+		document.title = `La Masia - Blog`
 	}, [])
+
 	return (
-		<section className="about">
+		<section>
 			<Soon />
 		</section>
 	)
 }
 
-export default About
+export default Blog

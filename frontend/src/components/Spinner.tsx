@@ -1,5 +1,5 @@
-import './Spinner.css'
-import SkullSVG from '../assets/svg/skull.svg?react'
+import '@styles/spinner.css'
+import { ReactComponent as SkullSVG } from '@assets/svg/skull.svg'
 
 const Spinner = () => {
 	return (

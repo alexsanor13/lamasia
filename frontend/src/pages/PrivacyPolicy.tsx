@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react'
-import './PolicyTerms.css'
+import { useEffect } from 'react'
+import './policyTerms.css'
 
-const PrivacyPolicy = () => {
+function PrivacyPolicy() {
 	useEffect(() => {
 		window.scrollTo(0, 0)
 		document.title = 'Politicas de privacidad'

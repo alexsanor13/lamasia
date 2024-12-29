@@ -4,32 +4,40 @@ import TicketSelector from '../components/TicketSelector'
 import EmailModal from '../components/EmailModal'
 import utils from '../common/utils'
 
-import PinSVG from '../assets/svg/pin.svg?react'
-import ClockSVG from '../assets/svg/clock.svg?react'
-import CalendarSVG from '../assets/svg/calendar.svg?react'
+import PinSVG from '@assets/svg/pin.svg'
+import ClockSVG from '@assets/svg/clock.svg'
+import CalendarSVG from '@assets/svg/calendar.svg'
 
 import eventsServices from '../services/events.js'
-import './EventDetail.css'
 import Spinner from '../components/Spinner'
 
-const EventDetail = () => {
+import '@styles/events.css'
+import { Event } from '@/types/events'
+import useHeader from '@/hooks/useHeader'
+
+const IS_MOBILE = window.innerWidth < 768
+
+function EventDetail() {
 	const { id } = useParams()
-	const [eventInfo, setEventInfo] = useState(null)
-	const [loading, setLoading] = useState(true)
-	const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
-	const [selectedTickets, setSelectedTickets] = useState(0)
-	const [packTickets, setPackTickets] = useState(0)
+
+	const { changeHeaderVisibility } = useHeader()
+
+	const [eventInfo, setEventInfo] = useState<Event | null>(null)
+	const [loading, setLoading] = useState<boolean>(true)
+	const [isMobile, setIsMobile] = useState<boolean>(IS_MOBILE)
+	const [selectedTickets, setSelectedTickets] = useState<number>(0)
+	const [packTickets, setPackTickets] = useState<number>(0)
 	const [cart, setCart] = useState({})
 
 	const [modalIsOpen, setIsOpen] = useState(false)
 
 	function openModal() {
-		document.querySelector('header').style.display = 'none'
+		changeHeaderVisibility(false)
 		setIsOpen(true)
 	}
 
 	function closeModal() {
-		document.querySelector('header').style.display = 'flex'
+		changeHeaderVisibility(true)
 		setIsOpen(false)
 	}
 
@@ -54,11 +62,13 @@ const EventDetail = () => {
 
 		return () => {
 			window.removeEventListener('resize', handleResize)
-			document.documentElement.style.background = null
+			document.documentElement.style.background = 'none'
 		}
 	}, [id, isMobile])
 
 	const handlePurchase = () => {
+		if (!eventInfo) return
+
 		const amount =
 			packTickets * eventInfo.priceVIP ||
 			Number(selectedTickets) * eventInfo.price
@@ -79,7 +89,7 @@ const EventDetail = () => {
 		}
 	}
 
-	const getTicketSelectorInfo = (release) => {
+	const getTicketSelectorInfo = (release: any) => {
 		let notBuyable = false
 		let releaseStatus = ''
 		if (release.price === eventInfo.price) {

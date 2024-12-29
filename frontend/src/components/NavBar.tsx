@@ -1,10 +1,13 @@
 // NavBar.js
-import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-const NavBar = ({ handlePage, setIsMenuOpen, classNav = 'header-nav' }) => {
-	const handleClick = (targetPath) => {
-		handlePage(targetPath)
+type NavBarProps = {
+	setIsMenuOpen: (isOpen: boolean) => void
+	classNav?: string
+}
+
+const NavBar = ({ setIsMenuOpen, classNav = 'header-nav' }: NavBarProps) => {
+	const handleClick = () => {
 		setIsMenuOpen(false)
 	}
 	return (
@@ -15,7 +18,7 @@ const NavBar = ({ handlePage, setIsMenuOpen, classNav = 'header-nav' }) => {
 				className={(navData) =>
 					navData.isActive ? `${classNav}-link active` : `${classNav}-link`
 				}
-				onClick={() => handleClick('events')}
+				onClick={() => handleClick()}
 				aria-label="Events">
 				EVENTOS
 			</NavLink>
@@ -25,7 +28,7 @@ const NavBar = ({ handlePage, setIsMenuOpen, classNav = 'header-nav' }) => {
 				className={(navData) =>
 					navData.isActive ? `${classNav}-link active` : `${classNav}-link`
 				}
-				onClick={() => handleClick('blog')}
+				onClick={() => handleClick()}
 				aria-label="Blog">
 				BLOG
 			</NavLink>
@@ -35,7 +38,7 @@ const NavBar = ({ handlePage, setIsMenuOpen, classNav = 'header-nav' }) => {
 				className={(navData) =>
 					navData.isActive ? `${classNav}-link active` : `${classNav}-link`
 				}
-				onClick={() => handleClick('about')}
+				onClick={() => handleClick()}
 				aria-label="About">
 				NOSOTROS
 			</NavLink>

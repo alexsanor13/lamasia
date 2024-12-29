@@ -1,0 +1,25 @@
+{
+	"compilerOptions": {
+		"target": "ESNext", // Support for modern JavaScript features
+		"module": "ESNext", // Compatible with ESM for Vite
+		"strict": true, // Enable all strict TypeScript checks
+		"esModuleInterop": true, // Interoperability with CommonJS modules
+		"skipLibCheck": true, // Skip type checks for external dependencies
+		"forceConsistentCasingInFileNames": true, // Enforce case-sensitive file imports
+		"moduleResolution": "node", // Use Node.js-style module resolution
+		"jsx": "react-jsx", // Use the new React JSX runtime
+		"resolveJsonModule": true, // Allow importing JSON files
+		"baseUrl": "./", // Define the project root for relative paths
+		"paths": {
+			"@/*": ["src/*"], // Main alias for the src folder
+			"@assets/*": ["src/assets/*"], // Alias for assets
+			"@components/*": ["src/components/*"], // Alias for components
+			"@pages/*": ["src/pages/*"], // Alias for pages
+			"@services/*": ["src/services/*"], // Alias for services
+			"@styles/*": ["src/styles/*"] // Alias for styles
+		},
+		"types": ["vite/client"] // Include Vite-specific types
+	},
+	"include": ["src/**/*"], // Include all files in the src folder
+	"exclude": ["node_modules", "dist"] // Exclude node_modules and dist folders
+}

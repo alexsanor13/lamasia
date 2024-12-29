@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import './PolicyTerms.css'
 
-const TermsOfUse = () => {
+function TermsOfUse() {
 	useEffect(() => {
 		window.scrollTo(0, 0)
 		document.title = 'Términos de Uso'

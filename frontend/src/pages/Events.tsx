@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react'
-import EventsCollection from '../components/EventsCollection'
-import Spinner from '../components/Spinner'
-import eventsServices from '../services/events'
+import { useState, useEffect } from 'react'
 
-import './Events.css'
+// Components
+import EventsCollection from '@components/EventsCollection'
+import Spinner from '@components/Spinner'
+import eventsServices from '@services/events'
 
-const Events = () => {
+import '@styles/Events.css'
+
+function Events() {
 	const [events, setEvents] = useState([])
 	const [loading, setLoading] = useState(true)
 	const [dataLoaded, setDataLoaded] = useState(false)
@@ -15,6 +17,7 @@ const Events = () => {
 		const metaDescriptionTag = document.querySelector(
 			'meta[name="description"]'
 		)
+
 		if (metaDescriptionTag) {
 			metaDescriptionTag.setAttribute(
 				'content',
